@@ -29,7 +29,6 @@ const config: Config = {
           cyan: 'hsl(var(--brand-cyan))',
           blue: 'hsl(var(--brand-blue))',
           red: 'hsl(var(--brand-red))',
-          purple: 'hsl(var(--brand-purple))',
         },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

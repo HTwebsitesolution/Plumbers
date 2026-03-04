@@ -12,7 +12,6 @@
     --brand-cyan: 195 100% 50%;
     --brand-blue: 225 100% 56%;
     --brand-red: 347 100% 59%;
-    --brand-purple: 263 88% 58%;
 
     /* Semantic tokens mapped to brand colors */
     --background: 218 75% 6%;
@@ -40,8 +39,8 @@
     --chart-1: 195 100% 50%;
     --chart-2: 225 100% 56%;
     --chart-3: 347 100% 59%;
-    --chart-4: 263 88% 58%;
-    --chart-5: 218 30% 78%;
+    --chart-4: 218 30% 78%;
+    --chart-5: 218 50% 20%;
   }
 }
 
