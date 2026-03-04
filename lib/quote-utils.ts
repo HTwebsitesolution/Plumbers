@@ -38,3 +38,30 @@ export function formatPrice(price: number): string {
     maximumFractionDigits: 0,
   }).format(price);
 }
+
+const ALLOWED_POSTCODE_DISTRICTS = [
+  'S80', 'S81', 'S25', 'S66',
+  'DN22', 'DN10', 'DN11', 'DN12',
+  'DN1', 'DN2', 'DN3', 'DN4', 'DN5', 'DN6', 'DN7', 'DN8', 'DN9'
+];
+
+export function extractOutwardCode(postcode: string): string {
+  const cleaned = postcode.replace(/\s+/g, '').toUpperCase();
+  const match = cleaned.match(/^([A-Z]{1,2}\d{1,2}[A-Z]?)/);
+  return match ? match[1] : '';
+}
+
+export function checkPostcodeCoverage(postcode: string): {
+  isInArea: boolean;
+  outwardCode: string;
+  coverageStatus: 'in_area' | 'out_of_area';
+} {
+  const outwardCode = extractOutwardCode(postcode);
+  const isInArea = ALLOWED_POSTCODE_DISTRICTS.includes(outwardCode);
+
+  return {
+    isInArea,
+    outwardCode,
+    coverageStatus: isInArea ? 'in_area' : 'out_of_area'
+  };
+}

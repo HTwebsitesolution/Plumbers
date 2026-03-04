@@ -1,5 +1,7 @@
 export interface QuoteFormData {
   postcode: string;
+  outwardCode?: string;
+  coverageStatus?: 'in_area' | 'out_of_area';
   propertyType: 'House' | 'Flat' | 'Other';
   bedrooms: number;
   bathrooms: number;
@@ -16,6 +18,16 @@ export interface QuoteFormData {
   addressLine1?: string;
   preferredContactMethod: 'Email' | 'Phone' | 'WhatsApp';
   preferredTimeWindow: 'Morning' | 'Afternoon' | 'Evening' | 'Anytime';
+  customerNotes?: string;
+}
+
+export interface OutOfAreaEnquiry {
+  postcode: string;
+  outwardCode: string;
+  coverageStatus: 'out_of_area';
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
   customerNotes?: string;
 }
 

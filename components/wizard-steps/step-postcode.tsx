@@ -6,12 +6,12 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { validateUKPostcode, formatPostcode } from '@/lib/quote-utils';
+import { validateUKPostcode, formatPostcode, checkPostcodeCoverage } from '@/lib/quote-utils';
 import { MapPin, CircleAlert as AlertCircle } from 'lucide-react';
 
 interface StepPostcodeProps {
   value: string;
-  onNext: (postcode: string) => void;
+  onNext: (postcode: string, coverageData: { outwardCode: string; coverageStatus: 'in_area' | 'out_of_area' }) => void;
 }
 
 export function StepPostcode({ value, onNext }: StepPostcodeProps) {
@@ -32,7 +32,13 @@ export function StepPostcode({ value, onNext }: StepPostcodeProps) {
       return;
     }
 
-    onNext(formatPostcode(postcode));
+    const formattedPostcode = formatPostcode(postcode);
+    const coverageData = checkPostcodeCoverage(formattedPostcode);
+
+    onNext(formattedPostcode, {
+      outwardCode: coverageData.outwardCode,
+      coverageStatus: coverageData.coverageStatus
+    });
   };
 
   return (

@@ -2,17 +2,79 @@ import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 import { generateQuoteRef } from '@/lib/quote-utils';
 import { getCustomerEmailTemplate, getInstallerEmailTemplate } from '@/lib/email-templates';
-import { QuoteFormData } from '@/lib/types';
+import { QuoteFormData, OutOfAreaEnquiry } from '@/lib/types';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.FROM_EMAIL;
 const INSTALLER_NOTIFY_EMAIL = process.env.INSTALLER_NOTIFY_EMAIL;
 
+function isOutOfAreaEnquiry(body: any): body is OutOfAreaEnquiry {
+  return body.coverageStatus === 'out_of_area';
+}
+
 export async function POST(request: Request) {
   try {
-    const body: QuoteFormData = await request.json();
+    const body = await request.json();
 
-    const requiredFields = [
+    if (isOutOfAreaEnquiry(body)) {
+      const requiredFields: (keyof OutOfAreaEnquiry)[] = [
+        'postcode',
+        'outwardCode',
+        'coverageStatus',
+        'customerName',
+        'customerEmail',
+        'customerPhone',
+      ];
+
+      for (const field of requiredFields) {
+        if (!body[field]) {
+          return NextResponse.json(
+            { error: `Missing required field: ${field}` },
+            { status: 400 }
+          );
+        }
+      }
+
+      const quoteRef = generateQuoteRef();
+
+      const { error: dbError } = await supabaseAdmin.from('leads').insert({
+        quote_ref: quoteRef,
+        postcode: body.postcode,
+        outward_code: body.outwardCode,
+        coverage_status: body.coverageStatus,
+        customer_name: body.customerName,
+        customer_email: body.customerEmail,
+        customer_phone: body.customerPhone,
+        customer_notes: body.customerNotes || null,
+        property_type: null,
+        bedrooms: null,
+        bathrooms: null,
+        fuel_type: null,
+        current_boiler_type: null,
+        boiler_location: null,
+        tier_name: null,
+        from_price: null,
+        warranty_years: null,
+        brand_preference: null,
+        address_line1: null,
+        preferred_contact_method: null,
+        preferred_time_window: null,
+      });
+
+      if (dbError) {
+        console.error('Database error:', dbError);
+        return NextResponse.json(
+          { error: 'Failed to save enquiry' },
+          { status: 500 }
+        );
+      }
+
+      return NextResponse.json({ success: true, quoteRef }, { status: 201 });
+    }
+
+    const fullQuote = body as QuoteFormData;
+
+    const requiredFields: (keyof QuoteFormData)[] = [
       'postcode',
       'propertyType',
       'bedrooms',
@@ -32,7 +94,7 @@ export async function POST(request: Request) {
     ];
 
     for (const field of requiredFields) {
-      if (!body[field as keyof QuoteFormData]) {
+      if (!fullQuote[field]) {
         return NextResponse.json(
           { error: `Missing required field: ${field}` },
           { status: 400 }
@@ -44,24 +106,26 @@ export async function POST(request: Request) {
 
     const { error: dbError } = await supabaseAdmin.from('leads').insert({
       quote_ref: quoteRef,
-      postcode: body.postcode,
-      property_type: body.propertyType,
-      bedrooms: body.bedrooms,
-      bathrooms: body.bathrooms,
-      fuel_type: body.fuelType,
-      current_boiler_type: body.currentBoilerType,
-      boiler_location: body.boilerLocation,
-      tier_name: body.tierName,
-      from_price: body.fromPrice,
-      warranty_years: body.warrantyYears,
-      brand_preference: body.brandPreference,
-      customer_name: body.customerName,
-      customer_email: body.customerEmail,
-      customer_phone: body.customerPhone,
-      address_line1: body.addressLine1 || null,
-      preferred_contact_method: body.preferredContactMethod,
-      preferred_time_window: body.preferredTimeWindow,
-      customer_notes: body.customerNotes || null,
+      postcode: fullQuote.postcode,
+      outward_code: fullQuote.outwardCode || null,
+      coverage_status: fullQuote.coverageStatus || null,
+      property_type: fullQuote.propertyType,
+      bedrooms: fullQuote.bedrooms,
+      bathrooms: fullQuote.bathrooms,
+      fuel_type: fullQuote.fuelType,
+      current_boiler_type: fullQuote.currentBoilerType,
+      boiler_location: fullQuote.boilerLocation,
+      tier_name: fullQuote.tierName,
+      from_price: fullQuote.fromPrice,
+      warranty_years: fullQuote.warrantyYears,
+      brand_preference: fullQuote.brandPreference,
+      customer_name: fullQuote.customerName,
+      customer_email: fullQuote.customerEmail,
+      customer_phone: fullQuote.customerPhone,
+      address_line1: fullQuote.addressLine1 || null,
+      preferred_contact_method: fullQuote.preferredContactMethod,
+      preferred_time_window: fullQuote.preferredTimeWindow,
+      customer_notes: fullQuote.customerNotes || null,
     });
 
     if (dbError) {
@@ -74,7 +138,7 @@ export async function POST(request: Request) {
 
     if (RESEND_API_KEY && FROM_EMAIL) {
       try {
-        const dataWithRef = { ...body, quoteRef };
+        const dataWithRef = { ...fullQuote, quoteRef };
 
         const customerEmail = getCustomerEmailTemplate(dataWithRef);
         const installerEmail = getInstallerEmailTemplate(dataWithRef);
@@ -88,7 +152,7 @@ export async function POST(request: Request) {
             },
             body: JSON.stringify({
               from: FROM_EMAIL,
-              to: body.customerEmail,
+              to: fullQuote.customerEmail,
               subject: customerEmail.subject,
               html: customerEmail.html,
             }),
