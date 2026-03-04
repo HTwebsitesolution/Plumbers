@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Lock, Download, Copy, Eye, Loader as Loader2, CircleCheck as CheckCircle2 } from 'lucide-react';
 import { formatPrice } from '@/lib/quote-utils';
 import { Lead } from '@/lib/types';
@@ -17,6 +18,8 @@ export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [filteredLeads, setFilteredLeads] = useState<Lead[]>([]);
+  const [coverageFilter, setCoverageFilter] = useState<string>('all');
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
@@ -59,6 +62,7 @@ export default function AdminPage() {
       if (response.ok) {
         const data = await response.json();
         setLeads(data.leads);
+        setFilteredLeads(data.leads);
       } else if (response.status === 401) {
         setIsAuthenticated(false);
       }
@@ -67,12 +71,22 @@ export default function AdminPage() {
     }
   };
 
+  useEffect(() => {
+    if (coverageFilter === 'all') {
+      setFilteredLeads(leads);
+    } else {
+      setFilteredLeads(leads.filter(lead => lead.coverageStatus === coverageFilter));
+    }
+  }, [coverageFilter, leads]);
+
   const exportToCSV = () => {
     if (leads.length === 0) return;
 
     const headers = [
       'Quote Ref',
       'Submitted At',
+      'Coverage Status',
+      'Outward Code',
       'Customer Name',
       'Email',
       'Phone',
@@ -95,22 +109,24 @@ export default function AdminPage() {
     const rows = leads.map((lead) => [
       lead.quoteRef,
       new Date(lead.submittedAt).toLocaleString(),
+      lead.coverageStatus,
+      lead.outwardCode,
       lead.customerName,
       lead.customerEmail,
       lead.customerPhone,
       lead.postcode,
-      lead.propertyType,
-      lead.bedrooms,
-      lead.bathrooms,
-      lead.fuelType,
-      lead.currentBoilerType,
-      lead.boilerLocation,
-      lead.tierName,
-      lead.fromPrice,
-      lead.warrantyYears,
-      lead.brandPreference,
-      lead.preferredContactMethod,
-      lead.preferredTimeWindow,
+      lead.propertyType || '',
+      lead.bedrooms || '',
+      lead.bathrooms || '',
+      lead.fuelType || '',
+      lead.currentBoilerType || '',
+      lead.boilerLocation || '',
+      lead.tierName || '',
+      lead.fromPrice || '',
+      lead.warrantyYears || '',
+      lead.brandPreference || '',
+      lead.preferredContactMethod || '',
+      lead.preferredTimeWindow || '',
       lead.customerNotes || '',
     ]);
 
@@ -197,17 +213,31 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-slate-50 p-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900">Admin Dashboard</h1>
-            <p className="mt-1 text-slate-600">
-              {leads.length} {leads.length === 1 ? 'lead' : 'leads'} received
-            </p>
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-3xl font-bold text-slate-900">Admin Dashboard</h1>
+              <p className="mt-1 text-slate-600">
+                {filteredLeads.length} of {leads.length} {leads.length === 1 ? 'lead' : 'leads'}
+              </p>
+            </div>
+            <Button onClick={exportToCSV} disabled={leads.length === 0}>
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
           </div>
-          <Button onClick={exportToCSV} disabled={leads.length === 0}>
-            <Download className="mr-2 h-4 w-4" />
-            Export CSV
-          </Button>
+          <div className="flex gap-4">
+            <Select value={coverageFilter} onValueChange={setCoverageFilter}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Filter by coverage" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Leads</SelectItem>
+                <SelectItem value="in_area">In Area</SelectItem>
+                <SelectItem value="out_of_area">Out of Area</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         <Card>
@@ -216,29 +246,38 @@ export default function AdminPage() {
               <TableRow>
                 <TableHead>Quote Ref</TableHead>
                 <TableHead>Date</TableHead>
+                <TableHead>Coverage</TableHead>
+                <TableHead>Area Code</TableHead>
                 <TableHead>Customer</TableHead>
                 <TableHead>Postcode</TableHead>
                 <TableHead>Tier</TableHead>
                 <TableHead>Price</TableHead>
-                <TableHead>Contact</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {leads.length === 0 ? (
+              {filteredLeads.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={8} className="text-center text-slate-500">
-                    No leads yet
+                  <TableCell colSpan={9} className="text-center text-slate-500">
+                    No leads found
                   </TableCell>
                 </TableRow>
               ) : (
-                leads.map((lead) => (
+                filteredLeads.map((lead) => (
                   <TableRow key={lead.id}>
                     <TableCell className="font-mono text-sm">
                       {lead.quoteRef}
                     </TableCell>
                     <TableCell>
                       {new Date(lead.submittedAt).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={lead.coverageStatus === 'in_area' ? 'default' : 'secondary'}>
+                        {lead.coverageStatus === 'in_area' ? 'In Area' : 'Out of Area'}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="font-mono text-sm">
+                      {lead.outwardCode}
                     </TableCell>
                     <TableCell>
                       <div className="font-medium">{lead.customerName}</div>
@@ -248,16 +287,14 @@ export default function AdminPage() {
                     </TableCell>
                     <TableCell>{lead.postcode}</TableCell>
                     <TableCell>
-                      <Badge variant="secondary">{lead.tierName}</Badge>
+                      {lead.tierName ? (
+                        <Badge variant="secondary">{lead.tierName}</Badge>
+                      ) : (
+                        <span className="text-slate-400">-</span>
+                      )}
                     </TableCell>
                     <TableCell className="font-medium">
-                      {formatPrice(lead.fromPrice)}
-                    </TableCell>
-                    <TableCell>
-                      <div className="text-sm">{lead.preferredContactMethod}</div>
-                      <div className="text-xs text-slate-500">
-                        {lead.preferredTimeWindow}
-                      </div>
+                      {lead.fromPrice ? formatPrice(lead.fromPrice) : '-'}
                     </TableCell>
                     <TableCell>
                       <div className="flex gap-2">
@@ -268,17 +305,19 @@ export default function AdminPage() {
                         >
                           <Eye className="h-4 w-4" />
                         </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => copyWhatsAppMessage(lead)}
-                        >
-                          {copied ? (
-                            <CheckCircle2 className="h-4 w-4 text-green-600" />
-                          ) : (
-                            <Copy className="h-4 w-4" />
-                          )}
-                        </Button>
+                        {lead.coverageStatus === 'in_area' && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => copyWhatsAppMessage(lead)}
+                          >
+                            {copied ? (
+                              <CheckCircle2 className="h-4 w-4 text-green-600" />
+                            ) : (
+                              <Copy className="h-4 w-4" />
+                            )}
+                          </Button>
+                        )}
                       </div>
                     </TableCell>
                   </TableRow>
@@ -298,6 +337,24 @@ export default function AdminPage() {
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-6">
+                <div>
+                  <h3 className="mb-3 font-semibold text-slate-900">Coverage Information</h3>
+                  <dl className="grid grid-cols-2 gap-3 text-sm">
+                    <div>
+                      <dt className="text-slate-500">Status</dt>
+                      <dd className="font-medium">
+                        <Badge variant={selectedLead.coverageStatus === 'in_area' ? 'default' : 'secondary'}>
+                          {selectedLead.coverageStatus === 'in_area' ? 'In Area' : 'Out of Area'}
+                        </Badge>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-slate-500">Outward Code</dt>
+                      <dd className="font-medium font-mono">{selectedLead.outwardCode}</dd>
+                    </div>
+                  </dl>
+                </div>
+
                 <div>
                   <h3 className="mb-3 font-semibold text-slate-900">Customer Information</h3>
                   <dl className="grid grid-cols-2 gap-3 text-sm">
@@ -326,57 +383,61 @@ export default function AdminPage() {
                   </dl>
                 </div>
 
-                <div>
-                  <h3 className="mb-3 font-semibold text-slate-900">Quote Details</h3>
-                  <dl className="grid grid-cols-2 gap-3 text-sm">
-                    <div>
-                      <dt className="text-slate-500">Tier</dt>
-                      <dd className="font-medium">{selectedLead.tierName}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-500">Price</dt>
-                      <dd className="font-medium">{formatPrice(selectedLead.fromPrice)}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-500">Warranty</dt>
-                      <dd className="font-medium">{selectedLead.warrantyYears} Years</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-500">Brand Preference</dt>
-                      <dd className="font-medium">{selectedLead.brandPreference}</dd>
-                    </div>
-                  </dl>
-                </div>
+                {selectedLead.coverageStatus === 'in_area' && (
+                  <div>
+                    <h3 className="mb-3 font-semibold text-slate-900">Quote Details</h3>
+                    <dl className="grid grid-cols-2 gap-3 text-sm">
+                      <div>
+                        <dt className="text-slate-500">Tier</dt>
+                        <dd className="font-medium">{selectedLead.tierName}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-slate-500">Price</dt>
+                        <dd className="font-medium">{formatPrice(selectedLead.fromPrice)}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-slate-500">Warranty</dt>
+                        <dd className="font-medium">{selectedLead.warrantyYears} Years</dd>
+                      </div>
+                      <div>
+                        <dt className="text-slate-500">Brand Preference</dt>
+                        <dd className="font-medium">{selectedLead.brandPreference}</dd>
+                      </div>
+                    </dl>
+                  </div>
+                )}
 
-                <div>
-                  <h3 className="mb-3 font-semibold text-slate-900">Property Details</h3>
-                  <dl className="grid grid-cols-2 gap-3 text-sm">
-                    <div>
-                      <dt className="text-slate-500">Property Type</dt>
-                      <dd className="font-medium">{selectedLead.propertyType}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-500">Bedrooms</dt>
-                      <dd className="font-medium">{selectedLead.bedrooms}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-500">Bathrooms</dt>
-                      <dd className="font-medium">{selectedLead.bathrooms}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-500">Fuel Type</dt>
-                      <dd className="font-medium">{selectedLead.fuelType}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-500">Current Boiler</dt>
-                      <dd className="font-medium">{selectedLead.currentBoilerType}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-500">Boiler Location</dt>
-                      <dd className="font-medium">{selectedLead.boilerLocation}</dd>
-                    </div>
-                  </dl>
-                </div>
+                {selectedLead.coverageStatus === 'in_area' && (
+                  <div>
+                    <h3 className="mb-3 font-semibold text-slate-900">Property Details</h3>
+                    <dl className="grid grid-cols-2 gap-3 text-sm">
+                      <div>
+                        <dt className="text-slate-500">Property Type</dt>
+                        <dd className="font-medium">{selectedLead.propertyType}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-slate-500">Bedrooms</dt>
+                        <dd className="font-medium">{selectedLead.bedrooms}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-slate-500">Bathrooms</dt>
+                        <dd className="font-medium">{selectedLead.bathrooms}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-slate-500">Fuel Type</dt>
+                        <dd className="font-medium">{selectedLead.fuelType}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-slate-500">Current Boiler</dt>
+                        <dd className="font-medium">{selectedLead.currentBoilerType}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-slate-500">Boiler Location</dt>
+                        <dd className="font-medium">{selectedLead.boilerLocation}</dd>
+                      </div>
+                    </dl>
+                  </div>
+                )}
 
                 {selectedLead.customerNotes && (
                   <div>
@@ -385,19 +446,21 @@ export default function AdminPage() {
                   </div>
                 )}
 
-                <div>
-                  <h3 className="mb-2 font-semibold text-slate-900">Contact Preferences</h3>
-                  <dl className="grid grid-cols-2 gap-3 text-sm">
-                    <div>
-                      <dt className="text-slate-500">Preferred Method</dt>
-                      <dd className="font-medium">{selectedLead.preferredContactMethod}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-500">Preferred Time</dt>
-                      <dd className="font-medium">{selectedLead.preferredTimeWindow}</dd>
-                    </div>
-                  </dl>
-                </div>
+                {selectedLead.coverageStatus === 'in_area' && (
+                  <div>
+                    <h3 className="mb-2 font-semibold text-slate-900">Contact Preferences</h3>
+                    <dl className="grid grid-cols-2 gap-3 text-sm">
+                      <div>
+                        <dt className="text-slate-500">Preferred Method</dt>
+                        <dd className="font-medium">{selectedLead.preferredContactMethod}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-slate-500">Preferred Time</dt>
+                        <dd className="font-medium">{selectedLead.preferredTimeWindow}</dd>
+                      </div>
+                    </dl>
+                  </div>
+                )}
               </div>
             </DialogContent>
           </Dialog>

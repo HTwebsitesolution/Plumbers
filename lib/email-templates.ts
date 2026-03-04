@@ -56,6 +56,25 @@ export function getCustomerEmailTemplate(data: QuoteFormData & { quoteRef: strin
                 </tr>
               </table>
 
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 24px;">
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0;">
+                    <span style="color: #64748b; font-size: 14px;">Postcode</span>
+                  </td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; text-align: right;">
+                    <span style="color: #1e293b; font-size: 14px; font-weight: 600;">${data.postcode}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0;">
+                    <span style="color: #64748b; font-size: 14px;">Area Code</span>
+                  </td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; text-align: right;">
+                    <span style="color: #1e293b; font-size: 14px; font-weight: 600;">${data.outwardCode}</span>
+                  </td>
+                </tr>
+              </table>
+
               <div style="background-color: #dbeafe; border-left: 4px solid #2563eb; padding: 16px; margin: 24px 0; border-radius: 4px;">
                 <p style="margin: 0; color: #1e40af; font-size: 14px; line-height: 1.6;"><strong>Important:</strong> This is a provisional estimate based on a standard installation. Your final price will be confirmed after our free site survey.</p>
               </div>
@@ -116,6 +135,19 @@ export function getInstallerEmailTemplate(data: QuoteFormData & { quoteRef: stri
           </tr>
           <tr>
             <td style="padding: 40px;">
+              <div style="background-color: ${data.coverageStatus === 'in_area' ? '#d1fae5' : '#fef3c7'}; border-left: 4px solid ${data.coverageStatus === 'in_area' ? '#10b981' : '#f59e0b'}; padding: 16px; margin-bottom: 24px; border-radius: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="color: ${data.coverageStatus === 'in_area' ? '#065f46' : '#92400e'}; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Coverage Status</div>
+                    <div style="color: ${data.coverageStatus === 'in_area' ? '#065f46' : '#92400e'}; font-size: 16px; font-weight: 600;">${data.coverageStatus === 'in_area' ? 'In Service Area' : 'Out of Area'}</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="color: ${data.coverageStatus === 'in_area' ? '#065f46' : '#92400e'}; font-size: 12px; margin-bottom: 4px;">Outward Code</div>
+                    <div style="color: ${data.coverageStatus === 'in_area' ? '#065f46' : '#92400e'}; font-size: 18px; font-weight: 700; font-family: monospace;">${data.outwardCode}</div>
+                  </div>
+                </div>
+              </div>
+
               <h2 style="margin: 0 0 24px 0; color: #1e293b; font-size: 20px; font-weight: 600;">Quote Details</h2>
 
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 32px;">

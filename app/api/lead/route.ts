@@ -140,24 +140,28 @@ export async function POST(request: Request) {
       try {
         const dataWithRef = { ...fullQuote, quoteRef };
 
-        const customerEmail = getCustomerEmailTemplate(dataWithRef);
         const installerEmail = getInstallerEmailTemplate(dataWithRef);
 
-        const emailPromises = [
-          fetch('https://api.resend.com/emails', {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${RESEND_API_KEY}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              from: FROM_EMAIL,
-              to: fullQuote.customerEmail,
-              subject: customerEmail.subject,
-              html: customerEmail.html,
-            }),
-          }),
-        ];
+        const emailPromises = [];
+
+        if (fullQuote.coverageStatus === 'in_area') {
+          const customerEmail = getCustomerEmailTemplate(dataWithRef);
+          emailPromises.push(
+            fetch('https://api.resend.com/emails', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${RESEND_API_KEY}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                from: FROM_EMAIL,
+                to: fullQuote.customerEmail,
+                subject: customerEmail.subject,
+                html: customerEmail.html,
+              }),
+            })
+          );
+        }
 
         if (INSTALLER_NOTIFY_EMAIL) {
           emailPromises.push(
