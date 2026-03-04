@@ -4,34 +4,34 @@
 
 @layer base {
   :root {
-    /* Boilable Brand Colors - Premium Dark Theme */
-    --brand-navy: 218 75% 6%;
-    --brand-navy-lighter: 218 50% 12%;
+    /* Boilable Brand Colors - Clean Light Theme */
+    --brand-navy: 218 75% 15%;
+    --brand-navy-lighter: 218 30% 96%;
     --brand-white: 0 0% 100%;
-    --brand-light-text: 218 30% 78%;
+    --brand-dark-text: 218 30% 20%;
     --brand-cyan: 195 100% 50%;
     --brand-blue: 225 100% 56%;
     --brand-red: 347 100% 59%;
 
     /* Semantic tokens mapped to brand colors */
-    --background: 218 75% 6%;
-    --foreground: 0 0% 100%;
-    --card: 218 50% 12%;
-    --card-foreground: 0 0% 100%;
-    --popover: 218 50% 12%;
-    --popover-foreground: 0 0% 100%;
+    --background: 0 0% 100%;
+    --foreground: 218 30% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 218 30% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 218 30% 20%;
     --primary: 195 100% 50%;
-    --primary-foreground: 218 75% 6%;
-    --secondary: 218 50% 12%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 218 50% 12%;
-    --muted-foreground: 218 30% 78%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 218 30% 96%;
+    --secondary-foreground: 218 30% 20%;
+    --muted: 218 30% 96%;
+    --muted-foreground: 218 30% 40%;
     --accent: 225 100% 56%;
     --accent-foreground: 0 0% 100%;
     --destructive: 347 100% 59%;
     --destructive-foreground: 0 0% 100%;
-    --border: 218 50% 20%;
-    --input: 218 50% 15%;
+    --border: 218 30% 90%;
+    --input: 0 0% 100%;
     --ring: 195 100% 50%;
     --radius: 0.75rem;
 
@@ -39,8 +39,8 @@
     --chart-1: 195 100% 50%;
     --chart-2: 225 100% 56%;
     --chart-3: 347 100% 59%;
-    --chart-4: 218 30% 78%;
-    --chart-5: 218 50% 20%;
+    --chart-4: 218 30% 60%;
+    --chart-5: 218 30% 80%;
   }
 }
 
@@ -58,7 +58,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold tracking-tight;
-    color: hsl(var(--brand-white));
+    color: hsl(var(--brand-navy));
   }
 
   h1 {
@@ -124,11 +124,11 @@
   /* Secondary Button */
   .btn-secondary {
     background: transparent;
-    color: hsl(var(--brand-light-text));
+    color: hsl(var(--brand-dark-text));
     font-weight: 600;
     padding: 0.75rem 2rem;
     border-radius: var(--radius);
-    border: 1px solid hsl(var(--brand-light-text) / 0.3);
+    border: 1px solid hsl(var(--brand-dark-text) / 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
   }
@@ -152,7 +152,7 @@
     border: 1px solid hsl(var(--border));
     border-radius: var(--radius);
     padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
 
   /* Gradient Border Card */
