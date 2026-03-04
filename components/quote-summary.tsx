@@ -17,54 +17,54 @@ export function QuoteSummary({ formData }: QuoteSummaryProps) {
   }
 
   return (
-    <Card className="sticky top-8 shadow-lg">
-      <CardHeader className="bg-slate-50">
+    <Card className="sticky top-8 shadow-2xl gradient-border-card">
+      <CardHeader className="bg-card/50 backdrop-blur">
         <CardTitle className="text-xl">Your Quote Summary</CardTitle>
-        <CardDescription>
+        <CardDescription className="text-muted-foreground">
           Provisional estimate subject to survey
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4 pt-6">
         <div className="space-y-2">
           <div className="flex items-baseline justify-between">
-            <h3 className="text-2xl font-bold text-slate-900">
+            <h3 className="text-2xl font-bold text-foreground">
               {formData.tierName}
             </h3>
             <div className="text-right">
-              <div className="text-sm text-slate-500">From</div>
-              <div className="text-2xl font-bold text-blue-600">
+              <div className="text-sm text-muted-foreground">From</div>
+              <div className="text-gradient text-3xl font-bold">
                 {formatPrice(formData.fromPrice || 0)}
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <Shield className="h-4 w-4 text-blue-600" />
-            <Badge variant="secondary" className="font-medium">
+            <Shield className="h-4 w-4 text-brand-cyan" />
+            <Badge className="font-medium bg-brand-cyan/10 text-brand-cyan border-brand-cyan/20 hover:bg-brand-cyan/20">
               {formData.warrantyYears} Year Warranty
             </Badge>
           </div>
         </div>
 
-        <Separator />
+        <Separator className="bg-border" />
 
         <div className="space-y-3 text-sm">
           {formData.postcode && (
             <div className="flex items-start gap-2">
-              <MapPin className="mt-0.5 h-4 w-4 text-slate-400" />
+              <MapPin className="mt-0.5 h-4 w-4 text-brand-cyan" />
               <div>
-                <div className="font-medium text-slate-700">Postcode</div>
-                <div className="text-slate-600">{formData.postcode}</div>
+                <div className="font-medium text-foreground">Postcode</div>
+                <div className="text-muted-foreground">{formData.postcode}</div>
               </div>
             </div>
           )}
 
           {formData.propertyType && (
             <div className="flex items-start gap-2">
-              <Home className="mt-0.5 h-4 w-4 text-slate-400" />
+              <Home className="mt-0.5 h-4 w-4 text-brand-blue" />
               <div>
-                <div className="font-medium text-slate-700">Property</div>
-                <div className="text-slate-600">
+                <div className="font-medium text-foreground">Property</div>
+                <div className="text-muted-foreground">
                   {formData.propertyType}
                   {formData.bedrooms && ` • ${formData.bedrooms} bed`}
                   {formData.bathrooms && ` • ${formData.bathrooms} bath`}
@@ -75,10 +75,10 @@ export function QuoteSummary({ formData }: QuoteSummaryProps) {
 
           {formData.fuelType && (
             <div className="flex items-start gap-2">
-              <Fuel className="mt-0.5 h-4 w-4 text-slate-400" />
+              <Fuel className="mt-0.5 h-4 w-4 text-brand-cyan" />
               <div>
-                <div className="font-medium text-slate-700">Current System</div>
-                <div className="text-slate-600">
+                <div className="font-medium text-foreground">Current System</div>
+                <div className="text-muted-foreground">
                   {formData.fuelType}
                   {formData.currentBoilerType &&
                     ` • ${formData.currentBoilerType}`}
@@ -90,20 +90,20 @@ export function QuoteSummary({ formData }: QuoteSummaryProps) {
 
           {formData.brandPreference && (
             <div className="flex items-start gap-2">
-              <Package className="mt-0.5 h-4 w-4 text-slate-400" />
+              <Package className="mt-0.5 h-4 w-4 text-brand-blue" />
               <div>
-                <div className="font-medium text-slate-700">Brand Preference</div>
-                <div className="text-slate-600">{formData.brandPreference}</div>
+                <div className="font-medium text-foreground">Brand Preference</div>
+                <div className="text-muted-foreground">{formData.brandPreference}</div>
               </div>
             </div>
           )}
 
           {formData.customerNotes && (
             <div className="flex items-start gap-2">
-              <FileText className="mt-0.5 h-4 w-4 text-slate-400" />
+              <FileText className="mt-0.5 h-4 w-4 text-brand-cyan" />
               <div>
-                <div className="font-medium text-slate-700">Notes</div>
-                <div className="text-slate-600">
+                <div className="font-medium text-foreground">Notes</div>
+                <div className="text-muted-foreground">
                   {formData.customerNotes.length > 60
                     ? `${formData.customerNotes.substring(0, 60)}...`
                     : formData.customerNotes}
@@ -113,10 +113,10 @@ export function QuoteSummary({ formData }: QuoteSummaryProps) {
           )}
         </div>
 
-        <Separator />
+        <Separator className="bg-border" />
 
-        <div className="rounded-lg bg-blue-50 p-3 text-xs text-slate-600">
-          <strong className="text-slate-900">Please note:</strong> Final price
+        <div className="rounded-lg bg-brand-cyan/10 border border-brand-cyan/20 p-3 text-xs text-muted-foreground">
+          <strong className="text-foreground">Please note:</strong> Final price
           confirmed after a free site survey.
         </div>
       </CardContent>

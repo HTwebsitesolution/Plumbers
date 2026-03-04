@@ -2,73 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* Boilable Brand Colors - Premium Dark Theme */
+    --brand-navy: 218 75% 6%;
+    --brand-navy-lighter: 218 50% 12%;
+    --brand-white: 0 0% 100%;
+    --brand-light-text: 218 30% 78%;
+    --brand-cyan: 195 100% 50%;
+    --brand-blue: 225 100% 56%;
+    --brand-red: 347 100% 59%;
+    --brand-purple: 263 88% 58%;
+
+    /* Semantic tokens mapped to brand colors */
+    --background: 218 75% 6%;
+    --foreground: 0 0% 100%;
+    --card: 218 50% 12%;
+    --card-foreground: 0 0% 100%;
+    --popover: 218 50% 12%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 195 100% 50%;
+    --primary-foreground: 218 75% 6%;
+    --secondary: 218 50% 12%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 218 50% 12%;
+    --muted-foreground: 218 30% 78%;
+    --accent: 225 100% 56%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 347 100% 59%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 218 50% 20%;
+    --input: 218 50% 15%;
+    --ring: 195 100% 50%;
+    --radius: 0.75rem;
+
+    /* Chart colors using brand palette */
+    --chart-1: 195 100% 50%;
+    --chart-2: 225 100% 56%;
+    --chart-3: 347 100% 59%;
+    --chart-4: 263 88% 58%;
+    --chart-5: 218 30% 78%;
   }
 }
 
@@ -78,13 +51,15 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
     font-feature-settings: 'kern' 1, 'liga' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply font-bold tracking-tight;
+    color: hsl(var(--brand-white));
   }
 
   h1 {
@@ -112,10 +87,94 @@
 
   input, textarea, select {
     @apply transition-all duration-150;
+    background: hsl(var(--input));
+    border: 1px solid hsl(var(--border));
+    color: hsl(var(--foreground));
   }
 
   input:focus, textarea:focus, select:focus {
-    @apply ring-2 ring-blue-500 ring-offset-2;
+    @apply ring-2 ring-offset-0;
+    ring-color: hsl(var(--ring));
+    border-color: hsl(var(--ring));
+  }
+}
+
+@layer components {
+  /* Premium Gradient Button */
+  .btn-gradient {
+    background: linear-gradient(135deg, hsl(var(--brand-cyan)) 0%, hsl(var(--brand-blue)) 50%, hsl(var(--brand-red)) 100%);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px 0 rgba(0, 200, 255, 0.15);
+  }
+
+  .btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(0, 200, 255, 0.25);
+  }
+
+  .btn-gradient:active {
+    transform: translateY(0);
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    background: transparent;
+    color: hsl(var(--brand-light-text));
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--brand-light-text) / 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: hsl(var(--brand-cyan));
+    color: hsl(var(--brand-cyan));
+  }
+
+  /* Gradient Text */
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--brand-cyan)) 0%, hsl(var(--brand-blue)) 50%, hsl(var(--brand-red)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Premium Card */
+  .premium-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Gradient Border Card */
+  .gradient-border-card {
+    position: relative;
+    background: hsl(var(--card));
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+
+  .gradient-border-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(var(--brand-cyan)) 0%, hsl(var(--brand-blue)) 50%, hsl(var(--brand-red)) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.3;
   }
 }
 
@@ -126,6 +185,10 @@
 
   .animate-slide-up {
     animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
   }
 
   @keyframes fadeIn {
@@ -145,6 +208,15 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 10px rgba(0, 200, 255, 0.2);
+    }
+    to {
+      box-shadow: 0 0 20px rgba(0, 200, 255, 0.4);
     }
   }
 }

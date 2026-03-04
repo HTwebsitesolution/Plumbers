@@ -42,8 +42,8 @@ export function StepTierSelection({ value, onNext, onBack }: StepTierSelectionPr
   return (
     <div className="mx-auto max-w-4xl">
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold text-slate-900">Choose your boiler</h2>
-        <p className="mt-2 text-lg text-slate-600">
+        <h2 className="text-3xl font-bold">Choose your boiler</h2>
+        <p className="mt-2 text-lg text-muted-foreground">
           Select the tier that best suits your needs
         </p>
       </div>
@@ -61,23 +61,23 @@ export function StepTierSelection({ value, onNext, onBack }: StepTierSelectionPr
         </div>
 
         {error && (
-          <p className="text-center text-sm text-red-600">{error}</p>
+          <p className="text-center text-sm text-destructive">{error}</p>
         )}
 
-        <Card className="border-blue-200 bg-blue-50">
+        <Card className="gradient-border-card">
           <CardContent className="pt-6">
             <div className="mb-4 flex items-start gap-3">
-              <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
+              <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
               <div>
-                <p className="font-medium text-slate-900">
+                <p className="font-medium text-foreground">
                   Final price confirmed after a free site survey
                 </p>
               </div>
             </div>
 
             <Accordion type="single" collapsible>
-              <AccordionItem value="price-changes">
-                <AccordionTrigger className="text-sm font-medium">
+              <AccordionItem value="price-changes" className="border-border">
+                <AccordionTrigger className="text-sm font-medium text-foreground hover:text-brand-cyan">
                   What can change the final price?
                 </AccordionTrigger>
                 <AccordionContent>
@@ -96,11 +96,11 @@ export function StepTierSelection({ value, onNext, onBack }: StepTierSelectionPr
         </Card>
 
         <div className="flex gap-3">
-          <Button type="button" variant="outline" onClick={onBack} className="w-32">
+          <Button type="button" variant="outline" onClick={onBack} className="w-32 btn-secondary">
             <ChevronLeft className="mr-2 h-4 w-4" />
             Back
           </Button>
-          <Button type="submit" size="lg" className="flex-1">
+          <Button type="submit" size="lg" className="flex-1 btn-gradient">
             Continue
           </Button>
         </div>
@@ -121,13 +121,13 @@ function TierCard({
   return (
     <Card
       className={cn(
-        'relative cursor-pointer transition-all hover:shadow-lg',
-        selected ? 'border-blue-600 shadow-lg ring-2 ring-blue-600' : 'border-slate-200'
+        'relative cursor-pointer transition-all hover:shadow-xl hover:scale-105',
+        selected ? 'gradient-border-card ring-4 ring-brand-cyan/20 shadow-2xl' : 'premium-card'
       )}
       onClick={onSelect}
     >
       {selected && (
-        <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-blue-600">
+        <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-brand shadow-lg">
           <Check className="h-5 w-5 text-white" />
         </div>
       )}
@@ -135,23 +135,23 @@ function TierCard({
       <CardHeader className="pb-4">
         <CardTitle className="text-xl">{tier.name}</CardTitle>
         <div className="flex items-baseline gap-1">
-          <span className="text-sm text-slate-500">From</span>
-          <span className="text-3xl font-bold text-slate-900">
+          <span className="text-sm text-muted-foreground">From</span>
+          <span className="text-gradient text-3xl font-bold">
             {formatPrice(tier.fromPrice)}
           </span>
         </div>
-        <Badge variant="secondary" className="w-fit">
+        <Badge className="w-fit bg-brand-blue/10 text-brand-blue border-brand-blue/20 hover:bg-brand-blue/20">
           <Shield className="mr-1 h-3 w-3" />
           {tier.warrantyYears} Year Warranty
         </Badge>
       </CardHeader>
 
       <CardContent className="space-y-3">
-        <div className="text-sm font-medium text-slate-900">Includes:</div>
+        <div className="text-sm font-semibold text-foreground">Includes:</div>
         <ul className="space-y-2">
           {tier.inclusions.map((inclusion, index) => (
-            <li key={index} className="flex items-start gap-2 text-sm text-slate-600">
-              <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-600" />
+            <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+              <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-cyan" />
               {inclusion}
             </li>
           ))}

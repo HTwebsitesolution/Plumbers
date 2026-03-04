@@ -22,11 +22,11 @@ export function PageLayout({ children }: PageLayoutProps) {
   ];
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <div className="flex min-h-screen flex-col bg-background">
+      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="text-2xl font-bold text-blue-600 transition-colors hover:text-blue-700">
-            Boilable
+          <Link href="/" className="text-2xl font-bold transition-colors hover:opacity-80">
+            <span className="text-gradient">Boilable</span>
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex" role="navigation" aria-label="Main navigation">
@@ -34,7 +34,7 @@ export function PageLayout({ children }: PageLayoutProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-brand-cyan"
               >
                 {link.label}
               </Link>
@@ -42,29 +42,29 @@ export function PageLayout({ children }: PageLayoutProps) {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Button asChild className="hidden sm:inline-flex">
+            <Button asChild className="hidden sm:inline-flex btn-gradient">
               <Link href="/quote">Get a Quote</Link>
             </Button>
 
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon" aria-label="Open menu">
+                <Button variant="ghost" size="icon" aria-label="Open menu" className="text-foreground hover:text-brand-cyan">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-card border-border">
                 <nav className="flex flex-col gap-4 mt-8" role="navigation" aria-label="Mobile navigation">
                   {navLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="text-lg font-medium text-slate-600 transition-colors hover:text-slate-900 py-2"
+                      className="text-lg font-medium text-muted-foreground transition-colors hover:text-brand-cyan py-2"
                       onClick={() => setIsOpen(false)}
                     >
                       {link.label}
                     </Link>
                   ))}
-                  <Button asChild className="mt-4 w-full">
+                  <Button asChild className="mt-4 w-full btn-gradient">
                     <Link href="/quote" onClick={() => setIsOpen(false)}>Get a Quote</Link>
                   </Button>
                 </nav>
@@ -76,68 +76,73 @@ export function PageLayout({ children }: PageLayoutProps) {
 
       <main id="main-content" className="flex-1">{children}</main>
 
-      <footer className="border-t border-slate-200 bg-slate-50 py-12">
+      <footer className="border-t border-border bg-card py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-4">
             <div>
-              <div className="mb-4 text-xl font-bold text-slate-900">Boilable</div>
-              <p className="text-sm text-slate-600">
+              <div className="mb-4 text-xl font-bold">
+                <span className="text-gradient">Boilable</span>
+              </div>
+              <p className="text-sm text-muted-foreground">
                 Quality boiler installations with transparent pricing and expert service.
+              </p>
+              <p className="mt-3 text-xs text-muted-foreground/60">
+                A Delaney & Salter Ltd company
               </p>
             </div>
             <div>
-              <div className="mb-4 text-sm font-semibold uppercase text-slate-900">
+              <div className="mb-4 text-sm font-semibold uppercase text-foreground">
                 Services
               </div>
-              <ul className="space-y-2 text-sm text-slate-600">
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/boilers" className="hover:text-slate-900">
+                  <Link href="/boilers" className="hover:text-brand-cyan transition-colors">
                     Boiler Installation
                   </Link>
                 </li>
                 <li>
-                  <Link href="/quote" className="hover:text-slate-900">
+                  <Link href="/quote" className="hover:text-brand-cyan transition-colors">
                     Get a Quote
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <div className="mb-4 text-sm font-semibold uppercase text-slate-900">
+              <div className="mb-4 text-sm font-semibold uppercase text-foreground">
                 Company
               </div>
-              <ul className="space-y-2 text-sm text-slate-600">
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/how-it-works" className="hover:text-slate-900">
+                  <Link href="/how-it-works" className="hover:text-brand-cyan transition-colors">
                     How It Works
                   </Link>
                 </li>
                 <li>
-                  <Link href="/reviews" className="hover:text-slate-900">
+                  <Link href="/reviews" className="hover:text-brand-cyan transition-colors">
                     Reviews
                   </Link>
                 </li>
                 <li>
-                  <Link href="/faqs" className="hover:text-slate-900">
+                  <Link href="/faqs" className="hover:text-brand-cyan transition-colors">
                     FAQs
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <div className="mb-4 text-sm font-semibold uppercase text-slate-900">
+              <div className="mb-4 text-sm font-semibold uppercase text-foreground">
                 Contact
               </div>
-              <ul className="space-y-2 text-sm text-slate-600">
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/contact" className="hover:text-slate-900">
+                  <Link href="/contact" className="hover:text-brand-cyan transition-colors">
                     Get in Touch
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="mt-8 border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
+          <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted-foreground">
             &copy; 2024 Boilable. All rights reserved.
           </div>
         </div>

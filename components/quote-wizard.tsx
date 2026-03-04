@@ -117,7 +117,7 @@ export function QuoteWizard({ children }: QuoteWizardProps) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <ProgressIndicator currentStep={state.currentStep} steps={STEPS} />
 
@@ -158,47 +158,47 @@ function ProgressIndicator({
             {step.id < currentStep ? (
               <div className="group flex w-full items-center">
                 <span className="flex items-center">
-                  <span className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-600">
+                  <span className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-brand shadow-lg">
                     <Check className="h-5 w-5 text-white" />
                   </span>
-                  <span className="ml-3 hidden text-sm font-medium text-slate-900 sm:block">
+                  <span className="ml-3 hidden text-sm font-medium text-foreground sm:block">
                     {step.name}
                   </span>
                 </span>
                 {stepIdx !== steps.length - 1 && (
-                  <div className="ml-4 hidden h-0.5 w-full bg-blue-600 sm:block" />
+                  <div className="ml-4 hidden h-0.5 w-full bg-gradient-brand sm:block" />
                 )}
               </div>
             ) : step.id === currentStep ? (
               <div className="flex items-center">
                 <span className="flex items-center">
-                  <span className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-blue-600 bg-white">
-                    <span className="text-sm font-semibold text-blue-600">
+                  <span className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-brand-cyan bg-card ring-4 ring-brand-cyan/20">
+                    <span className="text-sm font-semibold text-brand-cyan">
                       {step.id}
                     </span>
                   </span>
-                  <span className="ml-3 hidden text-sm font-medium text-blue-600 sm:block">
+                  <span className="ml-3 hidden text-sm font-medium text-brand-cyan sm:block">
                     {step.name}
                   </span>
                 </span>
                 {stepIdx !== steps.length - 1 && (
-                  <div className="ml-4 hidden h-0.5 w-full bg-slate-200 sm:block" />
+                  <div className="ml-4 hidden h-0.5 w-full bg-border sm:block" />
                 )}
               </div>
             ) : (
               <div className="group flex items-center">
                 <span className="flex items-center">
-                  <span className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white">
-                    <span className="text-sm font-medium text-slate-500">
+                  <span className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-border bg-card">
+                    <span className="text-sm font-medium text-muted-foreground">
                       {step.id}
                     </span>
                   </span>
-                  <span className="ml-3 hidden text-sm font-medium text-slate-500 sm:block">
+                  <span className="ml-3 hidden text-sm font-medium text-muted-foreground sm:block">
                     {step.name}
                   </span>
                 </span>
                 {stepIdx !== steps.length - 1 && (
-                  <div className="ml-4 hidden h-0.5 w-full bg-slate-200 sm:block" />
+                  <div className="ml-4 hidden h-0.5 w-full bg-border sm:block" />
                 )}
               </div>
             )}

@@ -11,8 +11,9 @@ const config: Config = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-brand': 'linear-gradient(135deg, hsl(var(--brand-cyan)) 0%, hsl(var(--brand-blue)) 50%, hsl(var(--brand-red)) 100%)',
+        'gradient-hero': 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--brand-navy-lighter)) 100%)',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -20,6 +21,16 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        brand: {
+          navy: 'hsl(var(--brand-navy))',
+          'navy-lighter': 'hsl(var(--brand-navy-lighter))',
+          white: 'hsl(var(--brand-white))',
+          'light-text': 'hsl(var(--brand-light-text))',
+          cyan: 'hsl(var(--brand-cyan))',
+          blue: 'hsl(var(--brand-blue))',
+          red: 'hsl(var(--brand-red))',
+          purple: 'hsl(var(--brand-purple))',
+        },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
