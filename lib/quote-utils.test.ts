@@ -135,6 +135,10 @@ describe('isCoveredOutwardCode', () => {
       expect(isCoveredOutwardCode('DN13')).toBe(false);
     });
 
+    it('should confirm DN100 is NOT covered (no prefix matching)', () => {
+      expect(isCoveredOutwardCode('DN100')).toBe(false);
+    });
+
     it('should confirm all S-codes are covered', () => {
       expect(isCoveredOutwardCode('S80')).toBe(true);
       expect(isCoveredOutwardCode('S81')).toBe(true);
