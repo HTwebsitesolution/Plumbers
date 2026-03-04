@@ -127,6 +127,9 @@ export default function QuotePage() {
                     });
                     nextStep();
                   }}
+                  onEnquiry={() => {
+                    nextStep();
+                  }}
                 />
               )}
 
