@@ -27,14 +27,14 @@ export function PageLayout({ children }: PageLayoutProps) {
       <header className="sticky top-0 z-50 border-b border-border bg-white/98 backdrop-blur-lg shadow-sm supports-[backdrop-filter]:bg-white/95">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <Link href="/" className="group flex items-center transition-all duration-300 hover:opacity-80" aria-label="Boilable Home">
-            <div className="relative h-10 sm:h-12 bg-[#0A1628] rounded-lg px-4 py-1">
+          <div className="relative h-12 sm:h-14 bg-[#0A1628] rounded-lg px-2 overflow-hidden">
               <Image
                 src="/brand/Boilable.co.uk_logo.png"
                 alt="Boilable"
-                width={200}
-                height={48}
+                width={220}
+                height={52}
                 priority
-                className="h-full w-auto object-contain"
+                className="h-full w-auto object-contain scale-[1.18] translate-y-[1px]"
               />
             </div>
             <span className="sr-only">Boilable - Boiler Installation Estimates</span>

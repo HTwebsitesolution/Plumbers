@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -13,8 +14,22 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-background">
       <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="text-2xl font-bold transition-colors hover:opacity-80">
-            <span className="text-gradient">Boilable</span>
+          <Link
+            href="/"
+            className="group flex items-center transition-all duration-300 hover:opacity-80"
+            aria-label="Boilable Home"
+          >
+            <div className="relative h-12 sm:h-14 bg-[#0A1628] rounded-lg px-2 overflow-hidden">
+              <Image
+                src="/brand/Boilable.co.uk_logo.png"
+                alt="Boilable"
+                width={220}
+                height={52}
+                priority
+                className="h-full w-auto object-contain scale-[1.18] translate-y-[1px]"
+              />
+            </div>
+            <span className="sr-only">Boilable - Boiler Installation Estimates</span>
           </Link>
           <nav className="hidden items-center gap-6 md:flex">
             <Link href="/how-it-works" className="text-sm font-medium text-muted-foreground transition-colors hover:text-brand-cyan">
@@ -321,8 +336,14 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-4">
             <div>
-              <div className="mb-4 text-xl font-bold">
-                <span className="text-gradient">Boilable</span>
+              <div className="mb-4 bg-[#0A1628] rounded-lg px-3 py-2 inline-block">
+                <Image
+                  src="/brand/Boilable.co.uk_logo.png"
+                  alt="Boilable.co.uk"
+                  width={140}
+                  height={35}
+                  className="h-7 w-auto object-contain"
+                />
               </div>
               <p className="text-sm text-muted-foreground">
                 Quality boiler installations with transparent pricing and expert service.

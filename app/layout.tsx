@@ -5,9 +5,10 @@ import { Toaster } from '@/components/ui/toaster';
 import { StructuredData } from '@/components/structured-data';
 
 const inter = Inter({ subsets: ['latin'] });
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://boilable.com'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'Boilable | Boiler Installation Estimates',
     template: '%s | Boilable'
