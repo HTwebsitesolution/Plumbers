@@ -27,9 +27,9 @@ export function PageLayout({ children }: PageLayoutProps) {
       <header className="sticky top-0 z-50 border-b border-border bg-white/98 backdrop-blur-lg shadow-sm supports-[backdrop-filter]:bg-white/95">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <Link href="/" className="group flex items-center transition-all duration-300 hover:opacity-80" aria-label="Boilable Home">
-            <div className="relative h-10 w-auto sm:h-12">
+            <div className="relative h-10 sm:h-12 bg-[#0A1628] rounded-lg px-4 py-1">
               <Image
-                src="/brand/boilable-logo.png"
+                src="/brand/Boilable.co.uk_logo.png"
                 alt="Boilable"
                 width={200}
                 height={48}
@@ -65,9 +65,9 @@ export function PageLayout({ children }: PageLayoutProps) {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-card border-border">
-                <div className="mb-8">
+                <div className="mb-8 bg-[#0A1628] rounded-lg px-3 py-2 inline-block">
                   <Image
-                    src="/brand/boilable-logo.png"
+                    src="/brand/Boilable.co.uk_logo.png"
                     alt="Boilable"
                     width={160}
                     height={40}
@@ -101,13 +101,13 @@ export function PageLayout({ children }: PageLayoutProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-4">
             <div>
-              <div className="mb-4">
+              <div className="mb-4 bg-[#0A1628] rounded-lg px-3 py-2 inline-block">
                 <Image
-                  src="/brand/boilable-logo.png"
+                  src="/brand/Boilable.co.uk_logo.png"
                   alt="Boilable.co.uk"
                   width={140}
                   height={35}
-                  className="h-8 w-auto object-contain"
+                  className="h-7 w-auto object-contain"
                 />
               </div>
               <p className="text-sm text-muted-foreground">
