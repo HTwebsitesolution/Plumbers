@@ -39,7 +39,7 @@ export function formatPrice(price: number): string {
   }).format(price);
 }
 
-const ALLOWED_POSTCODE_DISTRICTS = [
+export const ALLOWED_POSTCODE_DISTRICTS = [
   'S80', 'S81', 'S25', 'S66',
   'DN22', 'DN10', 'DN11', 'DN12',
   'DN1', 'DN2', 'DN3', 'DN4', 'DN5', 'DN6', 'DN7', 'DN8', 'DN9'
@@ -51,13 +51,45 @@ export function extractOutwardCode(postcode: string): string {
   return match ? match[1] : '';
 }
 
+export function isCoveredOutwardCode(outwardCode: string): boolean {
+  return ALLOWED_POSTCODE_DISTRICTS.includes(outwardCode.toUpperCase());
+}
+
+export interface PostcodeParseResult {
+  normalizedPostcode: string;
+  isValidFormat: boolean;
+  outwardCode: string;
+}
+
+export function parseUkPostcode(input: string): PostcodeParseResult {
+  const trimmed = input.trim().replace(/\s+/g, ' ').toUpperCase();
+  const isValid = validateUKPostcode(trimmed);
+
+  if (!isValid) {
+    return {
+      normalizedPostcode: trimmed,
+      isValidFormat: false,
+      outwardCode: ''
+    };
+  }
+
+  const normalized = formatPostcode(trimmed);
+  const outwardCode = extractOutwardCode(normalized);
+
+  return {
+    normalizedPostcode: normalized,
+    isValidFormat: true,
+    outwardCode
+  };
+}
+
 export function checkPostcodeCoverage(postcode: string): {
   isInArea: boolean;
   outwardCode: string;
   coverageStatus: 'in_area' | 'out_of_area';
 } {
   const outwardCode = extractOutwardCode(postcode);
-  const isInArea = ALLOWED_POSTCODE_DISTRICTS.includes(outwardCode);
+  const isInArea = isCoveredOutwardCode(outwardCode);
 
   return {
     isInArea,
