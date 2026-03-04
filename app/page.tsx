@@ -45,29 +45,39 @@ export default function Home() {
             <div className="absolute bottom-20 right-20 h-96 w-96 rounded-full bg-brand-blue blur-3xl"></div>
           </div>
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <Badge className="mb-6 border-brand-cyan/30 bg-brand-cyan/10 text-brand-cyan hover:bg-brand-cyan/20">
-                <Flame className="mr-1 h-3 w-3" />
-                Quality Boiler Installations
-              </Badge>
-              <h1 className="mb-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-                New Boiler Installation
-                <br />
-                <span className="text-gradient">From £1,750</span>
-              </h1>
-              <p className="mx-auto mb-10 max-w-2xl text-xl text-muted-foreground">
-                Get your instant provisional quote online. All installations include magnetic filter, limescale reducer, chemical flush, and programmable thermostat.
-              </p>
-              <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-                <Button asChild size="lg" className="btn-gradient text-lg px-8 py-6">
-                  <Link href="/quote">
-                    Get Your Quote Now
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button asChild size="lg" className="btn-secondary text-lg px-8 py-6">
-                  <Link href="/how-it-works">Learn More</Link>
-                </Button>
+            <div className="grid gap-12 items-center lg:grid-cols-2">
+              <div className="text-center lg:text-left">
+                <Badge className="mb-6 border-brand-cyan/30 bg-brand-cyan/10 text-brand-cyan hover:bg-brand-cyan/20">
+                  <Flame className="mr-1 h-3 w-3" />
+                  Quality Boiler Installations
+                </Badge>
+                <h1 className="mb-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+                  New Boiler Installation
+                  <br />
+                  <span className="text-gradient">From £1,750</span>
+                </h1>
+                <p className="mx-auto lg:mx-0 mb-10 max-w-2xl text-xl text-muted-foreground">
+                  Get your instant provisional quote online. All installations include magnetic filter, limescale reducer, chemical flush, and programmable thermostat.
+                </p>
+                <div className="flex flex-col items-center lg:items-start gap-4 sm:flex-row">
+                  <Button asChild size="lg" className="btn-gradient text-lg px-8 py-6">
+                    <Link href="/quote">
+                      Get Your Quote Now
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" className="btn-secondary text-lg px-8 py-6">
+                    <Link href="/how-it-works">Learn More</Link>
+                  </Button>
+                </div>
+              </div>
+              <div className="relative hidden lg:block">
+                <div className="absolute inset-0 bg-gradient-brand opacity-20 blur-3xl rounded-full"></div>
+                <img
+                  src="https://images.pexels.com/photos/8092183/pexels-photo-8092183.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Professional boiler installation"
+                  className="relative rounded-2xl shadow-2xl ring-1 ring-border"
+                />
               </div>
             </div>
           </div>
@@ -126,6 +136,13 @@ export default function Home() {
             </div>
             <div className="grid gap-6 md:grid-cols-4">
               <Card className="premium-card transition-all hover:scale-105">
+                <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
+                  <img
+                    src="https://images.pexels.com/photos/5475765/pexels-photo-5475765.jpeg?auto=compress&cs=tinysrgb&w=400"
+                    alt="Online quote form"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
                 <CardHeader>
                   <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg">
                     1
@@ -137,6 +154,13 @@ export default function Home() {
                 </CardHeader>
               </Card>
               <Card className="premium-card transition-all hover:scale-105">
+                <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
+                  <img
+                    src="https://images.pexels.com/photos/8092169/pexels-photo-8092169.jpeg?auto=compress&cs=tinysrgb&w=400"
+                    alt="Engineer conducting survey"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
                 <CardHeader>
                   <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg">
                     2
@@ -148,6 +172,13 @@ export default function Home() {
                 </CardHeader>
               </Card>
               <Card className="premium-card transition-all hover:scale-105">
+                <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
+                  <img
+                    src="https://images.pexels.com/photos/7689732/pexels-photo-7689732.jpeg?auto=compress&cs=tinysrgb&w=400"
+                    alt="Quote document"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
                 <CardHeader>
                   <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg">
                     3
@@ -159,6 +190,13 @@ export default function Home() {
                 </CardHeader>
               </Card>
               <Card className="premium-card transition-all hover:scale-105">
+                <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
+                  <img
+                    src="https://images.pexels.com/photos/5691607/pexels-photo-5691607.jpeg?auto=compress&cs=tinysrgb&w=400"
+                    alt="Professional installation"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
                 <CardHeader>
                   <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg">
                     4
@@ -182,8 +220,21 @@ export default function Home() {
               </p>
             </div>
             <div className="grid gap-8 md:grid-cols-3">
-              {BOILER_TIERS.map((tier) => (
+              {BOILER_TIERS.map((tier, index) => (
                 <Card key={tier.name} className="gradient-border-card relative overflow-hidden transition-all hover:scale-105">
+                  <div className="relative h-56 w-full overflow-hidden">
+                    <img
+                      src={
+                        index === 0
+                          ? "https://images.pexels.com/photos/8092175/pexels-photo-8092175.jpeg?auto=compress&cs=tinysrgb&w=600"
+                          : index === 1
+                          ? "https://images.pexels.com/photos/5691625/pexels-photo-5691625.jpeg?auto=compress&cs=tinysrgb&w=600"
+                          : "https://images.pexels.com/photos/8092157/pexels-photo-8092157.jpeg?auto=compress&cs=tinysrgb&w=600"
+                      }
+                      alt={`${tier.name} boiler`}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
                   <CardHeader>
                     <CardTitle className="text-2xl">{tier.name}</CardTitle>
                     <div className="flex items-baseline gap-1">

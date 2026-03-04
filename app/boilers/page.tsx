@@ -27,17 +27,26 @@ export default function BoilersPage() {
 
       <div className="bg-white py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <h2 className="mb-4 text-3xl font-bold text-slate-900">
-              All Tiers Include
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {BOILER_TIERS[0].inclusions.map((inclusion, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-green-600" />
-                  <span className="text-slate-600">{inclusion}</span>
-                </div>
-              ))}
+          <div className="mb-12 grid gap-8 lg:grid-cols-2 items-center">
+            <div>
+              <h2 className="mb-4 text-3xl font-bold text-slate-900">
+                All Tiers Include
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {BOILER_TIERS[0].inclusions.map((inclusion, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-green-600" />
+                    <span className="text-slate-600">{inclusion}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-xl">
+              <img
+                src="https://images.pexels.com/photos/8092183/pexels-photo-8092183.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Quality boiler installation components"
+                className="w-full h-96 object-cover"
+              />
             </div>
           </div>
 
@@ -57,8 +66,21 @@ export default function BoilersPage() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {BOILER_TIERS.map((tier) => (
+            {BOILER_TIERS.map((tier, index) => (
               <Card key={tier.name} className="relative overflow-hidden">
+                <div className="relative h-48 w-full overflow-hidden">
+                  <img
+                    src={
+                      index === 0
+                        ? "https://images.pexels.com/photos/8092175/pexels-photo-8092175.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        : index === 1
+                        ? "https://images.pexels.com/photos/5691625/pexels-photo-5691625.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        : "https://images.pexels.com/photos/8092157/pexels-photo-8092157.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    }
+                    alt={`${tier.name} installation`}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
                 <CardHeader>
                   <CardTitle>{tier.name}</CardTitle>
                   <div className="flex items-baseline gap-1">

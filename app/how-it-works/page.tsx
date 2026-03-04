@@ -25,7 +25,7 @@ export default function HowItWorksPage() {
       <div className="bg-white py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-16">
-            <div className="flex gap-8">
+            <div className="flex flex-col md:flex-row gap-8">
               <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
                 <span className="text-2xl font-bold text-blue-600">1</span>
               </div>
@@ -33,6 +33,13 @@ export default function HowItWorksPage() {
                 <h2 className="mb-4 text-2xl font-bold text-slate-900">
                   Get Your Instant Quote
                 </h2>
+                <div className="mb-4 rounded-xl overflow-hidden">
+                  <img
+                    src="https://images.pexels.com/photos/5475765/pexels-photo-5475765.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Person using laptop to get quote"
+                    className="w-full h-64 object-cover rounded-xl shadow-lg"
+                  />
+                </div>
                 <p className="mb-4 text-lg text-slate-600">
                   Start by completing our quick online form. We'll ask about your property,
                   current boiler, and your preferences. In just a few minutes, you'll receive
@@ -55,7 +62,7 @@ export default function HowItWorksPage() {
               </div>
             </div>
 
-            <div className="flex gap-8">
+            <div className="flex flex-col md:flex-row gap-8">
               <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
                 <span className="text-2xl font-bold text-blue-600">2</span>
               </div>
@@ -63,6 +70,13 @@ export default function HowItWorksPage() {
                 <h2 className="mb-4 text-2xl font-bold text-slate-900">
                   Free Site Survey
                 </h2>
+                <div className="mb-4 rounded-xl overflow-hidden">
+                  <img
+                    src="https://images.pexels.com/photos/8092169/pexels-photo-8092169.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Engineer conducting survey"
+                    className="w-full h-64 object-cover rounded-xl shadow-lg"
+                  />
+                </div>
                 <p className="mb-4 text-lg text-slate-600">
                   We'll contact you within 24 hours to arrange a convenient time for a free,
                   no-obligation site survey. One of our Gas Safe registered engineers will
@@ -85,7 +99,7 @@ export default function HowItWorksPage() {
               </div>
             </div>
 
-            <div className="flex gap-8">
+            <div className="flex flex-col md:flex-row gap-8">
               <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
                 <span className="text-2xl font-bold text-blue-600">3</span>
               </div>
@@ -93,6 +107,13 @@ export default function HowItWorksPage() {
                 <h2 className="mb-4 text-2xl font-bold text-slate-900">
                   Get Your Confirmed Quote
                 </h2>
+                <div className="mb-4 rounded-xl overflow-hidden">
+                  <img
+                    src="https://images.pexels.com/photos/7689732/pexels-photo-7689732.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Reviewing quote document"
+                    className="w-full h-64 object-cover rounded-xl shadow-lg"
+                  />
+                </div>
                 <p className="mb-4 text-lg text-slate-600">
                   After the survey, we'll provide you with a detailed, confirmed quote.
                   This will include the final price with a full breakdown of what's included
@@ -115,7 +136,7 @@ export default function HowItWorksPage() {
               </div>
             </div>
 
-            <div className="flex gap-8">
+            <div className="flex flex-col md:flex-row gap-8">
               <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
                 <span className="text-2xl font-bold text-blue-600">4</span>
               </div>
@@ -123,6 +144,13 @@ export default function HowItWorksPage() {
                 <h2 className="mb-4 text-2xl font-bold text-slate-900">
                   Professional Installation
                 </h2>
+                <div className="mb-4 rounded-xl overflow-hidden">
+                  <img
+                    src="https://images.pexels.com/photos/5691607/pexels-photo-5691607.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Professional boiler installation"
+                    className="w-full h-64 object-cover rounded-xl shadow-lg"
+                  />
+                </div>
                 <p className="mb-4 text-lg text-slate-600">
                   Once you're happy with the quote, we'll schedule your installation at a
                   time that suits you. Our Gas Safe registered engineers will complete the
