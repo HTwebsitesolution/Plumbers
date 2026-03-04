@@ -28,7 +28,7 @@ export default function QuotePage() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/lead', {
+      const response = await fetch('/api/enquiry', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
