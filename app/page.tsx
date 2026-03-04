@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { BackToTopButton } from '@/components/back-to-top';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -404,8 +405,9 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            &copy; 2024 Boilable. All rights reserved.
+          <div className="mt-8 border-t border-border pt-8 flex flex-col items-center justify-between gap-4 text-center text-sm text-muted-foreground md:flex-row md:text-left">
+            <p>&copy; 2024 Boilable. All rights reserved.</p>
+            <BackToTopButton />
           </div>
         </div>
       </footer>

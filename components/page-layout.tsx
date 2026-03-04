@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import { ReactNode, useState } from 'react';
+import { BackToTopButton } from '@/components/back-to-top';
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -169,8 +170,9 @@ export function PageLayout({ children }: PageLayoutProps) {
               </ul>
             </div>
           </div>
-          <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            &copy; 2024 Boilable. All rights reserved.
+          <div className="mt-8 border-t border-border pt-8 flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground md:flex-row">
+            <p>&copy; 2024 Boilable. All rights reserved.</p>
+            <BackToTopButton />
           </div>
         </div>
       </footer>
