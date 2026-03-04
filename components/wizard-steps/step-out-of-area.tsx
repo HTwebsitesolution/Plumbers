@@ -68,10 +68,11 @@ export function StepOutOfArea({ postcode, outwardCode, onSubmit }: StepOutOfArea
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100">
             <MapPin className="h-8 w-8 text-amber-600" />
           </div>
-          <CardTitle className="text-3xl">Sorry — we don't currently cover your area</CardTitle>
+          <CardTitle className="text-3xl">We don't currently cover your area</CardTitle>
           <CardDescription className="text-base">
-            Your postcode ({postcode}) is outside our current service area. However, we'd still like to hear from you.
-            Leave your details below and we'll be in touch if we expand to your area.
+            Sorry — we don't currently cover the postcode district <span className="font-semibold">{outwardCode}</span>.
+            <br />
+            If you're just outside our service area, send your details below and we'll confirm if we can help.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -131,7 +132,7 @@ export function StepOutOfArea({ postcode, outwardCode, onSubmit }: StepOutOfArea
             </div>
 
             <Button type="submit" size="lg" className="w-full">
-              Submit Enquiry
+              Send enquiry
             </Button>
           </form>
         </CardContent>
