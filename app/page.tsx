@@ -3,9 +3,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { ArrowRight, CircleCheck as CheckCircle2, Shield, Clock, Award, Flame } from 'lucide-react';
+import { ArrowRight, CircleCheck as CheckCircle2, Shield, Clock, Award } from 'lucide-react';
 import { BOILER_TIERS, STANDARD_INSTALL_DEFINITION } from '@/lib/types';
 import { formatPrice } from '@/lib/quote-utils';
+import { HeroPremium } from '@/components/hero-premium';
 
 export default function Home() {
   return (
@@ -39,49 +40,7 @@ export default function Home() {
       </header>
 
       <main className="flex-1">
-        <section className="relative overflow-hidden bg-gradient-hero py-24 md:py-32">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-brand-cyan blur-3xl"></div>
-            <div className="absolute bottom-20 right-20 h-96 w-96 rounded-full bg-brand-blue blur-3xl"></div>
-          </div>
-          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 items-center lg:grid-cols-2">
-              <div className="text-center lg:text-left">
-                <Badge className="mb-6 border-brand-cyan/30 bg-brand-cyan/10 text-brand-cyan hover:bg-brand-cyan/20">
-                  <Flame className="mr-1 h-3 w-3" />
-                  Quality Boiler Installations
-                </Badge>
-                <h1 className="mb-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-                  New Boiler Installation
-                  <br />
-                  <span className="text-gradient">From £1,750</span>
-                </h1>
-                <p className="mx-auto lg:mx-0 mb-10 max-w-2xl text-xl text-muted-foreground">
-                  Get your instant provisional quote online. All installations include magnetic filter, limescale reducer, chemical flush, and programmable thermostat.
-                </p>
-                <div className="flex flex-col items-center lg:items-start gap-4 sm:flex-row">
-                  <Button asChild size="lg" className="btn-gradient text-lg px-8 py-6">
-                    <Link href="/quote">
-                      Get Your Quote Now
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                  <Button asChild size="lg" className="btn-secondary text-lg px-8 py-6">
-                    <Link href="/how-it-works">Learn More</Link>
-                  </Button>
-                </div>
-              </div>
-              <div className="relative hidden lg:block">
-                <div className="absolute inset-0 bg-gradient-brand opacity-20 blur-3xl rounded-full"></div>
-                <img
-                  src="https://images.pexels.com/photos/8092183/pexels-photo-8092183.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Professional boiler installation"
-                  className="relative rounded-2xl shadow-2xl ring-1 ring-border"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+        <HeroPremium />
 
         <section className="border-y border-border bg-card py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
