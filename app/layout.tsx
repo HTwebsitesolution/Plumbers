@@ -9,24 +9,40 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://boilable.com'),
   title: {
-    default: 'Boilable - Quality Boiler Installation from £1,750',
+    default: 'Boilable | Boiler Installation Estimates',
     template: '%s | Boilable'
   },
-  description: 'Get your instant boiler installation quote online. Professional Gas Safe registered engineers. Up to 10 year warranty. From £1,750 installed.',
+  description: 'Get a boiler estimate in 60 seconds. Final price confirmed after a free site survey.',
   keywords: ['boiler installation', 'combi boiler', 'gas boiler', 'boiler replacement', 'Gas Safe', 'Worcester Bosch', 'Vaillant', 'Ideal'],
   authors: [{ name: 'Boilable' }],
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_GB',
     url: '/',
     siteName: 'Boilable',
-    title: 'Boilable - Quality Boiler Installation from £1,750',
-    description: 'Get your instant boiler installation quote online. Professional Gas Safe registered engineers. Up to 10 year warranty.',
+    title: 'Boilable | Boiler Installation Estimates',
+    description: 'Get a boiler estimate in 60 seconds. Final price confirmed after a free site survey.',
+    images: [
+      {
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Boilable - Boiler Installation Estimates',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Boilable - Quality Boiler Installation from £1,750',
-    description: 'Get your instant boiler installation quote online. Professional Gas Safe registered engineers.',
+    title: 'Boilable | Boiler Installation Estimates',
+    description: 'Get a boiler estimate in 60 seconds. Final price confirmed after a free site survey.',
+    images: ['/og.png'],
   },
   robots: {
     index: true,

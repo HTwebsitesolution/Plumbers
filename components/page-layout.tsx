@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Flame } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 
 interface PageLayoutProps {
@@ -24,16 +25,19 @@ export function PageLayout({ children }: PageLayoutProps) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <header className="sticky top-0 z-50 border-b border-border bg-white/98 backdrop-blur-lg shadow-sm supports-[backdrop-filter]:bg-white/95">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
-          <Link href="/" className="group flex items-center gap-3 transition-all duration-300 hover:scale-105">
-            <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-cyan via-brand-blue to-brand-red shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:shadow-brand-cyan/30">
-              <Flame className="h-6 w-6 text-white animate-pulse-subtle" />
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-brand-cyan/0 to-brand-blue/0 opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <Link href="/" className="group flex items-center transition-all duration-300 hover:opacity-80" aria-label="Boilable Home">
+            <div className="relative h-10 w-auto sm:h-12">
+              <Image
+                src="/brand/boilable-logo.png"
+                alt="Boilable"
+                width={200}
+                height={48}
+                priority
+                className="h-full w-auto object-contain"
+              />
             </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold leading-none tracking-tight text-gradient">Boilable</span>
-              <span className="text-[10px] font-medium text-muted-foreground/70 tracking-wider uppercase">Premium Installs</span>
-            </div>
+            <span className="sr-only">Boilable - Boiler Installation Estimates</span>
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex" role="navigation" aria-label="Main navigation">
@@ -61,14 +65,14 @@ export function PageLayout({ children }: PageLayoutProps) {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-card border-border">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-cyan via-brand-blue to-brand-red shadow-lg">
-                    <Flame className="h-5 w-5 text-white" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-xl font-bold text-gradient">Boilable</span>
-                    <span className="text-[9px] font-medium text-muted-foreground/70 tracking-wider uppercase">Premium Installs</span>
-                  </div>
+                <div className="mb-8">
+                  <Image
+                    src="/brand/boilable-logo.png"
+                    alt="Boilable"
+                    width={160}
+                    height={40}
+                    className="h-10 w-auto object-contain"
+                  />
                 </div>
                 <nav className="flex flex-col gap-2" role="navigation" aria-label="Mobile navigation">
                   {navLinks.map((link) => (
@@ -97,14 +101,14 @@ export function PageLayout({ children }: PageLayoutProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-4">
             <div>
-              <div className="mb-4 flex items-center gap-2">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-brand-cyan via-brand-blue to-brand-red shadow-md">
-                  <Flame className="h-5 w-5 text-white" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-lg font-bold text-gradient leading-none">Boilable</span>
-                  <span className="text-[9px] font-medium text-muted-foreground/70 tracking-wider uppercase">Premium Installs</span>
-                </div>
+              <div className="mb-4">
+                <Image
+                  src="/brand/boilable-logo.png"
+                  alt="Boilable.co.uk"
+                  width={140}
+                  height={35}
+                  className="h-8 w-auto object-contain"
+                />
               </div>
               <p className="text-sm text-muted-foreground">
                 Quality boiler installations with transparent pricing and expert service.
