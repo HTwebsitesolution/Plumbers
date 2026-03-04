@@ -43,7 +43,7 @@ export default function BoilersPage() {
             </div>
             <div className="rounded-xl overflow-hidden shadow-xl">
               <img
-                src="https://images.pexels.com/photos/8092183/pexels-photo-8092183.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="/boilable%20-%20choose%20your%20boiler/1.png"
                 alt="Quality boiler installation components"
                 className="w-full h-96 object-cover"
               />
@@ -72,10 +72,10 @@ export default function BoilersPage() {
                   <img
                     src={
                       index === 0
-                        ? "https://images.pexels.com/photos/8092175/pexels-photo-8092175.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        ? "/boilable%20-%20choose%20your%20boiler/1.png"
                         : index === 1
-                        ? "https://images.pexels.com/photos/5691625/pexels-photo-5691625.jpeg?auto=compress&cs=tinysrgb&w=600"
-                        : "https://images.pexels.com/photos/8092157/pexels-photo-8092157.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        ? "/boilable%20-%20choose%20your%20boiler/2.png"
+                        : "/boilable%20-%20choose%20your%20boiler/3.png"
                     }
                     alt={`${tier.name} installation`}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
