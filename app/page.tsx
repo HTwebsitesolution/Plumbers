@@ -113,7 +113,7 @@ export default function Home() {
               <Card className="premium-card transition-all duration-300 hover:scale-105 hover:shadow-xl animate-slide-up stagger-1 group">
                 <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
                   <img
-                    src="https://images.pexels.com/photos/5475765/pexels-photo-5475765.jpeg?auto=compress&cs=tinysrgb&w=400"
+                    src="/boilable%20quote%20-how%20it%20works/1.png"
                     alt="Online quote form"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -131,7 +131,7 @@ export default function Home() {
               <Card className="premium-card transition-all duration-300 hover:scale-105 hover:shadow-xl animate-slide-up stagger-2 group">
                 <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
                   <img
-                    src="https://images.pexels.com/photos/8092169/pexels-photo-8092169.jpeg?auto=compress&cs=tinysrgb&w=400"
+                    src="/boilable%20quote%20-how%20it%20works/2.png"
                     alt="Engineer conducting survey"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -149,7 +149,7 @@ export default function Home() {
               <Card className="premium-card transition-all duration-300 hover:scale-105 hover:shadow-xl animate-slide-up stagger-3 group">
                 <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
                   <img
-                    src="https://images.pexels.com/photos/7689732/pexels-photo-7689732.jpeg?auto=compress&cs=tinysrgb&w=400"
+                    src="/boilable%20quote%20-how%20it%20works/3.png"
                     alt="Quote document"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -167,7 +167,7 @@ export default function Home() {
               <Card className="premium-card transition-all duration-300 hover:scale-105 hover:shadow-xl animate-slide-up stagger-4 group">
                 <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
                   <img
-                    src="https://images.pexels.com/photos/5691607/pexels-photo-5691607.jpeg?auto=compress&cs=tinysrgb&w=400"
+                    src="/boilable%20quote%20-how%20it%20works/4.png"
                     alt="Professional installation"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />

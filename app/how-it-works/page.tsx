@@ -35,8 +35,8 @@ export default function HowItWorksPage() {
                 </h2>
                 <div className="mb-4 rounded-xl overflow-hidden">
                   <img
-                    src="https://images.pexels.com/photos/5475765/pexels-photo-5475765.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="Person using laptop to get quote"
+                    src="/boilable%20quote%20-how%20it%20works/1.png"
+                    alt="Customer completing online boiler quote"
                     className="w-full h-64 object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -72,8 +72,8 @@ export default function HowItWorksPage() {
                 </h2>
                 <div className="mb-4 rounded-xl overflow-hidden">
                   <img
-                    src="https://images.pexels.com/photos/8092169/pexels-photo-8092169.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="Engineer conducting survey"
+                    src="/boilable%20quote%20-how%20it%20works/2.png"
+                    alt="Boilable engineer carrying out boiler survey"
                     className="w-full h-64 object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -109,8 +109,8 @@ export default function HowItWorksPage() {
                 </h2>
                 <div className="mb-4 rounded-xl overflow-hidden">
                   <img
-                    src="https://images.pexels.com/photos/7689732/pexels-photo-7689732.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="Reviewing quote document"
+                    src="/boilable%20quote%20-how%20it%20works/3.png"
+                    alt="Boilable boiler installation quote on tablet"
                     className="w-full h-64 object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -146,8 +146,8 @@ export default function HowItWorksPage() {
                 </h2>
                 <div className="mb-4 rounded-xl overflow-hidden">
                   <img
-                    src="https://images.pexels.com/photos/5691607/pexels-photo-5691607.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="Professional boiler installation"
+                    src="/boilable%20quote%20-how%20it%20works/4.png"
+                    alt="Gas Safe registered boiler installation"
                     className="w-full h-64 object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
