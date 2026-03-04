@@ -47,7 +47,7 @@ const ALLOWED_POSTCODE_DISTRICTS = [
 
 export function extractOutwardCode(postcode: string): string {
   const cleaned = postcode.replace(/\s+/g, '').toUpperCase();
-  const match = cleaned.match(/^([A-Z]{1,2}\d{1,2}[A-Z]?)/);
+  const match = cleaned.match(/^([A-Z]{1,2}\d{1,2}[A-Z]?)(\d[A-Z]{2})$/);
   return match ? match[1] : '';
 }
 
