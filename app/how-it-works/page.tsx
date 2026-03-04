@@ -25,8 +25,8 @@ export default function HowItWorksPage() {
       <div className="bg-white py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-16">
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
+            <div className="flex flex-col md:flex-row gap-8 animate-slide-in-left group">
+              <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200 group-hover:shadow-lg">
                 <span className="text-2xl font-bold text-blue-600">1</span>
               </div>
               <div className="flex-1">
@@ -37,7 +37,7 @@ export default function HowItWorksPage() {
                   <img
                     src="https://images.pexels.com/photos/5475765/pexels-photo-5475765.jpeg?auto=compress&cs=tinysrgb&w=800"
                     alt="Person using laptop to get quote"
-                    className="w-full h-64 object-cover rounded-xl shadow-lg"
+                    className="w-full h-64 object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <p className="mb-4 text-lg text-slate-600">
@@ -62,8 +62,8 @@ export default function HowItWorksPage() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
+            <div className="flex flex-col md:flex-row gap-8 animate-slide-in-right group">
+              <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200 group-hover:shadow-lg">
                 <span className="text-2xl font-bold text-blue-600">2</span>
               </div>
               <div className="flex-1">
@@ -74,7 +74,7 @@ export default function HowItWorksPage() {
                   <img
                     src="https://images.pexels.com/photos/8092169/pexels-photo-8092169.jpeg?auto=compress&cs=tinysrgb&w=800"
                     alt="Engineer conducting survey"
-                    className="w-full h-64 object-cover rounded-xl shadow-lg"
+                    className="w-full h-64 object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <p className="mb-4 text-lg text-slate-600">
@@ -99,8 +99,8 @@ export default function HowItWorksPage() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
+            <div className="flex flex-col md:flex-row gap-8 animate-slide-in-left group">
+              <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200 group-hover:shadow-lg">
                 <span className="text-2xl font-bold text-blue-600">3</span>
               </div>
               <div className="flex-1">
@@ -111,7 +111,7 @@ export default function HowItWorksPage() {
                   <img
                     src="https://images.pexels.com/photos/7689732/pexels-photo-7689732.jpeg?auto=compress&cs=tinysrgb&w=800"
                     alt="Reviewing quote document"
-                    className="w-full h-64 object-cover rounded-xl shadow-lg"
+                    className="w-full h-64 object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <p className="mb-4 text-lg text-slate-600">
@@ -136,8 +136,8 @@ export default function HowItWorksPage() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
+            <div className="flex flex-col md:flex-row gap-8 animate-slide-in-right group">
+              <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200 group-hover:shadow-lg">
                 <span className="text-2xl font-bold text-blue-600">4</span>
               </div>
               <div className="flex-1">
@@ -148,7 +148,7 @@ export default function HowItWorksPage() {
                   <img
                     src="https://images.pexels.com/photos/5691607/pexels-photo-5691607.jpeg?auto=compress&cs=tinysrgb&w=800"
                     alt="Professional boiler installation"
-                    className="w-full h-64 object-cover rounded-xl shadow-lg"
+                    className="w-full h-64 object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <p className="mb-4 text-lg text-slate-600">

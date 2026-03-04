@@ -70,11 +70,11 @@ export default function ReviewsPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {REVIEWS.map((review, index) => (
-              <Card key={index}>
+              <Card key={index} className="animate-scale-in group transition-all duration-300 hover:scale-105 hover:shadow-xl" style={{animationDelay: `${index * 0.1}s`}}>
                 <CardContent className="pt-6">
                   <div className="mb-3 flex items-center gap-1">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400 transition-transform duration-300 group-hover:scale-125" />
                     ))}
                   </div>
                   <p className="mb-4 text-slate-600">{review.review}</p>

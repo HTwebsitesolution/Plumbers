@@ -20,32 +20,32 @@ export function HeroPremium() {
           {/* LEFT COLUMN - Content */}
           <div className="order-2 lg:order-1">
             {/* Eyebrow */}
-            <div className="mb-6 inline-flex items-center rounded-full border border-brand-cyan/20 bg-brand-cyan/5 px-4 py-1.5 text-sm font-medium text-brand-cyan backdrop-blur-sm">
+            <div className="mb-6 inline-flex items-center rounded-full border border-brand-cyan/20 bg-brand-cyan/5 px-4 py-1.5 text-sm font-medium text-brand-cyan backdrop-blur-sm animate-fade-in">
               Boilers-only installation
             </div>
 
             {/* H1 */}
-            <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl animate-slide-in-left">
               Boiler installation, done properly.
             </h1>
 
             {/* Subhead */}
-            <p className="mb-8 text-lg leading-relaxed text-white/75 sm:text-xl">
+            <p className="mb-8 text-lg leading-relaxed text-white/75 sm:text-xl animate-slide-in-left stagger-1">
               Choose Budget, Mid price, or Premium. We confirm the final price after a free site survey — no surprises.
             </p>
 
             {/* Trust bullets */}
             <div className="mb-8 space-y-3">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
+              <div className="flex items-start gap-3 animate-fade-in stagger-2 group">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white/90">Includes filter, limescale reducer, chemical flush + thermostat</span>
               </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
+              <div className="flex items-start gap-3 animate-fade-in stagger-3 group">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white/90">2 / 5 / 10-year warranty options</span>
               </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
+              <div className="flex items-start gap-3 animate-fade-in stagger-4 group">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white/90">Gas, LPG & Oil supported</span>
               </div>
             </div>
@@ -81,12 +81,12 @@ export function HeroPremium() {
               {/* Boiler illustration with radial glow */}
               <div className="relative mx-auto max-w-md lg:max-w-none">
                 {/* Radial glow background */}
-                <div className="absolute inset-0 -m-12 flex items-center justify-center">
+                <div className="absolute inset-0 -m-12 flex items-center justify-center animate-pulse-subtle">
                   <div className="h-80 w-80 rounded-full bg-gradient-to-br from-brand-cyan/10 via-brand-blue/10 to-transparent blur-2xl"></div>
                 </div>
 
                 {/* Boiler SVG illustration */}
-                <div className="relative z-10">
+                <div className="relative z-10 animate-float">
                   <svg
                     viewBox="0 0 300 400"
                     className="mx-auto w-full max-w-[280px] drop-shadow-2xl"
@@ -151,20 +151,20 @@ export function HeroPremium() {
               </div>
 
               {/* "What you get" feature card */}
-              <Card className="mt-8 border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+              <Card className="mt-8 border-white/10 bg-white/5 backdrop-blur-md shadow-xl animate-slide-in-right transition-all duration-300 hover:shadow-2xl hover:bg-white/10">
                 <CardContent className="p-6">
                   <h3 className="mb-4 text-lg font-semibold text-white">What you get</h3>
                   <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
+                    <li className="flex items-start gap-3 group">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
                       <span className="text-sm text-white/80">Free site survey</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
+                    <li className="flex items-start gap-3 group">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
                       <span className="text-sm text-white/80">Clear final price before work starts</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
+                    <li className="flex items-start gap-3 group">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
                       <span className="text-sm text-white/80">Warranty-backed installation</span>
                     </li>
                   </ul>

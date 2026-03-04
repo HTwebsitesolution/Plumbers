@@ -25,9 +25,9 @@ export default function ContactPage() {
       <div className="bg-white py-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="mb-16 grid gap-8 md:grid-cols-2">
-            <Card>
+            <Card className="animate-slide-in-left group transition-all duration-300 hover:scale-105 hover:shadow-xl">
               <CardHeader>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200">
                   <MessageSquare className="h-6 w-6 text-blue-600" />
                 </div>
                 <CardTitle>Start with a Quote</CardTitle>
@@ -47,9 +47,9 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="animate-slide-in-right group transition-all duration-300 hover:scale-105 hover:shadow-xl">
               <CardHeader>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200">
                   <Clock className="h-6 w-6 text-blue-600" />
                 </div>
                 <CardTitle>Response Time</CardTitle>
@@ -126,7 +126,7 @@ export default function ContactPage() {
             Frequently Asked Questions
           </h2>
           <div className="grid gap-6 md:grid-cols-2">
-            <Card>
+            <Card className="animate-scale-in stagger-1 transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <CardHeader>
                 <CardTitle className="text-lg">How quickly will I hear back?</CardTitle>
               </CardHeader>
@@ -139,7 +139,7 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="animate-scale-in stagger-2 transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <CardHeader>
                 <CardTitle className="text-lg">Is the survey really free?</CardTitle>
               </CardHeader>
@@ -152,7 +152,7 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="animate-scale-in stagger-3 transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <CardHeader>
                 <CardTitle className="text-lg">What areas do you cover?</CardTitle>
               </CardHeader>
@@ -165,7 +165,7 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="animate-scale-in stagger-4 transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <CardHeader>
                 <CardTitle className="text-lg">Can I make changes after the survey?</CardTitle>
               </CardHeader>

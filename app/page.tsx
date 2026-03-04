@@ -45,36 +45,36 @@ export default function Home() {
         <section className="border-y border-border bg-card py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-cyan/10 ring-1 ring-brand-cyan/20">
-                  <CheckCircle2 className="h-7 w-7 text-brand-cyan" />
+              <div className="flex items-center gap-4 animate-fade-in stagger-1 group">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-cyan/10 ring-1 ring-brand-cyan/20 transition-all duration-300 group-hover:scale-110 group-hover:bg-brand-cyan/20 group-hover:ring-brand-cyan/40">
+                  <CheckCircle2 className="h-7 w-7 text-brand-cyan transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <div>
                   <div className="font-semibold text-foreground">Quality Brands</div>
                   <div className="text-sm text-muted-foreground">Baxi, Viessmann & more</div>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-blue/10 ring-1 ring-brand-blue/20">
-                  <Shield className="h-7 w-7 text-brand-blue" />
+              <div className="flex items-center gap-4 animate-fade-in stagger-2 group">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-blue/10 ring-1 ring-brand-blue/20 transition-all duration-300 group-hover:scale-110 group-hover:bg-brand-blue/20 group-hover:ring-brand-blue/40">
+                  <Shield className="h-7 w-7 text-brand-blue transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <div>
                   <div className="font-semibold text-foreground">Up to 10 Years</div>
                   <div className="text-sm text-muted-foreground">Warranty included</div>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-cyan/10 ring-1 ring-brand-cyan/20">
-                  <Clock className="h-7 w-7 text-brand-cyan" />
+              <div className="flex items-center gap-4 animate-fade-in stagger-3 group">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-cyan/10 ring-1 ring-brand-cyan/20 transition-all duration-300 group-hover:scale-110 group-hover:bg-brand-cyan/20 group-hover:ring-brand-cyan/40">
+                  <Clock className="h-7 w-7 text-brand-cyan transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <div>
                   <div className="font-semibold text-foreground">24 Hour</div>
                   <div className="text-sm text-muted-foreground">Response time</div>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-blue/10 ring-1 ring-brand-blue/20">
-                  <Award className="h-7 w-7 text-brand-blue" />
+              <div className="flex items-center gap-4 animate-fade-in stagger-4 group">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-blue/10 ring-1 ring-brand-blue/20 transition-all duration-300 group-hover:scale-110 group-hover:bg-brand-blue/20 group-hover:ring-brand-blue/40">
+                  <Award className="h-7 w-7 text-brand-blue transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <div>
                   <div className="font-semibold text-foreground">Expert Team</div>
@@ -87,23 +87,23 @@ export default function Home() {
 
         <section className="bg-background py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-16 text-center">
+            <div className="mb-16 text-center animate-fade-in">
               <h2 className="mb-4 text-4xl font-bold md:text-5xl">How It Works</h2>
               <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
                 Get your new boiler installed in 4 simple steps
               </p>
             </div>
             <div className="grid gap-6 md:grid-cols-4">
-              <Card className="premium-card transition-all hover:scale-105">
+              <Card className="premium-card transition-all duration-300 hover:scale-105 hover:shadow-xl animate-slide-up stagger-1 group">
                 <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
                   <img
                     src="https://images.pexels.com/photos/5475765/pexels-photo-5475765.jpeg?auto=compress&cs=tinysrgb&w=400"
                     alt="Online quote form"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <CardHeader>
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg">
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                     1
                   </div>
                   <CardTitle>Get Your Quote</CardTitle>
@@ -112,16 +112,16 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
               </Card>
-              <Card className="premium-card transition-all hover:scale-105">
+              <Card className="premium-card transition-all duration-300 hover:scale-105 hover:shadow-xl animate-slide-up stagger-2 group">
                 <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
                   <img
                     src="https://images.pexels.com/photos/8092169/pexels-photo-8092169.jpeg?auto=compress&cs=tinysrgb&w=400"
                     alt="Engineer conducting survey"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <CardHeader>
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg">
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                     2
                   </div>
                   <CardTitle>Free Survey</CardTitle>
@@ -130,16 +130,16 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
               </Card>
-              <Card className="premium-card transition-all hover:scale-105">
+              <Card className="premium-card transition-all duration-300 hover:scale-105 hover:shadow-xl animate-slide-up stagger-3 group">
                 <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
                   <img
                     src="https://images.pexels.com/photos/7689732/pexels-photo-7689732.jpeg?auto=compress&cs=tinysrgb&w=400"
                     alt="Quote document"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <CardHeader>
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg">
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                     3
                   </div>
                   <CardTitle>Confirmed Quote</CardTitle>
@@ -148,16 +148,16 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
               </Card>
-              <Card className="premium-card transition-all hover:scale-105">
+              <Card className="premium-card transition-all duration-300 hover:scale-105 hover:shadow-xl animate-slide-up stagger-4 group">
                 <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
                   <img
                     src="https://images.pexels.com/photos/5691607/pexels-photo-5691607.jpeg?auto=compress&cs=tinysrgb&w=400"
                     alt="Professional installation"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <CardHeader>
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg">
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand text-xl font-bold text-white shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                     4
                   </div>
                   <CardTitle>Installation</CardTitle>
@@ -172,7 +172,7 @@ export default function Home() {
 
         <section className="bg-card py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-16 text-center">
+            <div className="mb-16 text-center animate-fade-in">
               <h2 className="mb-4 text-4xl font-bold md:text-5xl">Choose Your Boiler Tier</h2>
               <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
                 All installations include the same quality service and essentials
@@ -180,7 +180,7 @@ export default function Home() {
             </div>
             <div className="grid gap-8 md:grid-cols-3">
               {BOILER_TIERS.map((tier, index) => (
-                <Card key={tier.name} className="gradient-border-card relative overflow-hidden transition-all hover:scale-105">
+                <Card key={tier.name} className="gradient-border-card relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl animate-scale-in group" style={{animationDelay: `${index * 0.1}s`}}>
                   <div className="relative h-56 w-full overflow-hidden">
                     <img
                       src={
@@ -191,7 +191,7 @@ export default function Home() {
                           : "https://images.pexels.com/photos/8092157/pexels-photo-8092157.jpeg?auto=compress&cs=tinysrgb&w=600"
                       }
                       alt={`${tier.name} boiler`}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
                   <CardHeader>

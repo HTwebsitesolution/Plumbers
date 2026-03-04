@@ -67,7 +67,7 @@ export default function BoilersPage() {
 
           <div className="grid gap-8 md:grid-cols-3">
             {BOILER_TIERS.map((tier, index) => (
-              <Card key={tier.name} className="relative overflow-hidden">
+              <Card key={tier.name} className="relative overflow-hidden animate-scale-in group transition-all duration-300 hover:scale-105 hover:shadow-xl" style={{animationDelay: `${index * 0.15}s`}}>
                 <div className="relative h-48 w-full overflow-hidden">
                   <img
                     src={
@@ -78,7 +78,7 @@ export default function BoilersPage() {
                         : "https://images.pexels.com/photos/8092157/pexels-photo-8092157.jpeg?auto=compress&cs=tinysrgb&w=600"
                     }
                     alt={`${tier.name} installation`}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <CardHeader>
@@ -125,9 +125,9 @@ export default function BoilersPage() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            <Card>
+            <Card className="animate-fade-in stagger-1 group transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <CardHeader>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200">
                   <Fuel className="h-6 w-6 text-blue-600" />
                 </div>
                 <CardTitle>Gas</CardTitle>
@@ -138,9 +138,9 @@ export default function BoilersPage() {
               </CardHeader>
             </Card>
 
-            <Card>
+            <Card className="animate-fade-in stagger-2 group transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <CardHeader>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200">
                   <Fuel className="h-6 w-6 text-blue-600" />
                 </div>
                 <CardTitle>LPG</CardTitle>
@@ -151,9 +151,9 @@ export default function BoilersPage() {
               </CardHeader>
             </Card>
 
-            <Card>
+            <Card className="animate-fade-in stagger-3 group transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <CardHeader>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200">
                   <Fuel className="h-6 w-6 text-blue-600" />
                 </div>
                 <CardTitle>Oil</CardTitle>
