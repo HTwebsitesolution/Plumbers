@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase';
+import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { generateQuoteRef } from '@/lib/quote-utils';
 import { getCustomerEmailTemplate, getInstallerEmailTemplate } from '@/lib/email-templates';
 import { QuoteFormData, OutOfAreaEnquiry } from '@/lib/types';
@@ -36,6 +36,8 @@ export async function POST(request: Request) {
       }
 
       const quoteRef = generateQuoteRef();
+
+      const supabaseAdmin = getSupabaseServerClient();
 
       const { error: dbError } = await supabaseAdmin.from('leads').insert({
         quote_ref: quoteRef,
@@ -103,6 +105,8 @@ export async function POST(request: Request) {
     }
 
     const quoteRef = generateQuoteRef();
+
+    const supabaseAdmin = getSupabaseServerClient();
 
     const { error: dbError } = await supabaseAdmin.from('leads').insert({
       quote_ref: quoteRef,

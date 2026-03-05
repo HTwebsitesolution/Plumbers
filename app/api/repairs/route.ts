@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { getRepairsCustomerEmailTemplate, getRepairsInstallerEmailTemplate, RepairsRequestData } from '@/lib/repairs-email-templates';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 function generateRepairRef(): string {
   const date = new Date();
@@ -87,7 +84,7 @@ export async function POST(request: Request) {
 
     const repairRef = generateRepairRef();
 
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    const supabase = getSupabaseServerClient();
 
     const { error: insertError } = await supabase
       .from('repairs_requests')

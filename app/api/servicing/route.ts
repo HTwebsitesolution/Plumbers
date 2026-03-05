@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { getServicingCustomerEmailTemplate, getServicingInstallerEmailTemplate, ServicingRequestData } from '@/lib/email-templates';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 function generateServicingRef(): string {
   const date = new Date();
@@ -84,7 +81,7 @@ export async function POST(request: Request) {
 
     const serviceRef = generateServicingRef();
 
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    const supabase = getSupabaseServerClient();
 
     const { error: insertError } = await supabase
       .from('servicing_requests')

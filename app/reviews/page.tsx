@@ -11,37 +11,37 @@ export const metadata: Metadata = pageMetadata.reviews;
 const REVIEWS = [
   {
     name: 'Sarah M.',
-    location: 'London',
+    location: 'Doncaster',
     rating: 5,
     review: 'Excellent service from start to finish. The quote was transparent, the survey was thorough, and the installation team were professional and tidy. Very happy with my new boiler.',
   },
   {
     name: 'James T.',
-    location: 'Manchester',
+    location: 'Retford',
     rating: 5,
     review: 'I was impressed by how quick and easy the whole process was. Got my quote online, had the survey done within two days, and the installation was completed in less than a day. Highly recommend.',
   },
   {
     name: 'Linda K.',
-    location: 'Birmingham',
+    location: 'Worksop',
     rating: 5,
     review: 'The team explained everything clearly and there were no hidden costs. The engineer was knowledgeable and took time to show me how to use the new system. Great value for money.',
   },
   {
     name: 'Michael R.',
-    location: 'Bristol',
+    location: 'Bawtry',
     rating: 5,
     review: 'Professional installation and the quality of work was excellent. They cleaned up after themselves and left everything spotless. The new boiler is so much more efficient than the old one.',
   },
   {
     name: 'Emma W.',
-    location: 'Leeds',
+    location: 'Maltby',
     rating: 5,
     review: 'Very pleased with the service. The online quote gave me a good idea of costs, and the final price after the survey was exactly what I expected. No surprises.',
   },
   {
     name: 'David P.',
-    location: 'Glasgow',
+    location: 'Dinnington',
     rating: 5,
     review: "From quote to installation, everything was smooth. The communication was great, they turned up on time, and finished when they said they would. Can't fault the service.",
   },
