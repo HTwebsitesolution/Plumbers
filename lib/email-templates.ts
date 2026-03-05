@@ -20,6 +20,28 @@ export interface ServicingRequestData {
   customerNotes?: string;
 }
 
+export interface RepairsRequestData {
+  repairRef: string;
+  requestType: 'repairs' | 'out_of_area_enquiry';
+  postcode: string;
+  outwardCode?: string;
+  coverageStatus?: 'in_area' | 'out_of_area';
+  issueCategory?: string;
+  errorCode?: string;
+  urgency?: string;
+  gasSmell?: boolean;
+  fuelType?: string;
+  boilerType?: string;
+  boilerMake?: string;
+  boilerModel?: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  preferredContactMethod?: string;
+  preferredTimeWindow?: string;
+  customerNotes?: string;
+}
+
 export function getCustomerEmailTemplate(data: QuoteFormData & { quoteRef: string }) {
   return {
     subject: `Your Boiler Quote Request (${data.quoteRef})`,

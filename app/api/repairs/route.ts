@@ -1,0 +1,164 @@
+import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+import { getRepairsCustomerEmailTemplate, getRepairsInstallerEmailTemplate, RepairsRequestData } from '@/lib/repairs-email-templates';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+function generateRepairRef(): string {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let random = '';
+  for (let i = 0; i < 4; i++) {
+    random += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  return `REP-${year}${month}${day}-${random}`;
+}
+
+async function sendEmail(to: string, subject: string, html: string) {
+  const resendApiKey = process.env.RESEND_API_KEY;
+
+  if (!resendApiKey) {
+    console.warn('RESEND_API_KEY not configured. Email not sent.');
+    return;
+  }
+
+  try {
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'Boilable <noreply@boilable.co.uk>',
+        to: [to],
+        subject,
+        html,
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      console.error('Failed to send email:', error);
+    }
+  } catch (error) {
+    console.error('Error sending email:', error);
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+
+    const {
+      requestType,
+      postcode,
+      outwardCode,
+      coverageStatus,
+      issueCategory,
+      errorCode,
+      urgency,
+      gasSmell,
+      fuelType,
+      boilerType,
+      boilerMake,
+      boilerModel,
+      name: customerName,
+      email: customerEmail,
+      phone: customerPhone,
+      preferredContactMethod,
+      preferredTimeWindow,
+      notes: customerNotes,
+    } = body;
+
+    if (!customerName || !customerEmail || !customerPhone || !postcode) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    const repairRef = generateRepairRef();
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    const { error: insertError } = await supabase
+      .from('repairs_requests')
+      .insert({
+        repair_ref: repairRef,
+        request_type: requestType || 'repairs',
+        service: 'repairs',
+        postcode,
+        outward_code: outwardCode,
+        coverage_status: coverageStatus,
+        issue_category: issueCategory,
+        error_code: errorCode,
+        urgency,
+        gas_smell: gasSmell,
+        fuel_type: fuelType,
+        boiler_type: boilerType,
+        boiler_make: boilerMake,
+        boiler_model: boilerModel,
+        customer_name: customerName,
+        customer_email: customerEmail,
+        customer_phone: customerPhone,
+        preferred_contact_method: preferredContactMethod,
+        preferred_time_window: preferredTimeWindow,
+        customer_notes: customerNotes,
+      });
+
+    if (insertError) {
+      console.error('Database insert error:', insertError);
+      return NextResponse.json(
+        { error: 'Failed to save repair request' },
+        { status: 500 }
+      );
+    }
+
+    const emailData: RepairsRequestData = {
+      repairRef,
+      requestType: requestType || 'repairs',
+      postcode,
+      outwardCode,
+      coverageStatus,
+      issueCategory,
+      errorCode,
+      urgency,
+      gasSmell,
+      fuelType,
+      boilerType,
+      boilerMake,
+      boilerModel,
+      customerName,
+      customerEmail,
+      customerPhone,
+      preferredContactMethod,
+      preferredTimeWindow,
+      customerNotes,
+    };
+
+    const customerEmailTemplate = getRepairsCustomerEmailTemplate(emailData);
+    await sendEmail(customerEmail, customerEmailTemplate.subject, customerEmailTemplate.html);
+
+    const installerEmail = process.env.INSTALLER_EMAIL || 'installer@boilable.co.uk';
+    const installerEmailTemplate = getRepairsInstallerEmailTemplate(emailData);
+    await sendEmail(installerEmail, installerEmailTemplate.subject, installerEmailTemplate.html);
+
+    return NextResponse.json({
+      success: true,
+      repairRef,
+    });
+  } catch (error) {
+    console.error('Error processing repair request:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
