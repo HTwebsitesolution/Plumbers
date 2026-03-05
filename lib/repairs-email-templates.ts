@@ -22,14 +22,14 @@ export interface RepairsRequestData {
 
 export function getRepairsCustomerEmailTemplate(data: RepairsRequestData) {
   return {
-    subject: `Your Boiler Repair Request (${data.repairRef})`,
+    subject: `Repair request received — Ref ${data.repairRef}`,
     html: `
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Repair Request</title>
+  <title>Repair Request Received</title>
 </head>
 <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f8fafc;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8fafc; padding: 40px 20px;">
@@ -43,27 +43,13 @@ export function getRepairsCustomerEmailTemplate(data: RepairsRequestData) {
           </tr>
           <tr>
             <td style="padding: 40px;">
-              <h2 style="margin: 0 0 16px 0; color: #1e293b; font-size: 24px; font-weight: 600;">Thank you for your repair request!</h2>
-              <p style="margin: 0 0 24px 0; color: #64748b; font-size: 16px; line-height: 1.6;">Hi ${data.customerName},</p>
-              <p style="margin: 0 0 24px 0; color: #64748b; font-size: 16px; line-height: 1.6;">We've received your boiler repair request. Our team will be in touch soon to arrange a convenient time for your repair.</p>
+              <p style="margin: 0 0 24px 0; color: #1e293b; font-size: 16px; line-height: 1.6;">Thanks ${data.customerName}.</p>
+              <p style="margin: 0 0 24px 0; color: #64748b; font-size: 16px; line-height: 1.6;">We've received your boiler repair request. We'll contact you shortly to diagnose the issue and arrange a visit.</p>
 
               <div style="background-color: #f1f5f9; border-radius: 8px; padding: 24px; margin: 24px 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                  <div>
-                    <div style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Repair Reference</div>
-                    <div style="color: #1e293b; font-size: 18px; font-weight: 600; font-family: monospace;">${data.repairRef}</div>
-                  </div>
-                </div>
+                <div style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Repair Reference</div>
+                <div style="color: #1e293b; font-size: 18px; font-weight: 600; font-family: monospace;">${data.repairRef}</div>
               </div>
-
-              <h3 style="margin: 32px 0 16px 0; color: #1e293b; font-size: 18px; font-weight: 600;">What happens next?</h3>
-
-              <ol style="margin: 0; padding-left: 20px; color: #64748b; font-size: 15px; line-height: 1.8;">
-                <li style="margin-bottom: 12px;">Our team will review your repair request</li>
-                <li style="margin-bottom: 12px;">We'll contact you to discuss the issue and arrange a visit</li>
-                <li style="margin-bottom: 12px;">Our Gas Safe engineer will diagnose and repair your boiler</li>
-                <li>You'll receive confirmation once the repair is complete</li>
-              </ol>
 
               <div style="border-top: 1px solid #e2e8f0; margin-top: 32px; padding-top: 24px;">
                 <p style="margin: 0 0 8px 0; color: #64748b; font-size: 14px;">Questions? We're here to help.</p>
@@ -83,6 +69,15 @@ export function getRepairsCustomerEmailTemplate(data: RepairsRequestData) {
 </body>
 </html>
     `.trim(),
+    text: `Thanks ${data.customerName}.
+
+We've received your boiler repair request. We'll contact you shortly to diagnose the issue and arrange a visit.
+
+Repair Reference: ${data.repairRef}
+
+Questions? Reply to this email or visit our website.
+
+© 2024 Boilable. All rights reserved.`,
   };
 }
 

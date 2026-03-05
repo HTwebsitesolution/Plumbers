@@ -20,7 +20,7 @@ function generateServicingRef(): string {
   return `SERV-${year}${month}${day}-${random}`;
 }
 
-async function sendEmail(to: string, subject: string, html: string) {
+async function sendEmail(to: string, subject: string, html: string, text?: string) {
   const resendApiKey = process.env.RESEND_API_KEY;
 
   if (!resendApiKey) {
@@ -40,6 +40,7 @@ async function sendEmail(to: string, subject: string, html: string) {
         to: [to],
         subject,
         html,
+        text,
       }),
     });
 
@@ -135,7 +136,7 @@ export async function POST(request: Request) {
     };
 
     const customerEmailTemplate = getServicingCustomerEmailTemplate(emailData);
-    await sendEmail(customerEmail, customerEmailTemplate.subject, customerEmailTemplate.html);
+    await sendEmail(customerEmail, customerEmailTemplate.subject, customerEmailTemplate.html, customerEmailTemplate.text);
 
     const installerEmail = process.env.INSTALLER_EMAIL || 'installer@boilable.co.uk';
     const installerEmailTemplate = getServicingInstallerEmailTemplate(emailData);
