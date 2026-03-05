@@ -11,20 +11,42 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { data: leads, error } = await supabaseAdmin
+    const { data: leads, error: leadsError } = await supabaseAdmin
       .from('leads')
       .select('*')
       .order('submitted_at', { ascending: false });
 
-    if (error) {
-      console.error('Database error:', error);
+    if (leadsError) {
+      console.error('Database error:', leadsError);
       return NextResponse.json(
         { error: 'Failed to fetch leads' },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ leads });
+    const { data: servicingRequests, error: servicingError } = await supabaseAdmin
+      .from('servicing_requests')
+      .select('*')
+      .order('submitted_at', { ascending: false });
+
+    if (servicingError) {
+      console.error('Database error:', servicingError);
+    }
+
+    const { data: repairsRequests, error: repairsError } = await supabaseAdmin
+      .from('repairs_requests')
+      .select('*')
+      .order('submitted_at', { ascending: false });
+
+    if (repairsError) {
+      console.error('Database error:', repairsError);
+    }
+
+    return NextResponse.json({
+      leads,
+      servicingRequests: servicingRequests || [],
+      repairsRequests: repairsRequests || [],
+    });
   } catch (error) {
     console.error('API error:', error);
     return NextResponse.json(
