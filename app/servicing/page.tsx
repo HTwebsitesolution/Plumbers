@@ -4,7 +4,7 @@ import { PageLayout } from '@/components/page-layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { CheckCircle2, Shield, Clock, Wrench, FileText, AlertTriangle, ArrowRight } from 'lucide-react';
+import { CircleCheck as CheckCircle2, Shield, Clock, Wrench, FileText, TriangleAlert as AlertTriangle, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Boiler Servicing',

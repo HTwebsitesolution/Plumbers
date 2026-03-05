@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { CheckCircle2, Shield, Clock, Wrench, AlertTriangle, ArrowRight, Phone } from 'lucide-react';
+import { CircleCheck as CheckCircle2, Shield, Clock, Wrench, TriangleAlert as AlertTriangle, ArrowRight, Phone } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Boiler Repairs',
