@@ -171,7 +171,7 @@ export default function Home() {
         </section>
 
         <section className="bg-background py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="w-full px-4 sm:px-6 lg:px-12">
             <div className="mb-16 text-center animate-fade-in">
               <h2 className="mb-4 text-4xl font-bold md:text-5xl">How It Works</h2>
               <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
