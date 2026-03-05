@@ -5,7 +5,7 @@ import { BackToTopButton } from '@/components/back-to-top';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { ArrowRight, CircleCheck as CheckCircle2, Shield, Clock, Award } from 'lucide-react';
+import { ArrowRight, CircleCheck as CheckCircle2, Shield, Clock, Award, Wrench, Settings } from 'lucide-react';
 import { BOILER_TIERS, STANDARD_INSTALL_DEFINITION } from '@/lib/types';
 import { formatPrice } from '@/lib/quote-utils';
 import { HeroPremium } from '@/components/hero-premium';
@@ -33,11 +33,17 @@ export default function Home() {
             <span className="sr-only">Boilable - Boiler Installation Estimates</span>
           </Link>
           <nav className="hidden items-center gap-6 md:flex">
+            <Link href="/quote" className="text-sm font-medium text-muted-foreground transition-colors hover:text-brand-cyan">
+              New Boilers
+            </Link>
+            <Link href="/servicing" className="text-sm font-medium text-muted-foreground transition-colors hover:text-brand-cyan">
+              Servicing
+            </Link>
+            <Link href="/repairs" className="text-sm font-medium text-muted-foreground transition-colors hover:text-brand-cyan">
+              Repairs
+            </Link>
             <Link href="/how-it-works" className="text-sm font-medium text-muted-foreground transition-colors hover:text-brand-cyan">
               How It Works
-            </Link>
-            <Link href="/boilers" className="text-sm font-medium text-muted-foreground transition-colors hover:text-brand-cyan">
-              Boilers
             </Link>
             <Link href="/faqs" className="text-sm font-medium text-muted-foreground transition-colors hover:text-brand-cyan">
               FAQs
@@ -97,6 +103,69 @@ export default function Home() {
                   <div className="text-sm text-muted-foreground">Gas Safe registered</div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-background py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-16 text-center animate-fade-in">
+              <h2 className="mb-4 text-4xl font-bold md:text-5xl">Our Services</h2>
+              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+                Comprehensive boiler solutions for all your heating needs
+              </p>
+            </div>
+            <div className="grid gap-8 md:grid-cols-3 mb-24">
+              <Card className="gradient-border-card group hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <CardHeader>
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-brand shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                    <Settings className="h-8 w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl">New Boiler Installation</CardTitle>
+                  <CardDescription className="text-base">
+                    Get a new energy-efficient boiler installed by Gas Safe engineers with up to 10 years warranty
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button asChild className="btn-gradient w-full">
+                    <Link href="/quote">Get a Quote</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="gradient-border-card group hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <CardHeader>
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-brand shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                    <Shield className="h-8 w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl">Boiler Servicing</CardTitle>
+                  <CardDescription className="text-base">
+                    Annual servicing to keep your boiler running safely and efficiently with full service reports
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button asChild className="btn-gradient w-full">
+                    <Link href="/servicing">Learn More</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="gradient-border-card group hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <CardHeader>
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-brand shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                    <Wrench className="h-8 w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl">Boiler Repairs</CardTitle>
+                  <CardDescription className="text-base">
+                    Fast and reliable repairs for all boiler brands with 24-hour response time
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button asChild className="btn-gradient w-full">
+                    <Link href="/repairs">Learn More</Link>
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>

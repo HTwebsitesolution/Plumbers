@@ -16,8 +16,10 @@ export function PageLayout({ children }: PageLayoutProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
+    { href: '/quote', label: 'New Boilers' },
+    { href: '/servicing', label: 'Servicing' },
+    { href: '/repairs', label: 'Repairs' },
     { href: '/how-it-works', label: 'How It Works' },
-    { href: '/boilers', label: 'Boilers' },
     { href: '/faqs', label: 'FAQs' },
     { href: '/reviews', label: 'Reviews' },
     { href: '/contact', label: 'Contact' },
