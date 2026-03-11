@@ -1,173 +1,161 @@
-"use client";
+'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CircleCheck as CheckCircle2 } from 'lucide-react';
 
+const HERO_IMAGES = [
+  {
+    src: '/hero section/1.png',
+    alt: 'Freshly installed Baxi boiler in a clean utility space',
+  },
+  {
+    src: '/hero section/2.png',
+    alt: 'Modern Baxi boiler installed above a kitchen worktop',
+  },
+  {
+    src: '/hero section/3.png',
+    alt: 'Premium Baxi boiler installation with tidy pipework',
+  },
+];
+
 export function HeroPremium() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5500);
+
+    return () => clearInterval(id);
+  }, []);
   return (
-    <section className="relative overflow-hidden bg-brand-navy py-20 md:py-28 lg:py-32">
-      {/* Subtle gradient lighting effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-brand-cyan opacity-[0.08] blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/4 h-80 w-80 rounded-full bg-brand-blue opacity-[0.06] blur-3xl"></div>
-        <div className="absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-brand-red opacity-[0.05] blur-3xl"></div>
-      </div>
+    <section className="relative overflow-hidden bg-slate-950 py-16 md:py-20 lg:py-24">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.16),_transparent_55%),radial-gradient(circle_at_bottom,_rgba(59,130,246,0.22),_transparent_55%)]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.1fr)]">
           {/* LEFT COLUMN - Content */}
-          <div className="order-2 lg:order-1">
-            {/* Eyebrow */}
-            <div className="mb-6 inline-flex items-center rounded-full border border-brand-cyan/20 bg-brand-cyan/5 px-4 py-1.5 text-sm font-medium text-brand-cyan backdrop-blur-sm animate-fade-in">
-              Boilers-only installation
+          <div className="order-2 space-y-6 text-white lg:order-1">
+            <div className="inline-flex items-center rounded-full border border-brand-cyan/30 bg-slate-900/60 px-4 py-1.5 text-sm font-medium text-brand-cyan shadow-sm backdrop-blur">
+              New boilers, servicing & repairs in your area
             </div>
 
-            {/* H1 */}
-            <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl animate-slide-in-left">
-              Boiler installation, done properly.
+            <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-[3.2rem] lg:leading-[1.05]">
+              Fixed provisional boiler quotes in minutes.
             </h1>
 
-            {/* Subhead */}
-            <p className="mb-8 text-lg leading-relaxed text-white/75 sm:text-xl animate-slide-in-left stagger-1">
-              Choose Budget, Mid price, or Premium. We confirm the final price after a free site survey — no surprises.
+            <p className="max-w-xl text-lg leading-relaxed text-slate-200/80 sm:text-xl">
+              Answer a few quick questions about your home and get a provisional price from £1,750.
+              Final price is always confirmed after a free, no-obligation site survey.
             </p>
 
-            {/* Trust bullets */}
-            <div className="mb-8 space-y-3">
-              <div className="flex items-start gap-3 animate-fade-in stagger-2 group">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white/90">Includes filter, limescale reducer, chemical flush + thermostat</span>
+            <div className="grid gap-3 text-sm text-slate-100/90 sm:grid-cols-2">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
+                <span>All installs include filter, limescale protection, system flush and thermostat.</span>
               </div>
-              <div className="flex items-start gap-3 animate-fade-in stagger-3 group">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white/90">2 / 5 / 10-year warranty options</span>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
+                <span>2 / 5 / 10-year warranties available on Budget, Mid price and Premium tiers.</span>
               </div>
-              <div className="flex items-start gap-3 animate-fade-in stagger-4 group">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white/90">Gas, LPG & Oil supported</span>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
+                <span>Gas, LPG & Oil boilers covered across our postcode catchment.</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
+                <span>No online checkout or finance — just clear survey-backed pricing.</span>
               </div>
             </div>
 
-            {/* CTAs */}
-            <div className="mb-6 flex flex-col gap-4 sm:flex-row">
+            <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
               <Button
                 asChild
                 size="lg"
-                className="bg-brand-cyan text-brand-navy hover:bg-brand-cyan/90 font-semibold text-base px-8 py-6 h-auto shadow-lg shadow-brand-cyan/20 transition-all duration-200 hover:shadow-xl hover:shadow-brand-cyan/30 hover:-translate-y-0.5"
+                className="h-auto px-8 py-5 text-base font-semibold shadow-lg shadow-brand-cyan/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
               >
-                <Link href="/quote">Start my survey estimate</Link>
+                <Link href="/quote">Get my boiler estimate</Link>
               </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30 backdrop-blur-sm font-semibold text-base px-8 py-6 h-auto transition-all duration-200"
-              >
-                <Link href="/boilers">View what&apos;s included</Link>
-              </Button>
+              <div className="flex flex-wrap items-center gap-2 text-sm text-slate-300/80">
+                <span className="rounded-full bg-slate-900/60 px-3 py-1">Provisional from £1,750</span>
+                <span className="hidden h-4 w-px bg-slate-700 sm:inline-block" />
+                <span>Final price confirmed after free site survey</span>
+              </div>
             </div>
-
-            {/* Muted price line */}
-            <p className="text-sm text-white/50">
-              Provisional estimates from £1,750 — final price confirmed after survey.
-            </p>
           </div>
 
-          {/* RIGHT COLUMN - Visual + Feature Card */}
-          <div className="order-1 lg:order-2 relative">
-            <div className="relative">
-              {/* Boiler illustration with radial glow */}
-              <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Radial glow background */}
-                <div className="absolute inset-0 -m-12 flex items-center justify-center animate-pulse-subtle">
-                  <div className="h-80 w-80 rounded-full bg-gradient-to-br from-brand-cyan/10 via-brand-blue/10 to-transparent blur-2xl"></div>
+          {/* RIGHT COLUMN - Photo panel */}
+          <div className="order-1 lg:order-2">
+            <div className="relative mx-auto max-w-xl">
+              <Card className="overflow-hidden border-slate-800/70 bg-slate-900/80 shadow-2xl backdrop-blur-md">
+                <div className="relative w-full aspect-[3/4]">
+                  {HERO_IMAGES.map((image, index) => (
+                    <Image
+                      key={image.src}
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      priority={index === 0}
+                      className={`absolute inset-0 object-contain bg-slate-950 transition-opacity duration-700 ${
+                        index === activeIndex ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    />
+                  ))}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+
+                  <div className="absolute left-4 right-4 top-4 flex items-center justify-between gap-3">
+                    <div className="rounded-full bg-slate-950/80 px-3 py-1 text-xs font-medium text-slate-100 shadow-md shadow-black/40">
+                      South Yorkshire & North Notts coverage
+                    </div>
+                    <div className="rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-semibold text-emerald-950 shadow-md shadow-emerald-500/40">
+                      Free site survey
+                    </div>
+                  </div>
+
+                  <div className="absolute inset-x-4 bottom-4 space-y-3">
+                    <div className="flex flex-wrap items-end justify-between gap-3">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.16em] text-slate-300/80">Example install</p>
+                        <p className="text-2xl font-semibold text-white">
+                          From <span className="text-brand-cyan">£1,750</span>
+                        </p>
+                        <p className="text-xs text-slate-300/80">Based on a standard like-for-like combi swap</p>
+                      </div>
+                      <div className="rounded-xl bg-slate-950/80 px-3 py-2 text-xs text-slate-200 shadow-md shadow-black/40">
+                        <p className="font-semibold">Includes</p>
+                        <p>Magnetic filter, limescale reducer, chemical flush, inhibitor & controls</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Boiler SVG illustration */}
-                <div className="relative z-10 animate-float">
-                  <svg
-                    viewBox="0 0 300 400"
-                    className="mx-auto w-full max-w-[280px] drop-shadow-2xl"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    {/* Main boiler body */}
-                    <rect x="50" y="50" width="200" height="300" rx="12" fill="white" fillOpacity="0.95" />
-                    <rect x="50" y="50" width="200" height="300" rx="12" stroke="url(#paint0_linear)" strokeWidth="2" />
-
-                    {/* Top panel */}
-                    <rect x="70" y="70" width="160" height="60" rx="8" fill="url(#paint1_linear)" />
-
-                    {/* Display screen */}
-                    <rect x="85" y="85" width="80" height="30" rx="4" fill="hsl(218, 75%, 15%)" />
-                    <text x="125" y="105" textAnchor="middle" fill="hsl(195, 100%, 50%)" fontSize="16" fontWeight="600" fontFamily="system-ui">75°</text>
-
-                    {/* Controls */}
-                    <circle cx="190" cy="100" r="12" fill="white" stroke="url(#paint2_linear)" strokeWidth="2" />
-                    <circle cx="215" cy="100" r="12" fill="white" stroke="url(#paint2_linear)" strokeWidth="2" />
-
-                    {/* Pipes section */}
-                    <rect x="70" y="150" width="160" height="180" rx="8" fill="white" fillOpacity="0.5" stroke="url(#paint3_linear)" strokeWidth="1.5" />
-
-                    {/* Vertical pipes */}
-                    <line x1="110" y1="160" x2="110" y2="320" stroke="hsl(195, 100%, 50%)" strokeWidth="6" strokeLinecap="round" />
-                    <line x1="150" y1="160" x2="150" y2="320" stroke="hsl(225, 100%, 56%)" strokeWidth="6" strokeLinecap="round" />
-                    <line x1="190" y1="160" x2="190" y2="320" stroke="hsl(195, 100%, 50%)" strokeWidth="6" strokeLinecap="round" />
-
-                    {/* Horizontal connectors */}
-                    <line x1="70" y1="190" x2="230" y2="190" stroke="white" strokeWidth="3" strokeOpacity="0.3" />
-                    <line x1="70" y1="240" x2="230" y2="240" stroke="white" strokeWidth="3" strokeOpacity="0.3" />
-                    <line x1="70" y1="290" x2="230" y2="290" stroke="white" strokeWidth="3" strokeOpacity="0.3" />
-
-                    {/* Bottom connection points */}
-                    <circle cx="110" cy="340" r="8" fill="hsl(195, 100%, 50%)" />
-                    <circle cx="150" cy="340" r="8" fill="hsl(225, 100%, 56%)" />
-                    <circle cx="190" cy="340" r="8" fill="hsl(195, 100%, 50%)" />
-
-                    {/* Gradient definitions */}
-                    <defs>
-                      <linearGradient id="paint0_linear" x1="150" y1="50" x2="150" y2="350" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="hsl(195, 100%, 50%)" stopOpacity="0.3" />
-                        <stop offset="0.5" stopColor="hsl(225, 100%, 56%)" stopOpacity="0.2" />
-                        <stop offset="1" stopColor="hsl(347, 100%, 59%)" stopOpacity="0.1" />
-                      </linearGradient>
-                      <linearGradient id="paint1_linear" x1="150" y1="70" x2="150" y2="130" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="hsl(195, 100%, 50%)" stopOpacity="0.1" />
-                        <stop offset="1" stopColor="hsl(225, 100%, 56%)" stopOpacity="0.05" />
-                      </linearGradient>
-                      <linearGradient id="paint2_linear" x1="200" y1="88" x2="200" y2="112" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="hsl(195, 100%, 50%)" />
-                        <stop offset="1" stopColor="hsl(225, 100%, 56%)" />
-                      </linearGradient>
-                      <linearGradient id="paint3_linear" x1="150" y1="150" x2="150" y2="330" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="hsl(195, 100%, 50%)" stopOpacity="0.3" />
-                        <stop offset="1" stopColor="hsl(225, 100%, 56%)" stopOpacity="0.1" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-              </div>
-
-              {/* "What you get" feature card */}
-              <Card className="mt-8 border-white/10 bg-white/5 backdrop-blur-md shadow-xl animate-slide-in-right transition-all duration-300 hover:shadow-2xl hover:bg-white/10">
-                <CardContent className="p-6">
-                  <h3 className="mb-4 text-lg font-semibold text-white">What you get</h3>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3 group">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
-                      <span className="text-sm text-white/80">Free site survey</span>
-                    </li>
-                    <li className="flex items-start gap-3 group">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
-                      <span className="text-sm text-white/80">Clear final price before work starts</span>
-                    </li>
-                    <li className="flex items-start gap-3 group">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan transition-transform duration-300 group-hover:scale-125" />
-                      <span className="text-sm text-white/80">Warranty-backed installation</span>
-                    </li>
-                  </ul>
+                <CardContent className="border-t border-slate-800/80 bg-slate-950/80 px-4 py-4 sm:px-6">
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-slate-300/90 sm:text-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-cyan/15 text-[0.65rem] font-semibold text-brand-cyan">
+                        1
+                      </span>
+                      <span>Tell us about your home</span>
+                    </div>
+                    <span className="hidden h-[1px] flex-1 bg-slate-700/70 sm:inline-block" />
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-cyan/15 text-[0.65rem] font-semibold text-brand-cyan">
+                        2
+                      </span>
+                      <span>Get your provisional quote</span>
+                    </div>
+                    <span className="hidden h-[1px] flex-1 bg-slate-700/70 sm:inline-block" />
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-cyan/15 text-[0.65rem] font-semibold text-brand-cyan">
+                        3
+                      </span>
+                      <span>Book a free survey</span>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>
