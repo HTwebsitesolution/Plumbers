@@ -62,48 +62,48 @@ export default function ContactPage() {
             </Card>
           </div>
 
-          <div className="mb-16 overflow-hidden rounded-2xl shadow-xl bg-slate-900/80">
-            <img
-              src="/Photos for boilable website/4.png"
-              alt="Boiler and hot water cylinder installation in a dedicated plant room"
-              className="h-full w-full object-cover"
-            />
-          </div>
-
-          <div className="rounded-2xl bg-slate-50 p-8">
-            <h2 className="mb-8 text-center text-2xl font-bold text-slate-900">
-              Other Ways to Reach Us
-            </h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <Mail className="h-6 w-6 text-blue-600" />
+          <div className="mb-16 grid gap-8 rounded-2xl bg-slate-50 p-6 shadow-sm md:grid-cols-[1fr_minmax(0,320px)] md:items-center md:p-8 lg:gap-10">
+            <div className="order-2 md:order-1">
+              <h2 className="mb-6 text-2xl font-bold text-slate-900">
+                Other Ways to Reach Us
+              </h2>
+              <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-1">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
+                    <Mail className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 className="mb-1 font-semibold text-slate-900">Email</h3>
+                    <p className="text-sm text-slate-600">
+                      Send us an email and we'll get back to you as soon as possible
+                    </p>
+                    <p className="mt-2 text-sm font-medium text-blue-600">
+                      Contact details will be provided after quote submission
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="mb-1 font-semibold text-slate-900">Email</h3>
-                  <p className="text-sm text-slate-600">
-                    Send us an email and we'll get back to you as soon as possible
-                  </p>
-                  <p className="mt-2 text-sm font-medium text-blue-600">
-                    Contact details will be provided after quote submission
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <Phone className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="mb-1 font-semibold text-slate-900">Phone</h3>
-                  <p className="text-sm text-slate-600">
-                    Prefer to speak to someone? Give us a call during business hours
-                  </p>
-                  <p className="mt-2 text-sm font-medium text-blue-600">
-                    Contact details will be provided after quote submission
-                  </p>
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">
+                    <Phone className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 className="mb-1 font-semibold text-slate-900">Phone</h3>
+                    <p className="text-sm text-slate-600">
+                      Prefer to speak to someone? Give us a call during business hours
+                    </p>
+                    <p className="mt-2 text-sm font-medium text-blue-600">
+                      Contact details will be provided after quote submission
+                    </p>
+                  </div>
                 </div>
               </div>
+            </div>
+            <div className="relative order-1 aspect-[4/3] max-h-64 w-full overflow-hidden rounded-xl bg-slate-200 md:order-2 md:max-h-none md:min-h-0">
+              <img
+                src="/Photos for boilable website/4.png"
+                alt="Boiler and hot water cylinder installation in a dedicated plant room"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>
