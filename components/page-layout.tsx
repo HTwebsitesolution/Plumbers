@@ -173,7 +173,15 @@ export function PageLayout({ children }: PageLayoutProps) {
             </div>
           </div>
           <div className="mt-8 border-t border-border pt-8 flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground md:flex-row">
-            <p>&copy; 2024 Boilable. All rights reserved.</p>
+            <p>
+              &copy; 2026 Boilable. All rights reserved.
+              {' '}
+              Designed by{' '}
+              <Link href="https://htwebsolution.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand-cyan transition-colors underline underline-offset-2">
+                HTwebsolution
+              </Link>
+              .
+            </p>
             <BackToTopButton />
           </div>
         </div>
