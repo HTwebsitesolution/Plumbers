@@ -44,7 +44,7 @@ export function HeroPremium() {
               New boilers, servicing & repairs in your area
             </div>
 
-            <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-[3.2rem] lg:leading-[1.05]">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-[3.2rem] lg:leading-[1.05]">
               Fixed provisional boiler quotes in minutes.
             </h1>
 
