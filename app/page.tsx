@@ -316,6 +316,39 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="relative overflow-hidden bg-slate-900 py-16 md:py-20">
+          <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10 px-4 sm:px-6 lg:flex-row lg:px-8">
+            <div className="relative w-full max-w-md flex-shrink-0">
+              <div className="overflow-hidden rounded-2xl bg-slate-950 shadow-2xl ring-1 ring-slate-800/60">
+                <img
+                  src="/Photos for boilable website/2.png"
+                  alt="New boiler installation with tidy pipework"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+            <div className="max-w-xl text-center text-white lg:text-left">
+              <p className="mb-3 inline-flex items-center rounded-full bg-slate-800/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-cyan">
+                Boilable reassurance
+              </p>
+              <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
+                Provisional price today, final price after survey — always clear, never rushed.
+              </h2>
+              <p className="mb-6 text-sm md:text-base text-slate-200/85">
+                Every quote you see on Boilable is a provisional estimate based on your answers. We&apos;ll always
+                confirm the final price in person after a free, no‑obligation site survey at your property.
+              </p>
+              <p className="mb-6 text-sm md:text-base text-slate-200/85">
+                No online checkout, no finance upsells, and no surprise extras on the day — just transparent,
+                survey‑backed pricing for boiler installations in South Yorkshire and North Nottinghamshire.
+              </p>
+              <Button asChild variant="outline" className="border-slate-500 bg-transparent text-white hover:bg-white hover:text-slate-950">
+                <Link href="/how-it-works">See exactly how Boilable works</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
         <section className="bg-background py-24">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="mb-16 text-center">
