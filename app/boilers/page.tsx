@@ -43,8 +43,8 @@ export default function BoilersPage() {
             </div>
             <div className="rounded-xl overflow-hidden shadow-xl">
               <img
-                src="/boilable%20-%20choose%20your%20boiler/1.png"
-                alt="Quality boiler installation components"
+                src="/Photos for boilable website/1.png"
+                alt="New boiler neatly installed in a kitchen cupboard above a washing machine"
                 className="w-full h-96 object-cover"
               />
             </div>

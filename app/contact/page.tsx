@@ -62,6 +62,14 @@ export default function ContactPage() {
             </Card>
           </div>
 
+          <div className="mb-16 overflow-hidden rounded-2xl shadow-xl bg-slate-900/80">
+            <img
+              src="/Photos for boilable website/4.png"
+              alt="Boiler and hot water cylinder installation in a dedicated plant room"
+              className="h-full w-full object-cover"
+            />
+          </div>
+
           <div className="rounded-2xl bg-slate-50 p-8">
             <h2 className="mb-8 text-center text-2xl font-bold text-slate-900">
               Other Ways to Reach Us

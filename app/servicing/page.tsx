@@ -85,7 +85,7 @@ export default function ServicingPage() {
               Comprehensive checks to keep your boiler safe and efficient
             </p>
           </div>
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-start">
             <Card className="premium-card">
               <CardHeader>
                 <CardTitle className="text-2xl">Full Service Checklist</CardTitle>
@@ -112,6 +112,13 @@ export default function ServicingPage() {
                 </ul>
               </CardContent>
             </Card>
+            <div className="overflow-hidden rounded-2xl shadow-xl bg-slate-900/80">
+              <img
+                src="/Photos for boilable website/2.png"
+                alt="Ideal boiler installation with tidy new pipework ready for servicing"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>

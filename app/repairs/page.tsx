@@ -93,7 +93,8 @@ export default function RepairsPage() {
               We fix all types of boiler issues quickly and professionally
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-start">
+            <div className="grid gap-6 md:grid-cols-2">
             {[
               {
                 title: 'No Hot Water',
@@ -130,6 +131,14 @@ export default function RepairsPage() {
                 </CardHeader>
               </Card>
             ))}
+            </div>
+            <div className="overflow-hidden rounded-2xl shadow-xl bg-slate-900/80">
+              <img
+                src="/Photos for boilable website/3.png"
+                alt="Boiler and cylinder system in a plant room showing complex pipework ready for repair"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
