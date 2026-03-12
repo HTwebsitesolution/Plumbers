@@ -63,7 +63,10 @@ export function StepProperty({ values, onNext, onBack }: StepPropertyProps) {
               <Label>Property Type</Label>
               <RadioGroup value={propertyType} onValueChange={setPropertyType}>
                 {PROPERTY_TYPES.map((type) => (
-                  <div key={type} className="flex items-center space-x-2">
+                  <div
+                    key={type}
+                    className="flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 transition-colors hover:border-blue-200 hover:bg-blue-50"
+                  >
                     <RadioGroupItem value={type} id={type} />
                     <Label htmlFor={type} className="cursor-pointer font-normal">
                       {type}

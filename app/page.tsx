@@ -165,7 +165,7 @@ export default function Home() {
             <div className="grid gap-8 md:grid-cols-3 mb-24">
               <Card className="gradient-border-card group hover:shadow-2xl transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-brand shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-brand shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 animate-float">
                     <Settings className="h-8 w-8 text-white" />
                   </div>
                   <CardTitle className="text-2xl">New Boiler Installation</CardTitle>
@@ -182,7 +182,7 @@ export default function Home() {
 
               <Card className="gradient-border-card group hover:shadow-2xl transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-brand shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-brand shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 animate-float">
                     <Shield className="h-8 w-8 text-white" />
                   </div>
                   <CardTitle className="text-2xl">Boiler Servicing</CardTitle>
@@ -199,7 +199,7 @@ export default function Home() {
 
               <Card className="gradient-border-card group hover:shadow-2xl transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-brand shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-brand shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 animate-float">
                     <Wrench className="h-8 w-8 text-white" />
                   </div>
                   <CardTitle className="text-2xl">Boiler Repairs</CardTitle>

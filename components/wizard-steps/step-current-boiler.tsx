@@ -83,7 +83,7 @@ export function StepCurrentBoiler({ values, onNext, onBack }: StepCurrentBoilerP
                       type="button"
                       onClick={() => setFuelType(type)}
                       className={cn(
-                        'flex flex-col items-center gap-3 rounded-lg border-2 p-4 transition-all hover:border-blue-600 hover:bg-blue-50',
+                        'flex flex-col items-center gap-3 rounded-lg border-2 p-4 transition-all hover:-translate-y-0.5 hover:border-blue-600 hover:bg-blue-50',
                         fuelType === type
                           ? 'border-blue-600 bg-blue-50 shadow-md'
                           : 'border-gray-200 bg-white'

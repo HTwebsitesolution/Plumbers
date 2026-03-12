@@ -162,7 +162,10 @@ export function StepDetails({ values, onSubmit, onBack }: StepDetailsProps) {
                 }
               >
                 {CONTACT_METHODS.map((method) => (
-                  <div key={method} className="flex items-center space-x-2">
+                  <div
+                    key={method}
+                    className="flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 transition-colors hover:border-blue-200 hover:bg-blue-50"
+                  >
                     <RadioGroupItem value={method} id={`contact-${method}`} />
                     <Label
                       htmlFor={`contact-${method}`}
@@ -187,7 +190,10 @@ export function StepDetails({ values, onSubmit, onBack }: StepDetailsProps) {
                 }
               >
                 {TIME_WINDOWS.map((window) => (
-                  <div key={window} className="flex items-center space-x-2">
+                  <div
+                    key={window}
+                    className="flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 transition-colors hover:border-blue-200 hover:bg-blue-50"
+                  >
                     <RadioGroupItem value={window} id={`time-${window}`} />
                     <Label
                       htmlFor={`time-${window}`}
