@@ -570,7 +570,7 @@ export default function Home() {
             </div>
             <div>
               <div className="mb-4 text-sm font-semibold uppercase text-foreground">
-                Company
+                Boilable
               </div>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
