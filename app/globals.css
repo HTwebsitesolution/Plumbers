@@ -247,6 +247,10 @@
     animation-delay: 0.4s;
   }
 
+  .animate-gallery-scroll {
+    animation: gallery-scroll 45s linear infinite;
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -333,6 +337,15 @@
     }
     50% {
       transform: translateY(-5px);
+    }
+  }
+
+  @keyframes gallery-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
     }
   }
 }

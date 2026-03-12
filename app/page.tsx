@@ -10,6 +10,53 @@ import { BOILER_TIERS, STANDARD_INSTALL_DEFINITION } from '@/lib/types';
 import { formatPrice } from '@/lib/quote-utils';
 import { HeroPremium } from '@/components/hero-premium';
 
+const GALLERY_IMAGES = [
+  {
+    src: '/photos%20for%20gallery/1.png',
+    alt: 'New combi boiler installation with tidy copper pipework',
+  },
+  {
+    src: '/photos%20for%20gallery/2.png',
+    alt: 'Boiler installed neatly in a modern kitchen cupboard',
+  },
+  {
+    src: '/photos%20for%20gallery/3.png',
+    alt: 'Premium boiler and cylinder set up in a plant room',
+  },
+  {
+    src: '/photos%20for%20gallery/4.png',
+    alt: 'Wall-mounted boiler installation with smart controls',
+  },
+  {
+    src: '/photos%20for%20gallery/5.png',
+    alt: 'Compact boiler installation in a utility space',
+  },
+  {
+    src: '/photos%20for%20gallery/6.png',
+    alt: 'Close-up of neat boiler pipework and valves',
+  },
+  {
+    src: '/photos%20for%20gallery/7.png',
+    alt: 'Boiler installation with lagged pipework and filter',
+  },
+  {
+    src: '/photos%20for%20gallery/8.png',
+    alt: 'Boiler and cylinder installation in a cupboard',
+  },
+  {
+    src: '/photos%20for%20gallery/9.png',
+    alt: 'Boiler installed above worktop with clean finish',
+  },
+  {
+    src: '/photos%20for%20gallery/10.png',
+    alt: 'Premium boiler installation showing flue and pipework',
+  },
+  {
+    src: '/photos%20for%20gallery/11.png',
+    alt: 'Boiler and controls installed to a high standard',
+  },
+];
+
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -413,6 +460,55 @@ export default function Home() {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-slate-950 py-16 sm:py-20">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.12),_transparent_55%),radial-gradient(circle_at_bottom,_rgba(15,23,42,0.9),_transparent_55%)]" />
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-8 flex flex-col gap-3 text-center sm:mb-10 sm:text-left sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-cyan">
+                  Installation gallery
+                </p>
+                <h2 className="text-2xl font-semibold text-white sm:text-3xl md:text-4xl">
+                  Real installations. Tidy, thoughtful pipework.
+                </h2>
+              </div>
+              <p className="text-sm text-slate-300/80 sm:max-w-sm">
+                A glimpse of the standard we work to on every job across South Yorkshire and North Nottinghamshire.
+              </p>
+            </div>
+          </div>
+          <div className="relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-950 to-transparent sm:w-24" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-950 to-transparent sm:w-24" />
+            <div className="relative">
+              <div className="flex min-w-full gap-4 pl-4 pr-4 sm:gap-6 sm:pl-6 sm:pr-6 lg:gap-8 lg:pl-8 lg:pr-8 animate-gallery-scroll">
+                {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((image, index) => (
+                  <div
+                    key={`${image.src}-${index}`}
+                    className="group relative h-56 w-[260px] flex-shrink-0 overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/80 shadow-xl shadow-black/40 sm:h-64 sm:w-[320px] lg:h-72 lg:w-[360px]"
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent" />
+                    <div className="pointer-events-none absolute inset-x-4 bottom-4">
+                      <p className="text-xs font-medium uppercase tracking-[0.18em] text-brand-cyan/80">
+                        Boilable installation
+                      </p>
+                      <p className="mt-1 text-[0.8rem] font-medium text-slate-50">
+                        {image.alt}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
