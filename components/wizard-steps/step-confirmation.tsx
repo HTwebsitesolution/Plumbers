@@ -105,7 +105,8 @@ export function StepConfirmation({ quoteRef, formData }: StepConfirmationProps) 
                     We'll contact you
                   </h4>
                   <p className="mt-1 text-sm text-slate-600">
-                    Our team will reach out within 24 hours to discuss your requirements
+                    Our team will reach out within 24 hours to discuss your requirements.
+                    We&apos;ll contact you from a local South Yorkshire or North Nottinghamshire number so you know it&apos;s us.
                   </p>
                 </div>
               </div>

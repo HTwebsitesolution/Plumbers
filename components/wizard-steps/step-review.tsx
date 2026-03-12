@@ -17,7 +17,7 @@ interface StepReviewProps {
 export function StepReview({ formData, onSubmit, onBack, isSubmitting }: StepReviewProps) {
   return (
     <div className="mx-auto max-w-3xl">
-      <Card>
+      <Card className="rounded-3xl shadow-lg">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
             <ClipboardCheck className="h-8 w-8 text-blue-600" />
@@ -27,25 +27,23 @@ export function StepReview({ formData, onSubmit, onBack, isSubmitting }: StepRev
             Please check everything is correct before submitting
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div>
+        <CardContent className="space-y-6 pt-4 sm:pt-6">
+          <div className="border border-slate-200/80 rounded-2xl bg-slate-50/80 p-4 sm:p-5">
             <h3 className="mb-3 text-lg font-semibold text-slate-900">Selected Package</h3>
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <div className="flex items-start justify-between">
-                <div>
-                  <div className="text-xl font-semibold text-slate-900">
-                    {formData.tierName || 'Not selected'}
-                  </div>
-                  <div className="mt-2 space-y-1 text-sm text-slate-600">
-                    <div>Warranty: {formData.warrantyYears} years</div>
-                    <div>Brand preference: {formData.brandPreference || 'Not specified'}</div>
-                  </div>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <div className="text-xl font-semibold text-slate-900">
+                  {formData.tierName || 'Not selected'}
                 </div>
-                <div className="text-right">
-                  <div className="text-sm text-slate-500">From</div>
-                  <div className="text-2xl font-bold text-blue-600">
-                    {formatPrice(formData.fromPrice || 0)}
-                  </div>
+                <div className="mt-2 space-y-1 text-sm text-slate-600">
+                  <div>Warranty: {formData.warrantyYears} years</div>
+                  <div>Brand preference: {formData.brandPreference || 'Not specified'}</div>
+                </div>
+              </div>
+              <div className="text-left sm:text-right">
+                <div className="text-sm text-slate-500">From</div>
+                <div className="text-2xl font-bold text-blue-600">
+                  {formatPrice(formData.fromPrice || 0)}
                 </div>
               </div>
             </div>
@@ -143,18 +141,18 @@ export function StepReview({ formData, onSubmit, onBack, isSubmitting }: StepRev
 
           <Separator />
 
-          <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
+          <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
             <strong>Important:</strong> By submitting this request, you agree to us contacting you
             about your boiler quote. The price shown is indicative and based on a standard installation.
             Your final price will be confirmed after a free site survey.
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row">
             <Button
               type="button"
               variant="outline"
               onClick={onBack}
-              className="w-32"
+              className="w-full sm:w-32"
               disabled={isSubmitting}
             >
               <ChevronLeft className="mr-2 h-4 w-4" />
@@ -164,7 +162,7 @@ export function StepReview({ formData, onSubmit, onBack, isSubmitting }: StepRev
               type="button"
               onClick={onSubmit}
               size="lg"
-              className="flex-1"
+              className="flex-1 btn-gradient"
               disabled={isSubmitting}
             >
               {isSubmitting ? (

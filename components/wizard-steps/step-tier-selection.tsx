@@ -44,7 +44,7 @@ export function StepTierSelection({ value, onNext, onBack }: StepTierSelectionPr
       <div className="mb-8 text-center">
         <h2 className="text-3xl font-bold">Choose your boiler</h2>
         <p className="mt-2 text-lg text-muted-foreground">
-          Select the tier that best suits your needs
+          Select the tier that best suits your needs – you can still change this later in your quote.
         </p>
       </div>
 

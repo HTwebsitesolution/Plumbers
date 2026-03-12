@@ -484,7 +484,7 @@ export default function Home() {
             <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-950 to-transparent sm:w-24" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-950 to-transparent sm:w-24" />
             <div className="relative">
-              <div className="flex min-w-full gap-4 pl-4 pr-4 sm:gap-6 sm:pl-6 sm:pr-6 lg:gap-8 lg:pl-8 lg:pr-8 animate-gallery-scroll">
+              <div className="gallery-track flex min-w-full gap-4 pl-4 pr-4 sm:gap-6 sm:pl-6 sm:pr-6 lg:gap-8 lg:pl-8 lg:pr-8 animate-gallery-scroll">
                 {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((image, index) => (
                   <div
                     key={`${image.src}-${index}`}

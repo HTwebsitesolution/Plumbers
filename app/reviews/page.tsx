@@ -79,8 +79,15 @@ export default function ReviewsPage() {
                   </div>
                   <p className="mb-4 text-slate-600">{review.review}</p>
                   <div className="border-t border-slate-100 pt-4">
-                    <div className="font-semibold text-slate-900">{review.name}</div>
-                    <div className="text-sm text-slate-500">{review.location}</div>
+                    <div className="mb-1 flex items-center justify-between gap-2">
+                      <div className="font-semibold text-slate-900">{review.name}</div>
+                      <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700">
+                        {review.location}
+                      </span>
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Boiler installation in {review.location}
+                    </div>
                   </div>
                 </CardContent>
               </Card>

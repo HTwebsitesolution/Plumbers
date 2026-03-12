@@ -47,7 +47,7 @@ export function StepProperty({ values, onNext, onBack }: StepPropertyProps) {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <Card>
+      <Card className="rounded-3xl shadow-lg">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
             <Home className="h-8 w-8 text-blue-600" />

@@ -248,7 +248,11 @@
   }
 
   .animate-gallery-scroll {
-    animation: gallery-scroll 45s linear infinite;
+    animation: gallery-scroll 60s linear infinite;
+  }
+
+  .gallery-track:hover {
+    animation-play-state: paused;
   }
 
   @keyframes fadeIn {

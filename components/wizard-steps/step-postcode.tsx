@@ -81,7 +81,7 @@ export function StepPostcode({ value, onNext, onEnquiry }: StepPostcodeProps) {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <Card>
+      <Card className="rounded-3xl bg-blue-50/80 shadow-lg">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl">Check your postcode</CardTitle>
           <CardDescription className="text-base">

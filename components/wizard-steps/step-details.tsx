@@ -73,19 +73,19 @@ export function StepDetails({ values, onSubmit, onBack }: StepDetailsProps) {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <Card>
+      <Card className="rounded-3xl shadow-lg">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
             <User className="h-8 w-8 text-blue-600" />
           </div>
           <CardTitle className="text-3xl">Your contact details</CardTitle>
           <CardDescription className="text-base">
-            So we can arrange your free site survey
+            So we can arrange your free site survey – we&apos;ll only use these details to contact you about this quote.
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-4 sm:pt-6">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4">
+            <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="customerName">Full Name</Label>
                 <Input
@@ -129,6 +129,9 @@ export function StepDetails({ values, onSubmit, onBack }: StepDetailsProps) {
                   }
                   placeholder="07123 456789"
                 />
+                <p className="text-xs text-slate-500">
+                  Mobile preferred – we&apos;ll call or text you to arrange your survey. No marketing lists.
+                </p>
                 {errors.customerPhone && (
                   <p className="text-sm text-red-600">{errors.customerPhone}</p>
                 )}
@@ -200,18 +203,18 @@ export function StepDetails({ values, onSubmit, onBack }: StepDetailsProps) {
               )}
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row">
               <Button
                 type="button"
                 variant="outline"
                 onClick={onBack}
-                className="w-32"
+                className="w-full sm:w-32"
               >
                 <ChevronLeft className="mr-2 h-4 w-4" />
                 Back
               </Button>
-              <Button type="submit" size="lg" className="flex-1">
-                Continue
+              <Button type="submit" size="lg" className="flex-1 btn-gradient">
+                Continue to review
               </Button>
             </div>
           </form>

@@ -7,14 +7,14 @@ import { QuoteFormData } from '@/lib/types';
 import { cn } from '@/lib/utils';
 
 const STEPS = [
-  { id: 1, name: 'Postcode' },
-  { id: 2, name: 'Property' },
-  { id: 3, name: 'Current Boiler' },
-  { id: 4, name: 'Choose Tier' },
-  { id: 5, name: 'Brand' },
-  { id: 6, name: 'Options' },
-  { id: 7, name: 'Your Details' },
-  { id: 8, name: 'Review' },
+  { id: 1, name: 'Postcode', label: 'Check coverage' },
+  { id: 2, name: 'Property', label: 'Home basics' },
+  { id: 3, name: 'Current Boiler', label: 'Existing system' },
+  { id: 4, name: 'Choose Tier', label: 'Pick your package' },
+  { id: 5, name: 'Brand', label: 'Brand preference' },
+  { id: 6, name: 'Options', label: 'Extra notes' },
+  { id: 7, name: 'Your Details', label: 'Contact & survey' },
+  { id: 8, name: 'Review', label: 'Final check' },
 ];
 
 const STORAGE_KEY = 'boilable_quote_wizard';
@@ -127,9 +127,14 @@ export function QuoteWizard({ children }: QuoteWizardProps) {
           <ArrowLeft className="h-4 w-4" aria-hidden />
           Back to home
         </Link>
-        <ProgressIndicator currentStep={state.currentStep} steps={STEPS} />
+        <div className="space-y-2">
+          <ProgressIndicator currentStep={state.currentStep} steps={STEPS} />
+          <p className="text-xs text-muted-foreground">
+            Takes around 3–5 minutes to complete. You can move back and forth between steps at any time.
+          </p>
+        </div>
 
-        <div className="mt-8">
+        <div className="mt-8 rounded-3xl border border-border bg-card px-4 py-6 shadow-xl sm:px-6 sm:py-8 lg:px-8 lg:py-10">
           {children({
             currentStep: state.currentStep,
             formData: state.formData,
@@ -169,8 +174,13 @@ function ProgressIndicator({
                   <span className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-brand shadow-lg">
                     <Check className="h-5 w-5 text-white" />
                   </span>
-                  <span className="ml-3 hidden text-sm font-medium text-foreground sm:block">
-                    {step.name}
+                  <span className="ml-3 hidden sm:block">
+                    <span className="block text-sm font-medium text-foreground">
+                      {step.name}
+                    </span>
+                    <span className="block text-xs text-slate-400">
+                      {step.label}
+                    </span>
                   </span>
                 </span>
                 {stepIdx !== steps.length - 1 && (
@@ -185,8 +195,13 @@ function ProgressIndicator({
                       {step.id}
                     </span>
                   </span>
-                  <span className="ml-3 hidden text-sm font-medium text-brand-cyan sm:block">
-                    {step.name}
+                  <span className="ml-3 hidden sm:block">
+                    <span className="block text-sm font-medium text-brand-cyan">
+                      {step.name}
+                    </span>
+                    <span className="block text-xs text-slate-500">
+                      {step.label}
+                    </span>
                   </span>
                 </span>
                 {stepIdx !== steps.length - 1 && (
@@ -201,8 +216,13 @@ function ProgressIndicator({
                       {step.id}
                     </span>
                   </span>
-                  <span className="ml-3 hidden text-sm font-medium text-muted-foreground sm:block">
-                    {step.name}
+                  <span className="ml-3 hidden sm:block">
+                    <span className="block text-sm font-medium text-muted-foreground">
+                      {step.name}
+                    </span>
+                    <span className="block text-xs text-slate-400">
+                      {step.label}
+                    </span>
                   </span>
                 </span>
                 {stepIdx !== steps.length - 1 && (
