@@ -38,10 +38,13 @@ export interface BoilerTier {
   inclusions: string[];
 }
 
+export type LeadStatus = 'new' | 'contacted' | 'quoted' | 'closed';
+
 export interface Lead extends QuoteFormData {
   id: string;
   quoteRef: string;
   submittedAt: string;
+  status?: LeadStatus;
 }
 
 export const PROPERTY_TYPES = ['House', 'Flat', 'Other'] as const;

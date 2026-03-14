@@ -9,7 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Lock, Download, Copy, Eye, Loader as Loader2, CircleCheck as CheckCircle2 } from 'lucide-react';
+import { Lock, Download, Copy, Eye, Loader as Loader2, CircleCheck as CheckCircle2, LogOut } from 'lucide-react';
 import { formatPrice } from '@/lib/quote-utils';
 import { Lead } from '@/lib/types';
 import { useToast } from '@/hooks/use-toast';
@@ -76,6 +76,7 @@ export default function AdminPage() {
   const [filteredRepairs, setFilteredRepairs] = useState<RepairsRequest[]>([]);
 
   const [coverageFilter, setCoverageFilter] = useState<string>('all');
+  const [statusFilter, setStatusFilter] = useState<string>('all');
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [selectedServicing, setSelectedServicing] = useState<ServicingRequest | null>(null);
   const [selectedRepairs, setSelectedRepairs] = useState<RepairsRequest | null>(null);
@@ -114,6 +115,17 @@ export default function AdminPage() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/auth', { method: 'DELETE' });
+      setIsAuthenticated(false);
+      setPassword('');
+    } catch {
+      setIsAuthenticated(false);
+      setPassword('');
+    }
+  };
+
   const loadData = async () => {
     try {
       const response = await fetch('/api/admin/leads');
@@ -134,28 +146,46 @@ export default function AdminPage() {
   };
 
   useEffect(() => {
-    if (coverageFilter === 'all') {
-      setFilteredLeads(leads);
-      setFilteredServicing(servicingRequests);
-      setFilteredRepairs(repairsRequests);
-    } else {
-      setFilteredLeads(leads.filter(lead => lead.coverageStatus === coverageFilter));
-      setFilteredServicing(servicingRequests.filter(req => req.coverage_status === coverageFilter));
-      setFilteredRepairs(repairsRequests.filter(req => req.coverage_status === coverageFilter));
-    }
-  }, [coverageFilter, leads, servicingRequests, repairsRequests]);
+    // Base filter by coverage for all request types
+    const baseLeads =
+      coverageFilter === 'all'
+        ? leads
+        : leads.filter((lead) => lead.coverageStatus === coverageFilter);
+    const baseServicing =
+      coverageFilter === 'all'
+        ? servicingRequests
+        : servicingRequests.filter((req) => req.coverage_status === coverageFilter);
+    const baseRepairs =
+      coverageFilter === 'all'
+        ? repairsRequests
+        : repairsRequests.filter((req) => req.coverage_status === coverageFilter);
+
+    // Additional status filter only applies to leads
+    const statusFilteredLeads =
+      statusFilter === 'all'
+        ? baseLeads
+        : baseLeads.filter((lead) => (lead.status || 'new') === statusFilter);
+
+    setFilteredLeads(statusFilteredLeads);
+    setFilteredServicing(baseServicing);
+    setFilteredRepairs(baseRepairs);
+  }, [coverageFilter, statusFilter, leads, servicingRequests, repairsRequests]);
 
   const exportLeadsToCSV = () => {
     if (leads.length === 0) return;
 
     const headers = [
-      'Quote Ref', 'Submitted At', 'Coverage Status', 'Outward Code', 'Customer Name', 'Email', 'Phone',
+      'Quote Ref', 'Submitted At', 'Coverage Status', 'Status', 'Outward Code', 'Customer Name', 'Email', 'Phone',
       'Postcode', 'Property Type', 'Bedrooms', 'Bathrooms', 'Fuel Type', 'Current Boiler', 'Boiler Location',
       'Tier', 'Price', 'Warranty', 'Brand', 'Contact Method', 'Preferred Time', 'Notes',
     ];
 
     const rows = filteredLeads.map((lead) => [
-      lead.quoteRef, new Date(lead.submittedAt).toLocaleString(), lead.coverageStatus, lead.outwardCode,
+      lead.quoteRef,
+      new Date(lead.submittedAt).toLocaleString(),
+      lead.coverageStatus,
+      lead.status || 'new',
+      lead.outwardCode,
       lead.customerName, lead.customerEmail, lead.customerPhone, lead.postcode, lead.propertyType || '',
       String(lead.bedrooms || ''), String(lead.bathrooms || ''), lead.fuelType || '', lead.currentBoilerType || '',
       lead.boilerLocation || '', lead.tierName || '', String(lead.fromPrice || ''), String(lead.warrantyYears || ''),
@@ -325,15 +355,21 @@ export default function AdminPage() {
                 {currentData.length} of {totalData} {totalData === 1 ? 'request' : 'requests'}
               </p>
             </div>
-            <Button
-              onClick={activeTab === 'leads' ? exportLeadsToCSV : activeTab === 'servicing' ? exportServicingToCSV : exportRepairsToCSV}
-              disabled={currentData.length === 0}
-            >
-              <Download className="mr-2 h-4 w-4" />
-              Export CSV
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                onClick={activeTab === 'leads' ? exportLeadsToCSV : activeTab === 'servicing' ? exportServicingToCSV : exportRepairsToCSV}
+                disabled={currentData.length === 0}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Export CSV
+              </Button>
+              <Button variant="outline" onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Log out
+              </Button>
+            </div>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <Select value={coverageFilter} onValueChange={setCoverageFilter}>
               <SelectTrigger className="w-48">
                 <SelectValue placeholder="Filter by coverage" />
@@ -344,6 +380,20 @@ export default function AdminPage() {
                 <SelectItem value="out_of_area">Out of Area</SelectItem>
               </SelectContent>
             </Select>
+            {activeTab === 'leads' && (
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-48">
+                  <SelectValue placeholder="Filter by status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Statuses</SelectItem>
+                  <SelectItem value="new">New</SelectItem>
+                  <SelectItem value="contacted">Contacted</SelectItem>
+                  <SelectItem value="quoted">Quoted</SelectItem>
+                  <SelectItem value="closed">Closed</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
           </div>
         </div>
 
@@ -362,6 +412,7 @@ export default function AdminPage() {
                     <TableHead>Quote Ref</TableHead>
                     <TableHead>Date</TableHead>
                     <TableHead>Coverage</TableHead>
+                    <TableHead>Status</TableHead>
                     <TableHead>Area Code</TableHead>
                     <TableHead>Customer</TableHead>
                     <TableHead>Postcode</TableHead>
@@ -385,6 +436,28 @@ export default function AdminPage() {
                         <TableCell>
                           <Badge variant={lead.coverageStatus === 'in_area' ? 'default' : 'secondary'}>
                             {lead.coverageStatus === 'in_area' ? 'In Area' : 'Out of Area'}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant={
+                              lead.status === 'closed'
+                                ? 'secondary'
+                                : lead.status === 'quoted'
+                                ? 'default'
+                                : 'outline'
+                            }
+                            className={
+                              lead.status === 'new'
+                                ? 'border-blue-500 text-blue-600'
+                                : lead.status === 'contacted'
+                                ? 'border-amber-500 text-amber-600'
+                                : lead.status === 'quoted'
+                                ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                                : ''
+                            }
+                          >
+                            {lead.status ? lead.status.charAt(0).toUpperCase() + lead.status.slice(1) : 'New'}
                           </Badge>
                         </TableCell>
                         <TableCell className="font-mono text-sm">{lead.outwardCode}</TableCell>
