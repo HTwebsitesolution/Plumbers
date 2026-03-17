@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { getServicingCustomerEmailTemplate, getServicingInstallerEmailTemplate, ServicingRequestData } from '@/lib/email-templates';
+import { sendAdminWhatsApp } from '@/lib/whatsapp';
 
 function generateServicingRef(): string {
   const date = new Date();
@@ -138,6 +139,10 @@ export async function POST(request: Request) {
     const installerEmail = process.env.INSTALLER_EMAIL || 'installer@boilable.co.uk';
     const installerEmailTemplate = getServicingInstallerEmailTemplate(emailData);
     await sendEmail(installerEmail, installerEmailTemplate.subject, installerEmailTemplate.html);
+
+    sendAdminWhatsApp(
+      `🔔 Servicing request: ${serviceRef}\n${postcode} – ${customerName} – ${customerPhone}`
+    ).catch(() => {});
 
     return NextResponse.json({
       success: true,

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { generateQuoteRef } from '@/lib/quote-utils';
 import { OutOfAreaEnquiry } from '@/lib/types';
+import { sendAdminWhatsApp } from '@/lib/whatsapp';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.FROM_EMAIL;
@@ -273,6 +274,10 @@ export async function POST(request: Request) {
         console.error('Email error:', emailError);
       }
     }
+
+    sendAdminWhatsApp(
+      `🔔 Out-of-area enquiry: ${quoteRef}\n${body.postcode} (${body.outwardCode})\n${body.customerName} – ${body.customerPhone}`
+    ).catch(() => {});
 
     return NextResponse.json({ success: true, quoteRef }, { status: 201 });
   } catch (error) {

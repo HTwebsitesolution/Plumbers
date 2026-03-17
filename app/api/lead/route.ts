@@ -3,6 +3,7 @@ import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { generateQuoteRef } from '@/lib/quote-utils';
 import { getCustomerEmailTemplate, getInstallerEmailTemplate } from '@/lib/email-templates';
 import { QuoteFormData, OutOfAreaEnquiry } from '@/lib/types';
+import { sendAdminWhatsApp } from '@/lib/whatsapp';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.FROM_EMAIL;
@@ -70,6 +71,10 @@ export async function POST(request: Request) {
           { status: 500 }
         );
       }
+
+      sendAdminWhatsApp(
+        `🔔 Out-of-area enquiry: ${quoteRef}\n${body.postcode} (${body.outwardCode})\n${body.customerName} – ${body.customerPhone}`
+      ).catch(() => {});
 
       return NextResponse.json({ success: true, quoteRef }, { status: 201 });
     }
@@ -196,6 +201,10 @@ export async function POST(request: Request) {
         console.error('Email error:', emailError);
       }
     }
+
+    sendAdminWhatsApp(
+      `🔔 New boiler lead: ${quoteRef}\n${fullQuote.postcode} – ${fullQuote.tierName} from £${fullQuote.fromPrice}\n${fullQuote.customerName} – ${fullQuote.customerPhone}`
+    ).catch(() => {});
 
     return NextResponse.json({ success: true, quoteRef }, { status: 201 });
   } catch (error) {
