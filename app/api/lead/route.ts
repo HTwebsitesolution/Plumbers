@@ -66,7 +66,11 @@ export async function POST(request: Request) {
       });
 
       if (dbError) {
-        console.error('Database error:', dbError);
+        console.error('Database error (out-of-area enquiry):', dbError);
+        const msg = String((dbError as any).message || '').toLowerCase();
+        if (msg.includes('duplicate') || msg.includes('unique')) {
+          return NextResponse.json({ success: true, quoteRef, deduped: true }, { status: 200 });
+        }
         return NextResponse.json(
           { error: 'Failed to save enquiry' },
           { status: 500 }
@@ -158,7 +162,11 @@ export async function POST(request: Request) {
     });
 
     if (dbError) {
-      console.error('Database error:', dbError);
+      console.error('Database error (lead):', dbError);
+      const msg = String((dbError as any).message || '').toLowerCase();
+      if (msg.includes('duplicate') || msg.includes('unique')) {
+        return NextResponse.json({ success: true, quoteRef, deduped: true }, { status: 200 });
+      }
       return NextResponse.json(
         { error: 'Failed to save lead' },
         { status: 500 }
@@ -222,29 +230,46 @@ export async function POST(request: Request) {
       }
     }
 
-    sendAdminWhatsApp(
-      `🔔 New boiler lead: ${quoteRef}\n${fullQuote.postcode} – ${fullQuote.tierName} from £${fullQuote.fromPrice}\n${fullQuote.customerName} – ${fullQuote.customerPhone}`
-    ).catch(() => {});
-
+    // --- Notifications (best effort; never block the response) ---
     const baseUrl = process.env.SITE_BASE_URL ?? 'https://boilable.co.uk';
+
     const pushTitle = `New boiler quote: ${fullQuote.tierName}`;
     const pushMessage =
       `Ref ${quoteRef}\n` +
       `${fullQuote.postcode}${fullQuote.outwardCode ? ` (${fullQuote.outwardCode})` : ''} • ${fullQuote.fuelType}\n` +
-      `From £${fullQuote.fromPrice} • ${fullQuote.warrantyYears}yr\n` +
-      `Contact: ${fullQuote.customerName} • ${fullQuote.customerPhone}`;
+      `Tier: ${fullQuote.tierName} • From £${fullQuote.fromPrice} • ${fullQuote.warrantyYears}yr\n` +
+      `Contact: ${fullQuote.customerName} • ${fullQuote.customerPhone}\n` +
+      `Pref: ${fullQuote.preferredContactMethod} • ${fullQuote.preferredTimeWindow}\n` +
+      `Coverage: ${fullQuote.coverageStatus ?? 'unknown'}`;
 
-    const leadPushResult = await sendPushoverPush({
-      title: pushTitle,
-      message: pushMessage,
-      url: `${baseUrl}/admin`,
-      url_title: 'Open admin',
-      priority: 0,
-    });
+    const notifyPromises = [
+      // WhatsApp admin ping (if configured)
+      sendAdminWhatsApp(
+        `🔔 New boiler lead: ${quoteRef}\n${fullQuote.postcode} – ${fullQuote.tierName} from £${fullQuote.fromPrice}\n${fullQuote.customerName} – ${fullQuote.customerPhone}`
+      ),
 
-    if (!leadPushResult.ok) {
-      console.warn('Pushover push failed (lead):', leadPushResult.error, leadPushResult.details);
-    }
+      // Pushover push
+      sendPushoverPush({
+        title: pushTitle,
+        message: pushMessage,
+        url: `${baseUrl}/admin`,
+        url_title: 'Open admin',
+        priority: 0,
+      }),
+    ];
+
+    // Fire-and-log; never throw or delay the response
+    Promise.allSettled(notifyPromises)
+      .then((results) => {
+        results.forEach((r, i) => {
+          if (r.status === 'rejected') {
+            console.warn(`Notification ${i + 1} failed:`, r.reason);
+          } else if (typeof r.value === 'object' && r.value && 'ok' in r.value && r.value.ok === false) {
+            console.warn('Pushover push failed (lead):', r.value.error, r.value.details);
+          }
+        });
+      })
+      .catch(() => {});
 
     return NextResponse.json({ success: true, quoteRef }, { status: 201 });
   } catch (error) {
