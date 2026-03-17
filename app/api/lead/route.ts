@@ -4,6 +4,7 @@ import { generateQuoteRef } from '@/lib/quote-utils';
 import { getCustomerEmailTemplate, getInstallerEmailTemplate } from '@/lib/email-templates';
 import { QuoteFormData, OutOfAreaEnquiry } from '@/lib/types';
 import { sendAdminWhatsApp } from '@/lib/whatsapp';
+import { sendPushoverPush } from '@/lib/notifications/pushover';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.FROM_EMAIL;
@@ -75,6 +76,25 @@ export async function POST(request: Request) {
       sendAdminWhatsApp(
         `🔔 Out-of-area enquiry: ${quoteRef}\n${body.postcode} (${body.outwardCode})\n${body.customerName} – ${body.customerPhone}`
       ).catch(() => {});
+
+      const baseUrl = process.env.SITE_BASE_URL ?? 'https://boilable.co.uk';
+      const pushTitle = 'Out-of-area enquiry';
+      const pushMessage =
+        `Ref ${quoteRef}\n` +
+        `${body.postcode} (${body.outwardCode})\n` +
+        `Contact: ${body.customerName} • ${body.customerPhone}`;
+
+      const enquiryPushResult = await sendPushoverPush({
+        title: pushTitle,
+        message: pushMessage,
+        url: `${baseUrl}/admin`,
+        url_title: 'Open admin',
+        priority: 0,
+      });
+
+      if (!enquiryPushResult.ok) {
+        console.warn('Pushover push failed (out-of-area enquiry):', enquiryPushResult.error, enquiryPushResult.details);
+      }
 
       return NextResponse.json({ success: true, quoteRef }, { status: 201 });
     }
@@ -205,6 +225,26 @@ export async function POST(request: Request) {
     sendAdminWhatsApp(
       `🔔 New boiler lead: ${quoteRef}\n${fullQuote.postcode} – ${fullQuote.tierName} from £${fullQuote.fromPrice}\n${fullQuote.customerName} – ${fullQuote.customerPhone}`
     ).catch(() => {});
+
+    const baseUrl = process.env.SITE_BASE_URL ?? 'https://boilable.co.uk';
+    const pushTitle = `New boiler quote: ${fullQuote.tierName}`;
+    const pushMessage =
+      `Ref ${quoteRef}\n` +
+      `${fullQuote.postcode}${fullQuote.outwardCode ? ` (${fullQuote.outwardCode})` : ''} • ${fullQuote.fuelType}\n` +
+      `From £${fullQuote.fromPrice} • ${fullQuote.warrantyYears}yr\n` +
+      `Contact: ${fullQuote.customerName} • ${fullQuote.customerPhone}`;
+
+    const leadPushResult = await sendPushoverPush({
+      title: pushTitle,
+      message: pushMessage,
+      url: `${baseUrl}/admin`,
+      url_title: 'Open admin',
+      priority: 0,
+    });
+
+    if (!leadPushResult.ok) {
+      console.warn('Pushover push failed (lead):', leadPushResult.error, leadPushResult.details);
+    }
 
     return NextResponse.json({ success: true, quoteRef }, { status: 201 });
   } catch (error) {

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { getRepairsCustomerEmailTemplate, getRepairsInstallerEmailTemplate, RepairsRequestData } from '@/lib/repairs-email-templates';
 import { sendAdminWhatsApp } from '@/lib/whatsapp';
+import { sendPushoverPush } from '@/lib/notifications/pushover';
 
 function generateRepairRef(): string {
   const date = new Date();
@@ -152,6 +153,27 @@ export async function POST(request: Request) {
     sendAdminWhatsApp(
       `🔔 Repair request: ${repairRef}\n${postcode} – ${customerName} – ${customerPhone}${urgency ? ` (${urgency})` : ''}`
     ).catch(() => {});
+
+    const baseUrl = process.env.SITE_BASE_URL ?? 'https://boilable.co.uk';
+    const repairsPriority = urgency === 'Emergency today' ? 1 : 0;
+    const repairsPushTitle = `New repair request: ${issueCategory || 'General issue'}`;
+    const repairsPushMessage =
+      `Ref ${repairRef}\n` +
+      `${postcode}${outwardCode ? ` (${outwardCode})` : ''}${fuelType ? ` • ${fuelType}` : ''}\n` +
+      `Urgency: ${urgency || 'Unspecified'}${errorCode ? ` • Code: ${errorCode}` : ''}\n` +
+      `Contact: ${customerName} • ${customerPhone}`;
+
+    const repairsPushResult = await sendPushoverPush({
+      title: repairsPushTitle,
+      message: repairsPushMessage,
+      url: `${baseUrl}/admin`,
+      url_title: 'Open admin',
+      priority: repairsPriority,
+    });
+
+    if (!repairsPushResult.ok) {
+      console.warn('Pushover push failed (repairs):', repairsPushResult.error, repairsPushResult.details);
+    }
 
     return NextResponse.json({
       success: true,

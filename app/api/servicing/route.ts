@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { getServicingCustomerEmailTemplate, getServicingInstallerEmailTemplate, ServicingRequestData } from '@/lib/email-templates';
 import { sendAdminWhatsApp } from '@/lib/whatsapp';
+import { sendPushoverPush } from '@/lib/notifications/pushover';
 
 function generateServicingRef(): string {
   const date = new Date();
@@ -143,6 +144,26 @@ export async function POST(request: Request) {
     sendAdminWhatsApp(
       `🔔 Servicing request: ${serviceRef}\n${postcode} – ${customerName} – ${customerPhone}`
     ).catch(() => {});
+
+    const baseUrl = process.env.SITE_BASE_URL ?? 'https://boilable.co.uk';
+    const servicingPushTitle = 'New servicing request';
+    const servicingPushMessage =
+      `Ref ${serviceRef}\n` +
+      `${postcode}${outwardCode ? ` (${outwardCode})` : ''}${fuelType ? ` • ${fuelType}` : ''}\n` +
+      `${boilerType || ''}${boilerMake ? ` • ${boilerMake}` : ''}${boilerModel ? ` ${boilerModel}` : ''}\n` +
+      `Contact: ${customerName} • ${customerPhone}`;
+
+    const servicingPushResult = await sendPushoverPush({
+      title: servicingPushTitle,
+      message: servicingPushMessage,
+      url: `${baseUrl}/admin`,
+      url_title: 'Open admin',
+      priority: 0,
+    });
+
+    if (!servicingPushResult.ok) {
+      console.warn('Pushover push failed (servicing):', servicingPushResult.error, servicingPushResult.details);
+    }
 
     return NextResponse.json({
       success: true,
