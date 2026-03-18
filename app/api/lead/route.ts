@@ -242,34 +242,23 @@ export async function POST(request: Request) {
       `Pref: ${fullQuote.preferredContactMethod} • ${fullQuote.preferredTimeWindow}\n` +
       `Coverage: ${fullQuote.coverageStatus ?? 'unknown'}`;
 
-    const notifyPromises = [
-      // WhatsApp admin ping (if configured)
-      sendAdminWhatsApp(
-        `🔔 New boiler lead: ${quoteRef}\n${fullQuote.postcode} – ${fullQuote.tierName} from £${fullQuote.fromPrice}\n${fullQuote.customerName} – ${fullQuote.customerPhone}`
-      ),
+    // WhatsApp best-effort (do not block user submission)
+    sendAdminWhatsApp(
+      `🔔 New boiler lead: ${quoteRef}\n${fullQuote.postcode} – ${fullQuote.tierName} from £${fullQuote.fromPrice}\n${fullQuote.customerName} – ${fullQuote.customerPhone}`
+    ).catch(() => {});
 
-      // Pushover push
-      sendPushoverPush({
-        title: pushTitle,
-        message: pushMessage,
-        url: `${baseUrl}/admin`,
-        url_title: 'Open admin',
-        priority: 0,
-      }),
-    ];
+    // Pushover: await so serverless execution reliably sends the notification
+    const leadPushResult = await sendPushoverPush({
+      title: pushTitle,
+      message: pushMessage,
+      url: `${baseUrl}/admin`,
+      url_title: 'Open admin',
+      priority: 0,
+    });
 
-    // Fire-and-log; never throw or delay the response
-    Promise.allSettled(notifyPromises)
-      .then((results) => {
-        results.forEach((r, i) => {
-          if (r.status === 'rejected') {
-            console.warn(`Notification ${i + 1} failed:`, r.reason);
-          } else if (typeof r.value === 'object' && r.value && 'ok' in r.value && r.value.ok === false) {
-            console.warn('Pushover push failed (lead):', r.value.error, r.value.details);
-          }
-        });
-      })
-      .catch(() => {});
+    if (!leadPushResult.ok) {
+      console.warn('Pushover push failed (lead):', leadPushResult.error, leadPushResult.details);
+    }
 
     return NextResponse.json({ success: true, quoteRef }, { status: 201 });
   } catch (error) {

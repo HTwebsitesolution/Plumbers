@@ -18,6 +18,7 @@ export async function sendPushoverPush(args: {
   priority?: -2 | -1 | 0 | 1 | 2;
 }): Promise<PushoverResult> {
   if (!isConfigured()) {
+    console.warn('sendPushoverPush: missing PUSHOVER_APP_TOKEN or PUSHOVER_USER_KEY');
     return { ok: false, error: 'Pushover not configured (missing env vars).' };
   }
 

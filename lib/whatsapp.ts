@@ -7,6 +7,7 @@ export async function sendAdminWhatsApp(body: string): Promise<void> {
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   const from = process.env.TWILIO_WHATSAPP_FROM; // e.g. "whatsapp:+14155238886"
   const toRaw = process.env.ADMIN_WHATSAPP_NUMBER; // e.g. "447123456789,+447987654321"
+  const contentSid = process.env.TWILIO_WHATSAPP_CONTENT_SID; // e.g. "HXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
   if (!accountSid || !authToken || !from || !toRaw) {
     console.warn('sendAdminWhatsApp: missing Twilio config or admin numbers', {
@@ -33,6 +34,7 @@ export async function sendAdminWhatsApp(body: string): Promise<void> {
 
   console.log('sendAdminWhatsApp: sending WhatsApp notification', {
     recipientCount: recipients.length,
+    mode: contentSid ? 'template' : 'freeform',
   });
 
   await Promise.all(
@@ -44,8 +46,17 @@ export async function sendAdminWhatsApp(body: string): Promise<void> {
         const params = new URLSearchParams({
           From: from,
           To: to,
-          Body: body,
         });
+
+        if (contentSid) {
+          // Template send (works outside WhatsApp 24h window)
+          // Template should contain placeholders {{1}} and {{2}}.
+          params.set('ContentSid', contentSid);
+          params.set('ContentVariables', JSON.stringify({ '1': 'Boilable alert', '2': body }));
+        } else {
+          // Freeform send (only within WhatsApp 24h window)
+          params.set('Body', body);
+        }
 
         const res = await fetch(url, {
           method: 'POST',
