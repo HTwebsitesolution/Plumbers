@@ -356,6 +356,9 @@ export default function AdminPage() {
               </p>
             </div>
             <div className="flex items-center gap-2">
+              <Button variant="outline" onClick={() => (window.location.href = '/admin/reviews')}>
+                Moderate Reviews
+              </Button>
               <Button
                 onClick={activeTab === 'leads' ? exportLeadsToCSV : activeTab === 'servicing' ? exportServicingToCSV : exportRepairsToCSV}
                 disabled={currentData.length === 0}

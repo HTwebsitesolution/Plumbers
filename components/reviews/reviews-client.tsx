@@ -99,7 +99,15 @@ export function ReviewsClient() {
         throw new Error(errorData.error || 'Failed to submit review');
       }
 
-      toast({ title: 'Thanks for your review!', description: 'Your feedback has been submitted.' });
+      const responseData = await res.json().catch(() => ({}));
+      const submittedStatus = responseData.status as 'approved' | 'pending' | undefined;
+
+      toast({
+        title: 'Thanks for your review!',
+        description: submittedStatus === 'pending'
+          ? 'Your review has been submitted and is waiting for approval.'
+          : 'Your review is now visible on our website.',
+      });
       setReviewText('');
       setCustomerName('');
       setRating(5);

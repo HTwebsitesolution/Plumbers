@@ -27,13 +27,15 @@ export async function POST(request: Request) {
 
     const supabaseAdmin = getSupabaseServerClient();
 
+    const status = rating >= 4 ? 'approved' : 'pending';
+
     const { error } = await supabaseAdmin.from('customer_reviews').insert({
       rating,
       review_text: reviewText,
       customer_name: customerName,
       request_type: requestType,
       ref_code: refCode,
-      status: 'approved',
+      status,
     });
 
     if (error) {
@@ -41,7 +43,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Failed to submit review.' }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true }, { status: 201 });
+    return NextResponse.json({ success: true, status }, { status: 201 });
   } catch (err) {
     console.error('Reviews API error:', err);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
