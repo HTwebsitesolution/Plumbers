@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CircleCheck as CheckCircle2 } from 'lucide-react';
@@ -43,6 +44,22 @@ export function StepRepairsConfirmation({ repairRef }: StepRepairsConfirmationPr
           >
             <a href="/">Back to Home</a>
           </Button>
+
+          <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="text-sm font-semibold text-slate-900">Leave a review</div>
+                <div className="text-sm text-slate-600">
+                  After your repair is complete, help other customers by sharing your experience.
+                </div>
+              </div>
+              <Button asChild variant="outline" className="sm:w-auto">
+                <Link href={`/reviews?type=repairs&ref=${encodeURIComponent(repairRef)}`}>
+                  Leave a review
+                </Link>
+              </Button>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>

@@ -158,6 +158,22 @@ export function StepConfirmation({ quoteRef, formData }: StepConfirmationProps) 
               <Link href="/how-it-works">Learn More</Link>
             </Button>
           </div>
+
+          <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="text-sm font-semibold text-slate-900">Leave a review</div>
+                <div className="text-sm text-slate-600">
+                  After your installation is complete, help other customers by sharing your experience.
+                </div>
+              </div>
+              <Button asChild variant="outline" className="sm:w-auto">
+                <Link href={`/reviews?type=installation&ref=${encodeURIComponent(quoteRef)}`}>
+                  Leave a review
+                </Link>
+              </Button>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>
