@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
-import { Star } from 'lucide-react';
+import { LogOut, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 type PendingReview = {
@@ -85,6 +85,18 @@ export default function AdminReviewsPage() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/auth', { method: 'DELETE' });
+    } catch {
+      // Ignore; we still reset UI state.
+    } finally {
+      setIsAuthenticated(false);
+      setPassword('');
+      setReviews([]);
+    }
+  };
+
   const handleApprove = async (id: string) => {
     try {
       setIsSubmittingReview(true);
@@ -139,6 +151,10 @@ export default function AdminReviewsPage() {
             <h1 className="text-3xl font-bold text-slate-900">Review Moderation</h1>
             <p className="mt-1 text-slate-600">{reviews.length} pending review(s)</p>
           </div>
+          <Button variant="outline" onClick={handleLogout}>
+            <LogOut className="mr-2 h-4 w-4" />
+            Log out
+          </Button>
         </div>
 
         <Card>
