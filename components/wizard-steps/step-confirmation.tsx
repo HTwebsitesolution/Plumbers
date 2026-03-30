@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -21,6 +22,19 @@ interface StepConfirmationProps {
 }
 
 export function StepConfirmation({ quoteRef, formData }: StepConfirmationProps) {
+  useEffect(() => {
+    if (!quoteRef || typeof window === 'undefined') return;
+
+    const trackedKey = `fb_lead_tracked_${quoteRef}`;
+    if (window.sessionStorage.getItem(trackedKey)) return;
+
+    const fbq = (window as Window & { fbq?: (...args: unknown[]) => void }).fbq;
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead');
+      window.sessionStorage.setItem(trackedKey, '1');
+    }
+  }, [quoteRef]);
+
   return (
     <div className="mx-auto max-w-3xl">
       <Card className="border-green-200 bg-green-50/50">
