@@ -588,6 +588,16 @@ export default function Home() {
                     FAQs
                   </Link>
                 </li>
+                <li>
+                  <Link href="/privacy" className="hover:text-brand-cyan transition-colors">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms" className="hover:text-brand-cyan transition-colors">
+                    Terms &amp; Conditions
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>

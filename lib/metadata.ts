@@ -58,4 +58,14 @@ export const pageMetadata = {
     'Get in touch with our team for expert advice on boiler installation. Call us or fill out our contact form.',
     '/contact'
   ),
+  privacy: generatePageMetadata(
+    'Privacy Policy',
+    'How Boilable collects, uses, and protects your personal data in line with UK GDPR and the Data Protection Act 2018.',
+    '/privacy'
+  ),
+  terms: generatePageMetadata(
+    'Terms & Conditions',
+    'Terms of use for the Boilable website, including provisional quotes and limitations of liability.',
+    '/terms'
+  ),
 };
