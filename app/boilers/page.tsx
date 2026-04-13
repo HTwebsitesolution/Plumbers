@@ -120,11 +120,11 @@ export default function BoilersPage() {
               Fuel Types We Cover
             </h2>
             <p className="text-lg text-slate-600">
-              We install boilers for all fuel types
+              Natural gas and LPG installations within our service area
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2">
             <Card className="animate-fade-in stagger-1 group transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <CardHeader>
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200">
@@ -151,18 +151,14 @@ export default function BoilersPage() {
               </CardHeader>
             </Card>
 
-            <Card className="animate-fade-in stagger-3 group transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              <CardHeader>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200">
-                  <Fuel className="h-6 w-6 text-blue-600" />
-                </div>
-                <CardTitle>Oil</CardTitle>
-                <CardDescription>
-                  Oil-fired boilers are common in rural areas and can provide excellent
-                  heating efficiency with modern condensing models.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+          </div>
+
+          <div className="mx-auto mt-10 max-w-2xl rounded-xl border border-amber-200 bg-amber-50/90 px-6 py-5 text-center">
+            <p className="font-semibold text-slate-900">Oil-fired boilers</p>
+            <p className="mt-2 text-sm text-slate-700">
+              We do not install or service oil-fired boilers. If you need oil heating work, please
+              contact an OFTEC-registered specialist in your area.
+            </p>
           </div>
         </div>
       </div>

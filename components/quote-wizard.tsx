@@ -3,7 +3,7 @@
 import { useState, useEffect, useReducer } from 'react';
 import Link from 'next/link';
 import { Check, ArrowLeft } from 'lucide-react';
-import { QuoteFormData } from '@/lib/types';
+import { QuoteFormData, isAllowedFuelType } from '@/lib/types';
 import { cn } from '@/lib/utils';
 
 const STEPS = [
@@ -83,6 +83,11 @@ export function QuoteWizard({ children }: QuoteWizardProps) {
     if (savedState) {
       try {
         const parsed = JSON.parse(savedState) as WizardState;
+        const ft = parsed.formData?.fuelType;
+        if (ft !== undefined && !isAllowedFuelType(ft)) {
+          const { fuelType: _drop, ...rest } = parsed.formData;
+          parsed.formData = rest;
+        }
         dispatch({ type: 'LOAD_STATE', payload: parsed });
       } catch (error) {
         console.error('Failed to load wizard state:', error);

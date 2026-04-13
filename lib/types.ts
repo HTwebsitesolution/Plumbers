@@ -5,7 +5,7 @@ export interface QuoteFormData {
   propertyType: 'House' | 'Flat' | 'Other';
   bedrooms: number;
   bathrooms: number;
-  fuelType: 'Gas' | 'LPG' | 'Oil';
+  fuelType: 'Gas' | 'LPG';
   currentBoilerType: 'Combi' | 'System' | 'Regular' | 'Not sure';
   boilerLocation: 'Kitchen' | 'Utility' | 'Loft' | 'Garage' | 'Airing cupboard' | 'Other';
   tierName: 'Budget boiler' | 'Mid price boiler' | 'Premium boiler';
@@ -49,7 +49,12 @@ export interface Lead extends QuoteFormData {
 
 export const PROPERTY_TYPES = ['House', 'Flat', 'Other'] as const;
 
-export const FUEL_TYPES = ['Gas', 'LPG', 'Oil'] as const;
+/** Natural gas and LPG only — we do not install or service oil-fired boilers. */
+export const FUEL_TYPES = ['Gas', 'LPG'] as const;
+
+export function isAllowedFuelType(value: unknown): value is 'Gas' | 'LPG' {
+  return value === 'Gas' || value === 'LPG';
+}
 
 export const BOILER_TYPES = ['Combi', 'System', 'Regular', 'Not sure'] as const;
 

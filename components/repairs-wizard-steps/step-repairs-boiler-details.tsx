@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { FUEL_TYPES, isAllowedFuelType } from '@/lib/types';
 
 interface BoilerDetails {
   fuelType: string;
@@ -20,7 +21,9 @@ interface StepRepairsBoilerDetailsProps {
 }
 
 export function StepRepairsBoilerDetails({ value, onNext }: StepRepairsBoilerDetailsProps) {
-  const [fuelType, setFuelType] = useState(value.fuelType || '');
+  const [fuelType, setFuelType] = useState(
+    isAllowedFuelType(value.fuelType) ? value.fuelType : ''
+  );
   const [boilerType, setBoilerType] = useState(value.boilerType || '');
   const [boilerMake, setBoilerMake] = useState(value.boilerMake || '');
   const [boilerModel, setBoilerModel] = useState(value.boilerModel || '');
@@ -49,7 +52,7 @@ export function StepRepairsBoilerDetails({ value, onNext }: StepRepairsBoilerDet
             <div className="space-y-3">
               <Label>Fuel Type</Label>
               <RadioGroup value={fuelType} onValueChange={setFuelType}>
-                {['Gas', 'LPG', 'Oil'].map((type) => (
+                {FUEL_TYPES.map((type) => (
                   <div key={type} className="flex items-center space-x-2">
                     <RadioGroupItem value={type} id={`fuel-${type}`} />
                     <Label htmlFor={`fuel-${type}`} className="font-normal cursor-pointer">

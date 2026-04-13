@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { getRepairsCustomerEmailTemplate, getRepairsInstallerEmailTemplate, RepairsRequestData } from '@/lib/repairs-email-templates';
+import { isAllowedFuelType } from '@/lib/types';
 import { sendAdminWhatsApp } from '@/lib/whatsapp';
 import { sendPushoverPush } from '@/lib/notifications/pushover';
 
@@ -80,6 +81,16 @@ export async function POST(request: Request) {
     if (!customerName || !customerEmail || !customerPhone || !postcode) {
       return NextResponse.json(
         { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    if (fuelType != null && fuelType !== '' && !isAllowedFuelType(fuelType)) {
+      return NextResponse.json(
+        {
+          error:
+            'We only repair natural gas and LPG boilers. We do not repair oil-fired boilers.',
+        },
         { status: 400 }
       );
     }

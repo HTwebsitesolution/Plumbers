@@ -5,8 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Flame, ChevronLeft, Droplet, Fuel, Wind } from 'lucide-react';
-import { FUEL_TYPES, BOILER_TYPES, BOILER_LOCATIONS, QuoteFormData } from '@/lib/types';
+import { Flame, ChevronLeft, Droplet, Wind } from 'lucide-react';
+import {
+  FUEL_TYPES,
+  BOILER_TYPES,
+  BOILER_LOCATIONS,
+  QuoteFormData,
+  isAllowedFuelType,
+} from '@/lib/types';
 import { cn } from '@/lib/utils';
 
 interface StepCurrentBoilerProps {
@@ -20,7 +26,9 @@ interface StepCurrentBoilerProps {
 }
 
 export function StepCurrentBoiler({ values, onNext, onBack }: StepCurrentBoilerProps) {
-  const [fuelType, setFuelType] = useState(values.fuelType || '');
+  const rawFuel = values.fuelType as unknown;
+  const initialFuel = isAllowedFuelType(rawFuel) ? rawFuel : '';
+  const [fuelType, setFuelType] = useState(initialFuel);
   const [currentBoilerType, setCurrentBoilerType] = useState(values.currentBoilerType || '');
   const [boilerLocation, setBoilerLocation] = useState(values.boilerLocation || '');
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -51,8 +59,6 @@ export function StepCurrentBoiler({ values, onNext, onBack }: StepCurrentBoilerP
         return Flame;
       case 'LPG':
         return Droplet;
-      case 'Oil':
-        return Fuel;
       default:
         return Wind;
     }
@@ -74,7 +80,7 @@ export function StepCurrentBoiler({ values, onNext, onBack }: StepCurrentBoilerP
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-3">
               <Label className="text-base font-medium">What fuel type does your current boiler use?</Label>
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="grid gap-3 sm:grid-cols-2">
                 {FUEL_TYPES.map((type) => {
                   const Icon = getFuelIcon(type);
                   return (

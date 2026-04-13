@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { generateQuoteRef } from '@/lib/quote-utils';
 import { getCustomerEmailTemplate, getInstallerEmailTemplate } from '@/lib/email-templates';
-import { QuoteFormData, OutOfAreaEnquiry } from '@/lib/types';
+import { QuoteFormData, OutOfAreaEnquiry, isAllowedFuelType } from '@/lib/types';
 import { sendAdminWhatsApp } from '@/lib/whatsapp';
 import { sendPushoverPush } from '@/lib/notifications/pushover';
 
@@ -131,6 +131,16 @@ export async function POST(request: Request) {
           { status: 400 }
         );
       }
+    }
+
+    if (!isAllowedFuelType(fullQuote.fuelType)) {
+      return NextResponse.json(
+        {
+          error:
+            'We only provide quotes for natural gas and LPG boilers. We do not install or service oil-fired boilers.',
+        },
+        { status: 400 }
+      );
     }
 
     const quoteRef = generateQuoteRef();

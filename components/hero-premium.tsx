@@ -64,7 +64,7 @@ export function HeroPremium() {
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
-                <span>Gas, LPG & Oil boilers covered across our postcode catchment.</span>
+                <span>Gas and LPG boilers covered across our postcode catchment.</span>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-cyan" />
