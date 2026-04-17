@@ -130,7 +130,9 @@ export function ReviewsClient() {
           ))}
         </div>
         <h1 className="text-4xl font-bold text-slate-900">Customer Reviews</h1>
-        <p className="mt-3 text-lg text-slate-600">Tell us about your experience with Boilable.</p>
+        <p className="mt-3 text-lg text-slate-600">
+          Tell us about your experience with {process.env.NEXT_PUBLIC_SITE_NAME || 'our team'}.
+        </p>
       </div>
 
       {/* Reviews list */}

@@ -4,6 +4,7 @@ import { getServicingCustomerEmailTemplate, getServicingInstallerEmailTemplate, 
 import { isAllowedFuelType } from '@/lib/types';
 import { sendAdminWhatsApp } from '@/lib/whatsapp';
 import { sendPushoverPush } from '@/lib/notifications/pushover';
+import { getMailFrom, getSiteBaseUrl } from '@/lib/site-config';
 
 function generateServicingRef(): string {
   const date = new Date();
@@ -36,7 +37,7 @@ async function sendEmail(to: string, subject: string, html: string, text?: strin
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Boilable <noreply@boilable.co.uk>',
+        from: getMailFrom(),
         to: [to],
         subject,
         html,
@@ -148,7 +149,7 @@ export async function POST(request: Request) {
     const customerEmailTemplate = getServicingCustomerEmailTemplate(emailData);
     await sendEmail(customerEmail, customerEmailTemplate.subject, customerEmailTemplate.html, customerEmailTemplate.text);
 
-    const installerEmail = process.env.INSTALLER_EMAIL || 'installer@boilable.co.uk';
+    const installerEmail = process.env.INSTALLER_EMAIL || 'installer@example.com';
     const installerEmailTemplate = getServicingInstallerEmailTemplate(emailData);
     await sendEmail(installerEmail, installerEmailTemplate.subject, installerEmailTemplate.html);
 
@@ -156,7 +157,7 @@ export async function POST(request: Request) {
       `🔔 Servicing request: ${serviceRef}\n${postcode} – ${customerName} – ${customerPhone}`
     ).catch(() => {});
 
-    const baseUrl = process.env.SITE_BASE_URL ?? 'https://boilable.co.uk';
+    const baseUrl = getSiteBaseUrl();
     const servicingPushTitle = 'New servicing request';
     const servicingPushMessage =
       `Ref ${serviceRef}\n` +

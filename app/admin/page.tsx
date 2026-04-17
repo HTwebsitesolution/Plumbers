@@ -13,6 +13,7 @@ import { Lock, Download, Copy, Eye, Loader as Loader2, CircleCheck as CheckCircl
 import { formatPrice } from '@/lib/quote-utils';
 import { Lead } from '@/lib/types';
 import { useToast } from '@/hooks/use-toast';
+import { getSiteConfig } from '@/lib/site-config';
 
 interface ServicingRequest {
   id: string;
@@ -253,21 +254,21 @@ export default function AdminPage() {
   };
 
   const copyWhatsAppLeadMessage = (lead: Lead) => {
-    const message = `Hi ${lead.customerName}, this is [Your Name] from Boilable. Thanks for your ${lead.tierName} quote request (${lead.quoteRef}). I'd love to arrange your free site survey. When would be a good time to visit ${lead.postcode}?`;
+    const message = `Hi ${lead.customerName}, this is [Your Name] from ${getSiteConfig().siteName}. Thanks for your ${lead.tierName} quote request (${lead.quoteRef}). I'd love to arrange your free site survey. When would be a good time to visit ${lead.postcode}?`;
     navigator.clipboard.writeText(message);
     showCopiedToast();
   };
 
   const copyWhatsAppServicingMessage = (req: ServicingRequest) => {
     const timeWindowText = req.preferred_time_window ? `You mentioned ${req.preferred_time_window} works best for you.` : 'When would suit you?';
-    const message = `Hi ${req.customer_name}, this is [Your Name] from Boilable. Thanks for your servicing request (${req.service_ref}). I'd like to arrange a convenient time for your annual service. ${timeWindowText}`;
+    const message = `Hi ${req.customer_name}, this is [Your Name] from ${getSiteConfig().siteName}. Thanks for your servicing request (${req.service_ref}). I'd like to arrange a convenient time for your annual service. ${timeWindowText}`;
     navigator.clipboard.writeText(message);
     showCopiedToast();
   };
 
   const copyWhatsAppRepairsMessage = (req: RepairsRequest) => {
     const timeWindowText = req.preferred_time_window ? `You mentioned ${req.preferred_time_window} works best for you.` : 'When would suit you?';
-    const message = `Hi ${req.customer_name}, this is [Your Name] from Boilable. Thanks for your repair request (${req.repair_ref}). I'd like to arrange a visit to fix your boiler issue. ${timeWindowText}`;
+    const message = `Hi ${req.customer_name}, this is [Your Name] from ${getSiteConfig().siteName}. Thanks for your repair request (${req.repair_ref}). I'd like to arrange a visit to fix your boiler issue. ${timeWindowText}`;
     navigator.clipboard.writeText(message);
     showCopiedToast();
   };

@@ -5,6 +5,7 @@ import { getCustomerEmailTemplate, getInstallerEmailTemplate } from '@/lib/email
 import { QuoteFormData, OutOfAreaEnquiry, isAllowedFuelType } from '@/lib/types';
 import { sendAdminWhatsApp } from '@/lib/whatsapp';
 import { sendPushoverPush } from '@/lib/notifications/pushover';
+import { getSiteBaseUrl } from '@/lib/site-config';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.FROM_EMAIL;
@@ -81,7 +82,7 @@ export async function POST(request: Request) {
         `🔔 Out-of-area enquiry: ${quoteRef}\n${body.postcode} (${body.outwardCode})\n${body.customerName} – ${body.customerPhone}`
       ).catch(() => {});
 
-      const baseUrl = process.env.SITE_BASE_URL ?? 'https://boilable.co.uk';
+      const baseUrl = getSiteBaseUrl();
       const pushTitle = 'Out-of-area enquiry';
       const pushMessage =
         `Ref ${quoteRef}\n` +
@@ -241,7 +242,7 @@ export async function POST(request: Request) {
     }
 
     // --- Notifications (best effort; never block the response) ---
-    const baseUrl = process.env.SITE_BASE_URL ?? 'https://boilable.co.uk';
+    const baseUrl = getSiteBaseUrl();
 
     const pushTitle = `New boiler quote: ${fullQuote.tierName}`;
     const pushMessage =

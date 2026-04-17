@@ -1,3 +1,5 @@
+import { getSiteConfig, getEmailFooterCopyright } from './site-config';
+
 export interface RepairsRequestData {
   repairRef: string;
   requestType: 'repairs' | 'out_of_area_enquiry';
@@ -21,6 +23,8 @@ export interface RepairsRequestData {
 }
 
 export function getRepairsCustomerEmailTemplate(data: RepairsRequestData) {
+  const site = getSiteConfig();
+  const footer = getEmailFooterCopyright();
   return {
     subject: `Repair request received — Ref ${data.repairRef}`,
     html: `
@@ -38,7 +42,7 @@ export function getRepairsCustomerEmailTemplate(data: RepairsRequestData) {
         <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
           <tr>
             <td style="background-color: #2563eb; padding: 40px; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">Boilable</h1>
+              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">${site.siteName}</h1>
             </td>
           </tr>
           <tr>
@@ -59,7 +63,7 @@ export function getRepairsCustomerEmailTemplate(data: RepairsRequestData) {
           </tr>
           <tr>
             <td style="background-color: #f8fafc; padding: 24px; text-align: center;">
-              <p style="margin: 0; color: #94a3b8; font-size: 12px;">&copy; 2024 Boilable. All rights reserved.</p>
+              <p style="margin: 0; color: #94a3b8; font-size: 12px;">${footer}</p>
             </td>
           </tr>
         </table>
@@ -77,14 +81,15 @@ Repair Reference: ${data.repairRef}
 
 Questions? Reply to this email or visit our website.
 
-© 2024 Boilable. All rights reserved.`,
+${footer}`,
   };
 }
 
 export function getRepairsInstallerEmailTemplate(data: RepairsRequestData) {
+  const site = getSiteConfig();
   const urgencyColor = data.urgency === 'Emergency today' ? '#dc2626' : data.urgency === 'ASAP' ? '#f59e0b' : '#10b981';
   const timeWindowText = data.preferredTimeWindow ? `You mentioned ${data.preferredTimeWindow} works best for you.` : 'When would suit you?';
-  const whatsappMessage = `Hi ${data.customerName}, this is [Your Name] from Boilable. Thanks for your repair request (${data.repairRef}). I'd like to arrange a visit to fix your boiler issue. ${timeWindowText}`;
+  const whatsappMessage = `Hi ${data.customerName}, this is [Your Name] from ${site.siteName}. Thanks for your repair request (${data.repairRef}). I'd like to arrange a visit to fix your boiler issue. ${timeWindowText}`;
 
   return {
     subject: `New Repair Request${data.urgency === 'Emergency today' ? ' - EMERGENCY' : ''}: ${data.postcode} (${data.repairRef})`,

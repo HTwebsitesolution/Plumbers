@@ -5,10 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, CircleCheck as CheckCircle2, Calendar, ClipboardCheck, Wrench, Shield } from 'lucide-react';
 import { pageMetadata } from '@/lib/metadata';
+import { getSiteConfig } from '@/lib/site-config';
 
 export const metadata: Metadata = pageMetadata.howItWorks;
 
 export default function HowItWorksPage() {
+  const site = getSiteConfig();
   return (
     <PageLayout>
       <div className="bg-gradient-to-b from-blue-50 to-white py-16">
@@ -17,7 +19,7 @@ export default function HowItWorksPage() {
             How It Works
           </h1>
           <p className="text-xl text-slate-600">
-            Getting a new boiler installed is simple with Boilable
+            Getting a new boiler installed is simple with {site.siteName}
           </p>
         </div>
       </div>
@@ -73,7 +75,7 @@ export default function HowItWorksPage() {
                 <div className="mb-4 rounded-xl overflow-hidden">
                   <img
                     src="/boilable%20quote%20-how%20it%20works/2.png"
-                    alt="Boilable engineer carrying out boiler survey"
+                    alt="Gas Safe engineer carrying out a boiler survey"
                     className="w-full h-64 object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -110,7 +112,7 @@ export default function HowItWorksPage() {
                 <div className="mb-4 rounded-xl overflow-hidden">
                   <img
                     src="/boilable%20quote%20-how%20it%20works/3.png"
-                    alt="Boilable boiler installation quote on tablet"
+                    alt="Boiler installation quote reviewed on a tablet"
                     className="w-full h-64 object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>

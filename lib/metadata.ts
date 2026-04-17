@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { getSiteConfig } from './site-config';
 
 export function generatePageMetadata(
   title: string,
@@ -22,9 +23,11 @@ export function generatePageMetadata(
   };
 }
 
+const site = getSiteConfig();
+
 export const pageMetadata = {
   home: generatePageMetadata(
-    'Boilable - Quality Boiler Installation from £1,750',
+    `${site.siteName} - Quality Boiler Installation from £1,750`,
     'Get your instant boiler installation quote online. Professional Gas Safe registered engineers. Up to 10 year warranty. From £1,750 installed.',
     '/'
   ),
@@ -50,7 +53,7 @@ export const pageMetadata = {
   ),
   reviews: generatePageMetadata(
     'Customer Reviews',
-    'Read what our customers say about their boiler installation experience with Boilable. Trusted by homeowners across the UK.',
+    `Read what our customers say about their boiler installation experience with ${site.siteName}. Trusted by homeowners across the UK.`,
     '/reviews'
   ),
   contact: generatePageMetadata(
@@ -60,12 +63,12 @@ export const pageMetadata = {
   ),
   privacy: generatePageMetadata(
     'Privacy Policy',
-    'How Boilable collects, uses, and protects your personal data in line with UK GDPR and the Data Protection Act 2018.',
+    `How ${site.siteName} collects, uses, and protects your personal data in line with UK GDPR and the Data Protection Act 2018.`,
     '/privacy'
   ),
   terms: generatePageMetadata(
     'Terms & Conditions',
-    'Terms of use for the Boilable website, including provisional quotes and limitations of liability.',
+    `Terms of use for the ${site.siteName} website, including provisional quotes and limitations of liability.`,
     '/terms'
   ),
 };

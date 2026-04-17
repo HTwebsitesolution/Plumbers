@@ -9,6 +9,7 @@ import { ArrowRight, CircleCheck as CheckCircle2, Shield, Clock, Award, Wrench, 
 import { BOILER_TIERS, STANDARD_INSTALL_DEFINITION } from '@/lib/types';
 import { formatPrice } from '@/lib/quote-utils';
 import { HeroPremium } from '@/components/hero-premium';
+import { getSiteConfig } from '@/lib/site-config';
 
 const GALLERY_IMAGES = [
   {
@@ -58,6 +59,7 @@ const GALLERY_IMAGES = [
 ];
 
 export default function Home() {
+  const site = getSiteConfig();
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
@@ -65,19 +67,19 @@ export default function Home() {
           <Link
             href="/"
             className="group flex items-center transition-all duration-300 hover:opacity-80"
-            aria-label="Boilable Home"
+            aria-label={`${site.siteName} home`}
           >
             <div className="relative h-12 sm:h-14 bg-[#0A1628] rounded-lg px-2 overflow-hidden">
               <Image
-                src="/brand/Boilable.co.uk_logo.png"
-                alt="Boilable"
+                src={site.logoSrc}
+                alt={site.logoAlt}
                 width={220}
                 height={52}
                 priority
                 className="h-full w-auto object-contain scale-[1.18] translate-y-[1px]"
               />
             </div>
-            <span className="sr-only">Boilable - Boiler Installation Estimates</span>
+            <span className="sr-only">{site.siteName} — Boiler installation estimates</span>
           </Link>
           <nav className="hidden items-center gap-6 md:flex">
             <Link href="/quote" className="text-sm font-medium text-muted-foreground transition-colors hover:text-brand-cyan">
@@ -376,13 +378,13 @@ export default function Home() {
             </div>
             <div className="max-w-xl text-center text-white lg:text-left">
               <p className="mb-3 inline-flex items-center rounded-full bg-slate-800/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-cyan">
-                Boilable reassurance
+                Straightforward pricing
               </p>
               <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
                 Provisional price today, final price after survey — always clear, never rushed.
               </h2>
               <p className="mb-6 text-sm md:text-base text-slate-200/85">
-                Every quote you see on Boilable is a provisional estimate based on your answers. We&apos;ll always
+                Every quote you see here is a provisional estimate based on your answers. We&apos;ll always
                 confirm the final price in person after a free, no‑obligation site survey at your property.
               </p>
               <p className="mb-6 text-sm md:text-base text-slate-200/85">
@@ -390,7 +392,7 @@ export default function Home() {
                 survey‑backed pricing for boiler installations in South Yorkshire and North Nottinghamshire.
               </p>
               <Button asChild variant="outline" className="border-slate-500 bg-transparent text-white hover:bg-white hover:text-slate-950">
-                <Link href="/how-it-works">See exactly how Boilable works</Link>
+                <Link href="/how-it-works">See exactly how it works</Link>
               </Button>
             </div>
           </div>
@@ -499,7 +501,7 @@ export default function Home() {
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent" />
                     <div className="pointer-events-none absolute inset-x-4 bottom-4">
                       <p className="text-xs font-medium uppercase tracking-[0.18em] text-brand-cyan/80">
-                        Boilable installation
+                        Professional installation
                       </p>
                       <p className="mt-1 text-[0.8rem] font-medium text-slate-50">
                         {image.alt}
@@ -537,18 +539,18 @@ export default function Home() {
             <div>
               <div className="mb-4 bg-[#0A1628] rounded-lg px-3 py-2 inline-block">
                 <Image
-                  src="/brand/Boilable.co.uk_logo.png"
-                  alt="Boilable.co.uk"
+                  src={site.logoSrc}
+                  alt={site.logoAlt}
                   width={140}
                   height={35}
                   className="h-7 w-auto object-contain"
                 />
               </div>
               <p className="text-sm text-muted-foreground">
-                Quality boiler installations with transparent pricing and expert service.
+                {site.tagline}
               </p>
               <p className="mt-3 text-xs text-muted-foreground/60">
-                A Delaney & Salter Ltd company
+                {site.footerLegalLine}
               </p>
             </div>
             <div>
@@ -570,7 +572,7 @@ export default function Home() {
             </div>
             <div>
               <div className="mb-4 text-sm font-semibold uppercase text-foreground">
-                Boilable
+                {site.footerLinksHeading}
               </div>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
@@ -615,7 +617,7 @@ export default function Home() {
           </div>
           <div className="mt-8 border-t border-border pt-8 flex flex-col items-center justify-between gap-4 text-center text-sm text-muted-foreground md:flex-row md:text-left">
             <p>
-              &copy; 2026 Boilable. All rights reserved.
+              &copy; {site.copyrightYear} {site.siteName}. All rights reserved.
               {' '}
               Designed by{' '}
               <Link href="https://htwebsolution.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand-cyan transition-colors underline underline-offset-2">

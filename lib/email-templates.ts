@@ -1,5 +1,6 @@
 import { QuoteFormData } from './types';
 import { formatPrice } from './quote-utils';
+import { getSiteConfig, getEmailFooterCopyright } from './site-config';
 
 export interface ServicingRequestData {
   serviceRef: string;
@@ -43,6 +44,8 @@ export interface RepairsRequestData {
 }
 
 export function getCustomerEmailTemplate(data: QuoteFormData & { quoteRef: string }) {
+  const site = getSiteConfig();
+  const footer = getEmailFooterCopyright();
   return {
     subject: `Your Boiler Quote Request (${data.quoteRef})`,
     html: `
@@ -60,7 +63,7 @@ export function getCustomerEmailTemplate(data: QuoteFormData & { quoteRef: strin
         <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
           <tr>
             <td style="background-color: #2563eb; padding: 40px; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">Boilable</h1>
+              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">${site.siteName}</h1>
             </td>
           </tr>
           <tr>
@@ -137,7 +140,7 @@ export function getCustomerEmailTemplate(data: QuoteFormData & { quoteRef: strin
           </tr>
           <tr>
             <td style="background-color: #f8fafc; padding: 24px; text-align: center;">
-              <p style="margin: 0; color: #94a3b8; font-size: 12px;">&copy; 2024 Boilable. All rights reserved.</p>
+              <p style="margin: 0; color: #94a3b8; font-size: 12px;">${footer}</p>
             </td>
           </tr>
         </table>
@@ -151,7 +154,8 @@ export function getCustomerEmailTemplate(data: QuoteFormData & { quoteRef: strin
 }
 
 export function getInstallerEmailTemplate(data: QuoteFormData & { quoteRef: string }) {
-  const whatsappMessage = `Hi ${data.customerName}, this is [Your Name] from Boilable. Thanks for your ${data.tierName} quote request (${data.quoteRef}). I'd love to arrange your free site survey. When would be a good time to visit ${data.postcode}?`;
+  const site = getSiteConfig();
+  const whatsappMessage = `Hi ${data.customerName}, this is [Your Name] from ${site.siteName}. Thanks for your ${data.tierName} quote request (${data.quoteRef}). I'd love to arrange your free site survey. When would be a good time to visit ${data.postcode}?`;
 
   return {
     subject: `New Lead: ${data.tierName} - ${data.postcode} (${data.quoteRef})`,
@@ -367,6 +371,8 @@ export function getInstallerEmailTemplate(data: QuoteFormData & { quoteRef: stri
 }
 
 export function getServicingCustomerEmailTemplate(data: ServicingRequestData) {
+  const site = getSiteConfig();
+  const footer = getEmailFooterCopyright();
   return {
     subject: `Servicing request received — Ref ${data.serviceRef}`,
     html: `
@@ -384,7 +390,7 @@ export function getServicingCustomerEmailTemplate(data: ServicingRequestData) {
         <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
           <tr>
             <td style="background-color: #2563eb; padding: 40px; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">Boilable</h1>
+              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">${site.siteName}</h1>
             </td>
           </tr>
           <tr>
@@ -405,7 +411,7 @@ export function getServicingCustomerEmailTemplate(data: ServicingRequestData) {
           </tr>
           <tr>
             <td style="background-color: #f8fafc; padding: 24px; text-align: center;">
-              <p style="margin: 0; color: #94a3b8; font-size: 12px;">&copy; 2024 Boilable. All rights reserved.</p>
+              <p style="margin: 0; color: #94a3b8; font-size: 12px;">${footer}</p>
             </td>
           </tr>
         </table>
@@ -423,12 +429,13 @@ Service Reference: ${data.serviceRef}
 
 Questions? Reply to this email or visit our website.
 
-© 2024 Boilable. All rights reserved.`,
+${footer}`,
   };
 }
 
 export function getServicingInstallerEmailTemplate(data: ServicingRequestData) {
-  const whatsappMessage = `Hi ${data.customerName}, this is [Your Name] from Boilable. Thanks for booking a boiler service (${data.serviceRef}). I'd like to arrange a convenient time to visit ${data.postcode}. ${data.preferredTimeWindow ? `You mentioned ${data.preferredTimeWindow} works best for you.` : 'When would suit you?'}`;
+  const site = getSiteConfig();
+  const whatsappMessage = `Hi ${data.customerName}, this is [Your Name] from ${site.siteName}. Thanks for booking a boiler service (${data.serviceRef}). I'd like to arrange a convenient time to visit ${data.postcode}. ${data.preferredTimeWindow ? `You mentioned ${data.preferredTimeWindow} works best for you.` : 'When would suit you?'}`;
 
   return {
     subject: `New Servicing Request: ${data.postcode} (${data.serviceRef})`,

@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Boilable Brand Colors - Clean Light Theme */
+    /* Brand colors — clean light theme (override via Tailwind / CSS as needed) */
     --brand-navy: 218 75% 15%;
     --brand-navy-lighter: 218 30% 96%;
     --brand-white: 0 0% 100%;

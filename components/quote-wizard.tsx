@@ -17,7 +17,8 @@ const STEPS = [
   { id: 8, name: 'Review', label: 'Final check' },
 ];
 
-const STORAGE_KEY = 'boilable_quote_wizard';
+const STORAGE_KEY =
+  process.env.NEXT_PUBLIC_QUOTE_WIZARD_STORAGE_KEY || 'plumber_quote_wizard_v1';
 
 interface WizardState {
   currentStep: number;

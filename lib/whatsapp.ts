@@ -52,7 +52,13 @@ export async function sendAdminWhatsApp(body: string): Promise<void> {
           // Template send (works outside WhatsApp 24h window)
           // Template should contain placeholders {{1}} and {{2}}.
           params.set('ContentSid', contentSid);
-          params.set('ContentVariables', JSON.stringify({ '1': 'Boilable alert', '2': body }));
+          params.set(
+            'ContentVariables',
+            JSON.stringify({
+              '1': `${process.env.NEXT_PUBLIC_SITE_NAME || 'Site'} alert`,
+              '2': body,
+            })
+          );
         } else {
           // Freeform send (only within WhatsApp 24h window)
           params.set('Body', body);

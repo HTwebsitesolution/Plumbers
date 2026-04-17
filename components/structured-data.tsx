@@ -1,11 +1,13 @@
+import { getSiteConfig } from '@/lib/site-config';
+
 export function StructuredData() {
-  const structuredData = {
+  const site = getSiteConfig();
+  const structuredData: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'Boilable',
-    description: 'Quality boiler installations with transparent pricing and expert service',
-    url: 'https://boilable.com',
-    telephone: '+44-XXX-XXX-XXXX',
+    name: site.siteName,
+    description: site.businessDescription,
+    url: site.siteUrl,
     priceRange: '£1,750 - £3,000',
     address: {
       '@type': 'PostalAddress',
@@ -22,6 +24,10 @@ export function StructuredData() {
       reviewCount: '127',
     },
   };
+
+  if (site.businessPhone) {
+    structuredData.telephone = site.businessPhone;
+  }
 
   return (
     <script

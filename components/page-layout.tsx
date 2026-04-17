@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 import { BackToTopButton } from '@/components/back-to-top';
+import { getSiteConfig } from '@/lib/site-config';
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -14,6 +15,7 @@ interface PageLayoutProps {
 
 export function PageLayout({ children }: PageLayoutProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const site = getSiteConfig();
 
   const navLinks = [
     { href: '/quote', label: 'New Boilers' },
@@ -29,18 +31,18 @@ export function PageLayout({ children }: PageLayoutProps) {
     <div className="flex min-h-screen flex-col bg-background">
       <header className="sticky top-0 z-50 border-b border-border bg-white/98 backdrop-blur-lg shadow-sm supports-[backdrop-filter]:bg-white/95">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="group flex items-center transition-all duration-300 hover:opacity-80" aria-label="Boilable Home">
+          <Link href="/" className="group flex items-center transition-all duration-300 hover:opacity-80" aria-label={`${site.siteName} home`}>
           <div className="relative h-12 sm:h-14 bg-[#0A1628] rounded-lg px-2 overflow-hidden">
               <Image
-                src="/brand/Boilable.co.uk_logo.png"
-                alt="Boilable"
+                src={site.logoSrc}
+                alt={site.logoAlt}
                 width={220}
                 height={52}
                 priority
                 className="h-full w-auto object-contain scale-[1.18] translate-y-[1px]"
               />
             </div>
-            <span className="sr-only">Boilable - Boiler Installation Estimates</span>
+            <span className="sr-only">{site.siteName} — Boiler installation estimates</span>
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex" role="navigation" aria-label="Main navigation">
@@ -70,8 +72,8 @@ export function PageLayout({ children }: PageLayoutProps) {
               <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-card border-border">
                 <div className="mb-8 bg-[#0A1628] rounded-lg px-3 py-2 inline-block">
                   <Image
-                    src="/brand/Boilable.co.uk_logo.png"
-                    alt="Boilable"
+                    src={site.logoSrc}
+                    alt={site.logoAlt}
                     width={160}
                     height={40}
                     className="h-10 w-auto object-contain"
@@ -106,18 +108,18 @@ export function PageLayout({ children }: PageLayoutProps) {
             <div>
               <div className="mb-4 bg-[#0A1628] rounded-lg px-3 py-2 inline-block">
                 <Image
-                  src="/brand/Boilable.co.uk_logo.png"
-                  alt="Boilable.co.uk"
+                  src={site.logoSrc}
+                  alt={site.logoAlt}
                   width={140}
                   height={35}
                   className="h-7 w-auto object-contain"
                 />
               </div>
               <p className="text-sm text-muted-foreground">
-                Quality boiler installations with transparent pricing and expert service.
+                {site.tagline}
               </p>
               <p className="mt-3 text-xs text-muted-foreground/60">
-                A Delaney & Salter Ltd company
+                {site.footerLegalLine}
               </p>
             </div>
             <div>
@@ -139,7 +141,7 @@ export function PageLayout({ children }: PageLayoutProps) {
             </div>
             <div>
               <div className="mb-4 text-sm font-semibold uppercase text-foreground">
-                Boilable
+                {site.footerLinksHeading}
               </div>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
@@ -184,7 +186,7 @@ export function PageLayout({ children }: PageLayoutProps) {
           </div>
           <div className="mt-8 border-t border-border pt-8 flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground md:flex-row">
             <p>
-              &copy; 2026 Boilable. All rights reserved.
+              &copy; {site.copyrightYear} {site.siteName}. All rights reserved.
               {' '}
               Designed by{' '}
               <Link href="https://htwebsolution.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand-cyan transition-colors underline underline-offset-2">

@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { PageLayout } from '@/components/page-layout';
 import { pageMetadata } from '@/lib/metadata';
+import { getSiteConfig } from '@/lib/site-config';
 
 export const metadata: Metadata = pageMetadata.privacy;
 
 export default function PrivacyPage() {
+  const site = getSiteConfig();
   return (
     <PageLayout>
       <div className="bg-gradient-to-b from-blue-50 to-white py-14">
@@ -22,8 +24,8 @@ export default function PrivacyPage() {
           </h1>
           <p className="mt-4 text-lg text-slate-600">
             This policy explains how we handle personal information when you use{' '}
-            <strong className="font-semibold text-slate-800">boilable.co.uk</strong> and related
-            services operated under the Boilable brand.
+            <strong className="font-semibold text-slate-800">{site.siteHost}</strong> and related
+            services operated under the {site.siteName} brand.
           </p>
         </div>
       </div>
@@ -33,8 +35,8 @@ export default function PrivacyPage() {
           <section className="space-y-3">
             <h2 className="text-xl font-semibold text-slate-900">1. Who we are</h2>
             <p>
-              Boilable is operated by{' '}
-              <strong className="font-semibold text-slate-800">Delaney &amp; Salter Ltd</strong>{' '}
+              {site.siteName} is operated by{' '}
+              <strong className="font-semibold text-slate-800">{site.legalEntityName}</strong>{' '}
               (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;). For data protection law purposes we
               act as the <strong className="font-semibold text-slate-800">data controller</strong>{' '}
               of personal data collected through this website, unless we state otherwise (for example

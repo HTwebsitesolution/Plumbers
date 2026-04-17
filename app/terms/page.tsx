@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { PageLayout } from '@/components/page-layout';
 import { pageMetadata } from '@/lib/metadata';
+import { getSiteConfig } from '@/lib/site-config';
 
 export const metadata: Metadata = pageMetadata.terms;
 
 export default function TermsPage() {
+  const site = getSiteConfig();
   return (
     <PageLayout>
       <div className="bg-gradient-to-b from-blue-50 to-white py-14">
@@ -22,9 +24,9 @@ export default function TermsPage() {
           </h1>
           <p className="mt-4 text-lg text-slate-600">
             These terms govern your use of the website{' '}
-            <strong className="font-semibold text-slate-800">boilable.co.uk</strong> and related
-            Boilable online services operated by{' '}
-            <strong className="font-semibold text-slate-800">Delaney &amp; Salter Ltd</strong>.
+            <strong className="font-semibold text-slate-800">{site.siteHost}</strong> and related{' '}
+            {site.siteName} online services operated by{' '}
+            <strong className="font-semibold text-slate-800">{site.legalEntityName}</strong>.
           </p>
         </div>
       </div>
@@ -41,9 +43,9 @@ export default function TermsPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-xl font-semibold text-slate-900">2. About Boilable</h2>
+            <h2 className="text-xl font-semibold text-slate-900">2. About {site.siteName}</h2>
             <p>
-              Boilable provides information about boiler installation, servicing, and repairs and
+              {site.siteName} provides information about boiler installation, servicing, and repairs and
               offers ways to request quotes or bookings online. Gas work is carried out by
               appropriately qualified engineers (e.g. Gas Safe registered) where applicable; specific
               engineer credentials are confirmed as part of the job process, not by this website

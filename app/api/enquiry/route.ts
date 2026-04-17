@@ -3,12 +3,15 @@ import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { generateQuoteRef } from '@/lib/quote-utils';
 import { OutOfAreaEnquiry } from '@/lib/types';
 import { sendAdminWhatsApp } from '@/lib/whatsapp';
+import { getSiteConfig, getEmailFooterCopyright } from '@/lib/site-config';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.FROM_EMAIL;
 const INSTALLER_NOTIFY_EMAIL = process.env.INSTALLER_NOTIFY_EMAIL;
 
 function getCustomerAcknowledgementEmail(data: OutOfAreaEnquiry & { quoteRef: string }) {
+  const site = getSiteConfig();
+  const footer = getEmailFooterCopyright();
   return {
     subject: `Thanks for your enquiry (${data.quoteRef})`,
     html: `
@@ -26,14 +29,14 @@ function getCustomerAcknowledgementEmail(data: OutOfAreaEnquiry & { quoteRef: st
         <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
           <tr>
             <td style="background-color: #2563eb; padding: 40px; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">Boilable</h1>
+              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">${site.siteName}</h1>
             </td>
           </tr>
           <tr>
             <td style="padding: 40px;">
               <h2 style="margin: 0 0 16px 0; color: #1e293b; font-size: 24px; font-weight: 600;">Thanks for your enquiry!</h2>
               <p style="margin: 0 0 24px 0; color: #64748b; font-size: 16px; line-height: 1.6;">Hi ${data.customerName},</p>
-              <p style="margin: 0 0 24px 0; color: #64748b; font-size: 16px; line-height: 1.6;">Thank you for your interest in Boilable. We've received your enquiry for postcode ${data.postcode}.</p>
+              <p style="margin: 0 0 24px 0; color: #64748b; font-size: 16px; line-height: 1.6;">Thank you for your interest in ${site.siteName}. We've received your enquiry for postcode ${data.postcode}.</p>
               <p style="margin: 0 0 24px 0; color: #64748b; font-size: 16px; line-height: 1.6;">While this area is currently outside our service coverage, we're always looking to expand. We'll be in touch if we're able to help.</p>
 
               <div style="background-color: #f1f5f9; border-radius: 8px; padding: 24px; margin: 24px 0;">
@@ -49,7 +52,7 @@ function getCustomerAcknowledgementEmail(data: OutOfAreaEnquiry & { quoteRef: st
           </tr>
           <tr>
             <td style="background-color: #f8fafc; padding: 24px; text-align: center;">
-              <p style="margin: 0; color: #94a3b8; font-size: 12px;">&copy; 2024 Boilable. All rights reserved.</p>
+              <p style="margin: 0; color: #94a3b8; font-size: 12px;">${footer}</p>
             </td>
           </tr>
         </table>

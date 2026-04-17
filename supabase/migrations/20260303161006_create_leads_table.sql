@@ -3,7 +3,7 @@
 
   ## Overview
   This migration creates the core `leads` table to store all boiler installation quote submissions
-  from the Boilable.co.uk quote wizard.
+  from the online quote wizard.
 
   ## New Tables
   
