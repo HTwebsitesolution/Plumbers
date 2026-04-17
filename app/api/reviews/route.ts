@@ -1,26 +1,64 @@
 import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 
-/** Public approved reviews for /reviews (server-side DB read; avoids browser-only anon env issues). */
+/**
+ * Public approved reviews for /reviews.
+ * Uses a fresh Supabase client (not the module singleton) so serverless always picks up
+ * current env and avoids a bad first-init cache. Prefer service role when set.
+ */
 export async function GET() {
   try {
-    const supabaseAdmin = getSupabaseServerClient();
-    const { data, error } = await supabaseAdmin
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!url?.trim()) {
+      return NextResponse.json(
+        { error: 'Failed to load reviews', details: 'NEXT_PUBLIC_SUPABASE_URL is not set on the server.' },
+        { status: 503 }
+      );
+    }
+
+    const key = serviceRole?.trim() || anon?.trim();
+    if (!key) {
+      return NextResponse.json(
+        {
+          error: 'Failed to load reviews',
+          details: 'Set SUPABASE_SERVICE_ROLE_KEY (recommended) or NEXT_PUBLIC_SUPABASE_ANON_KEY on Vercel.',
+        },
+        { status: 503 }
+      );
+    }
+
+    const supabase = createClient(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+
+    const { data, error } = await supabase
       .from('customer_reviews')
-      .select('id, rating, review_text, customer_name, request_type, ref_code, created_at')
+      .select('*')
       .eq('status', 'approved')
       .order('created_at', { ascending: false })
       .limit(12);
 
     if (error) {
       console.error('GET /api/reviews failed:', error);
-      return NextResponse.json({ error: 'Failed to load reviews' }, { status: 500 });
+      return NextResponse.json(
+        {
+          error: 'Failed to load reviews',
+          details: error.message,
+          code: error.code,
+        },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ reviews: data ?? [] }, { status: 200 });
   } catch (err) {
     console.error('GET /api/reviews error:', err);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const message = err instanceof Error ? err.message : String(err);
+    return NextResponse.json({ error: 'Internal server error', details: message }, { status: 500 });
   }
 }
 
