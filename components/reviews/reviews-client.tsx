@@ -20,22 +20,13 @@ type ReviewRow = {
 };
 
 async function fetchApprovedReviews(): Promise<ReviewRow[]> {
-  // Dynamic import avoids executing `lib/supabase` during server/prerender builds
-  // (where env vars like NEXT_PUBLIC_SUPABASE_URL may not exist locally).
-  const { supabase } = await import('@/lib/supabase');
-
-  const { data, error } = await supabase
-    .from('customer_reviews')
-    .select('*')
-    .eq('status', 'approved')
-    .order('created_at', { ascending: false })
-    .limit(12);
-
-  if (error) {
-    console.error('Failed to fetch reviews:', error);
+  const res = await fetch('/api/reviews', { cache: 'no-store' });
+  if (!res.ok) {
+    console.error('Failed to fetch reviews:', res.status);
     return [];
   }
-  return (data ?? []) as ReviewRow[];
+  const json = (await res.json()) as { reviews?: ReviewRow[] };
+  return json.reviews ?? [];
 }
 
 export function ReviewsClient() {

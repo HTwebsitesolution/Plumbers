@@ -1,6 +1,29 @@
 import { NextResponse } from 'next/server';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 
+/** Public approved reviews for /reviews (server-side DB read; avoids browser-only anon env issues). */
+export async function GET() {
+  try {
+    const supabaseAdmin = getSupabaseServerClient();
+    const { data, error } = await supabaseAdmin
+      .from('customer_reviews')
+      .select('id, rating, review_text, customer_name, request_type, ref_code, created_at')
+      .eq('status', 'approved')
+      .order('created_at', { ascending: false })
+      .limit(12);
+
+    if (error) {
+      console.error('GET /api/reviews failed:', error);
+      return NextResponse.json({ error: 'Failed to load reviews' }, { status: 500 });
+    }
+
+    return NextResponse.json({ reviews: data ?? [] }, { status: 200 });
+  } catch (err) {
+    console.error('GET /api/reviews error:', err);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
