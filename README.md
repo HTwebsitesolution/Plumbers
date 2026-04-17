@@ -1,28 +1,33 @@
-# Plumbers (whitelabel boiler site template)
+# Plumbers — sales & showcase site
 
-Next.js app for **new boiler installations**, **servicing**, and **repairs**, with quote and booking flows. This repo is the product template (forked from the original Boilable build). **Branding and legal copy are driven by environment variables** so one codebase can power a neutral demo and per-client Vercel projects.
+Next.js app for **new boiler installations**, **servicing**, and **repairs**, with quote and booking flows. This repository ([HTwebsitesolution/Plumbers](https://github.com/HTwebsitesolution/Plumbers)) is for **your marketing**: demonstrating what you can build for plumbers who have no site or a weak site. It is **not** the live codebase for paying clients.
+
+**Repository policy**
+
+- **Do all future development, commits, and pushes here** (`Plumbers` only).
+- **Do not** push showcase or template work to the **Boilable** client repository. That repo belongs to the real client; treat it as frozen from your side unless they commission changes under a separate agreement.
+
+Branding and legal copy are **environment-driven** (`NEXT_PUBLIC_*`, `MAIL_FROM`, etc.) so each Vercel deployment can look like a different business without forking for a first demo.
 
 ## Environment variables
 
 Copy [`.env.example`](.env.example) to `.env.local` and set values for your deployment.
 
-**Minimum for a neutral demo**
+**Minimum for the public showcase**
 
-- `NEXT_PUBLIC_SITE_NAME` — default in code is **Plumbers**; override per client (e.g. `Boilable`)
-- `NEXT_PUBLIC_SITE_URL` — canonical URL (used for metadata and JSON-LD)
+- `NEXT_PUBLIC_SITE_NAME` — default in code is **Plumbers**; override when demoing a named package (e.g. your agency brand).
+- `NEXT_PUBLIC_SITE_URL` — canonical URL of **this** Vercel project (metadata and JSON-LD).
 
 **Optional**
 
-- `NEXT_PUBLIC_LOGO_PATH` — default `/brand/site-logo.svg`; for a client logo use e.g. `/brand/client-logo.png`
+- `NEXT_PUBLIC_LOGO_PATH` — default `/brand/site-logo.svg`; swap for a custom asset per campaign if needed.
 - `NEXT_PUBLIC_FOOTER_LEGAL_LINE`, `NEXT_PUBLIC_LEGAL_ENTITY_NAME`, `NEXT_PUBLIC_FOOTER_LINKS_HEADING`, etc.
-- `NEXT_PUBLIC_FACEBOOK_PIXEL_ID` — if unset, the Meta Pixel script is not loaded (recommended for generic demos)
-- `MAIL_FROM` — used by servicing/repairs email helper (`Resend` `from` field)
-- `FROM_EMAIL` — used by lead/enquiry routes when `RESEND_API_KEY` is set
-- `SITE_BASE_URL` — server-side absolute links (defaults to `NEXT_PUBLIC_SITE_URL`)
+- `NEXT_PUBLIC_FACEBOOK_PIXEL_ID` — omit on generic demos if you do not want ad pixels firing.
+- `MAIL_FROM`, `FROM_EMAIL`, `SITE_BASE_URL`, `INSTALLER_EMAIL` — set when you want real email from this showcase; otherwise leave unset or use test inboxes.
 
-**Existing Boilable production (example)**
+**When you win a client**
 
-On the Boilable Vercel project, set e.g. `NEXT_PUBLIC_SITE_NAME=Boilable`, `NEXT_PUBLIC_SITE_URL=https://boilable.co.uk`, `NEXT_PUBLIC_LOGO_PATH=/brand/Boilable.co.uk_logo.png`, plus `NEXT_PUBLIC_LEGAL_ENTITY_NAME`, footer lines, `MAIL_FROM`, `FROM_EMAIL`, and `NEXT_PUBLIC_FACEBOOK_PIXEL_ID` as needed.
+Give them their **own** repo (or a private fork), their own Vercel project, and env vars for their name, logo, legal entity, domains, and analytics — not this Plumbers deployment.
 
 ## Scripts
 
@@ -34,6 +39,6 @@ npm run lint
 npm run test:run
 ```
 
-## Remote
+## Git remote
 
-Canonical GitHub remote for ongoing work: [HTwebsitesolution/Plumbers](https://github.com/HTwebsitesolution/Plumbers).
+This clone should use **`origin` → `https://github.com/HTwebsitesolution/Plumbers.git`** so `git push` only updates the showcase repo.

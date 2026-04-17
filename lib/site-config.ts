@@ -1,6 +1,6 @@
 /**
  * Whitelabel / per-deployment branding. Set on Vercel (or .env.local).
- * Defaults are neutral for template demos; Boilable production uses env overrides.
+ * Defaults suit the Plumbers showcase; per-client deployments override via env.
  */
 
 function trimTrailingSlash(url: string): string {
