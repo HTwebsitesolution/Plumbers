@@ -8,7 +8,7 @@ Copy [`.env.example`](.env.example) to `.env.local` and set values for your depl
 
 **Minimum for a neutral demo**
 
-- `NEXT_PUBLIC_SITE_NAME` — e.g. `Demo Heating`
+- `NEXT_PUBLIC_SITE_NAME` — default in code is **Plumbers**; override per client (e.g. `Boilable`)
 - `NEXT_PUBLIC_SITE_URL` — canonical URL (used for metadata and JSON-LD)
 
 **Optional**

@@ -40,7 +40,7 @@ export function getSiteConfig(): SiteConfig {
     /* keep default */
   }
 
-  const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Demo Heating';
+  const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Plumbers';
 
   return {
     siteName,
